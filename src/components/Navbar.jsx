@@ -23,13 +23,13 @@ const Navbar = () => {
     const hsl = "hsl(6,87.3%,75.3%)"
 
   return (
-    <div className='w-full bg-[#171717] flex justify-between items-center h-8 max-w-[1240px] mx-auto px-4 text-[#e5e5e5]'>
+    <div className='max-w-screen-2xl bg-[#171717] flex justify-between items-center h-8 max-w-[1240px] mx-auto px-4 text-[#e5e5e5]'>
             {/*Logo*/}
-       <Link to='/'> <h1 className=' text-lg font-mono font-thin '> GDVSTA </h1></Link>
+       <Link to='/'> <h1 className='w-full text-lg font-mono font-thin '> GDVSTA </h1></Link>
         <ul className='hidden md:flex' /*style={{"border": "2px solid red"}} */>
             {navItems.map(item=>(
                 <Link to={`${item.link}`}><li key={item.id} 
-                className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-[#f79489] font-normal`}>
+                className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}>
                     {item.text}
                 </li> </Link>
             ))}
