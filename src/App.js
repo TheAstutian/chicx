@@ -1,12 +1,45 @@
-import logo from './logo.svg';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Route,
+} from "react-router-dom";
+
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+
 import './App.css';
+
+const Layout = () =>{
+  return(
+    <>
+    <Navbar/>
+    <Outlet/>
+    <Footer/>
+    </>
+  )
+}
+
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element:<Layout />,
+    children:[
+      {
+        path:'/',
+        element:<Home />
+      }
+    ]
+  }
+])
 
 function App() {
   return (
-    <div className="App">
-      <h1 className='text-3xl font-bold underline'>
-        Hello world!
-      </h1>
+    <div className="App"> 
+      <div className="">
+        <RouterProvider router={router} />
+      </div>
     </div>
   );
 }
