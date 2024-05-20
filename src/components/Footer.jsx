@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
+        <footer class="p-4 bg-[#eee] md:p-8 lg:p-10 dark:bg-gray-800">
             <div class="mx-auto max-w-screen-xl text-center">
                 <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
                     <svg class="mr-2 h-8" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,7 @@ const Footer = () => {
                     </svg>
                     GoldyVhista    
                 </a>
-                <p class="my-6 text-gray-500 dark:text-gray-400">Wholesale and retail seller of consumer goods and high quality merchandise. Bring deals.</p>
+                <p class="my-6 text-[#171717] dark:text-gray-400">Wholesale and retail seller of consumer goods and high quality merchandise. Bring deals.</p>
                 <ul class="flex flex-wrap justify-center items-center mb-6  text-gray-900 dark:text-white">
                     <li>
                         <a href="#" class="mr-4 hover:underline md:mr-6 ">About GDVSTA</a>
