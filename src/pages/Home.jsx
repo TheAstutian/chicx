@@ -3,6 +3,7 @@ import React from 'react'
 import Hero from '../components/Hero'
 import Testimonials from '../components/Testimonials';
 import Card from '../components/Card';
+import { Link } from 'react-router-dom';
 
 const products = [
     {
@@ -215,7 +216,7 @@ const Home = () => {
 
         <div className='flex items-center flex-col justify-center' >
             <h1 className='pt-10  text-2xl text-tertiary'>Latest Deals</h1>
-                <div  className=' carousel w-5/6 rounded-box bg-green-200 mx-3' style={{"border":"2px solid blue"}}> 
+                <div  className=' carousel w-2/3 rounded-box ' > 
                   <div className='carousel-item '>
                   <Card />
                   </div>
@@ -242,29 +243,50 @@ const Home = () => {
         
         <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-10 text-2xl text-tertiary'>Popular Items</h1>
-           <div className='carousel  w-5/6 px-3 mx-auto rounded-box '> 
-              <div className='carousel-item'>
+           <div className='grid grid-cols-1 md:grid-cols-5 md:gap-2'> 
+              <div className='h-auto max-w-full rounded-lg'>
               <Card />
               </div>
 
-              <div className='carousel-item'>
+              <div className='h-auto max-w-full rounded-lg'>
               <Card />
               </div>
 
-              <div className='carousel-item'>
+              <div className='h-auto max-w-full rounded-lg'>
               <Card />
               </div>
 
-              <div className='carousel-item'>
+              <div className='h-auto max-w-full rounded-lg'>
               <Card />
               </div>
 
-              <div className='carousel-item'>
+              <div className='h-auto max-w-full rounded-lg'>
+              <Card />
+              </div><div className='h-auto max-w-full rounded-lg'>
+              <Card />
+              </div>
+
+              <div className='h-auto max-w-full rounded-lg'>
+              <Card />
+              </div>
+
+              <div className='h-auto max-w-full rounded-lg'>
+              <Card />
+              </div>
+
+              <div className='h-auto max-w-full rounded-lg'>
+              <Card />
+              </div>
+
+              <div className='h-auto max-w-full rounded-lg'>
               <Card />
               </div>
 
             </div>
             
+        </div>
+        <div className=' border-solid border-2 border-indigo-600 flex justify-end pt-1 pr-20 pb-10' >
+          <button className='px-5 py-3  font-thin text-white rounded-lg bg-secondary hover:bg-tertiary hover:text-white  focus:ring-4 focus:ring-primary '><Link to ='/products'>See all di market</Link></button>
         </div>
        
         <Testimonials />

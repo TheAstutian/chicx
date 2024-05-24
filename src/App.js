@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 
 import './App.css';
+import Products from "./pages/Products";
 
 const Layout = () =>{
   return(
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path:'/',
         element:<Home />
+      },
+      {
+        path:'/products',
+        element:<Products />
       }
     ]
   }
