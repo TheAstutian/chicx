@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 
 import './App.css';
 import Products from "./pages/Products";
+import Product from "./pages/Product";
 
 const Layout = () =>{
   return(
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path:'/products',
         element:<Products />
+      },
+      {
+        path:'/product',
+        element:<Product />
       }
     ]
   }

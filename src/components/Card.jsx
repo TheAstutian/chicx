@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Card = () => {
+const Card = (props) => {
+    
   return (
     <div className="group my-3 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
             {/* product images and discount */}

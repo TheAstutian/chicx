@@ -209,6 +209,7 @@ const products = [
 
 const Home = () => {
 
+const db = products;
 
   return (
     <div className='bg-[#e5e5e5]'>
@@ -238,12 +239,18 @@ const Home = () => {
                   </div>
 
                 </div>
-                
         </div>
         
         <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-10 text-2xl text-tertiary'>Popular Items</h1>
            <div className='grid grid-cols-1 md:grid-cols-5 md:gap-2'> 
+             {db.map((item)=>(
+              <div className='bg-black'>
+              <p>{item.name}</p>
+              </div>
+             ))}
+             
+             
               <div className='h-auto max-w-full rounded-lg'>
               <Card />
               </div>
@@ -285,7 +292,7 @@ const Home = () => {
             </div>
             
         </div>
-        <div className=' border-solid border-2 border-indigo-600 flex justify-end pt-1 pr-20 pb-10' >
+        <div className='  flex justify-end pt-3 pr-20 pb-10' >
           <button className='px-5 py-3  font-thin text-white rounded-lg bg-secondary hover:bg-tertiary hover:text-white  focus:ring-4 focus:ring-primary '><Link to ='/products'>See all di market</Link></button>
         </div>
        
