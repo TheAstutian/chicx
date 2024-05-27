@@ -206,6 +206,17 @@ const products = [
     },
   ]
   
+const item_sample = {
+  id: 1,
+  name: 'Samsung Galaxy S21',
+  description: 'Latest model with advanced features',
+  price: 450000.00,
+  primaryCategory: 'Electronics',
+  secondaryCategory: 'Mobile Phones',
+  imageUrl: 'https://example.com/images/samsung-galaxy-s21.jpg',
+  details: 'The Samsung Galaxy S21 offers a new camera design, a faster processor, and better software features.',
+  date: '2024-02-15',
+}
 
 const Home = () => {
 
@@ -219,75 +230,45 @@ const db = products;
             <h1 className='pt-10  text-2xl text-tertiary'>Latest Deals</h1>
                 <div  className=' carousel w-2/3 rounded-box ' > 
                   <div className='carousel-item '>
-                  <Card />
+                  <Card id={item_sample.id} data={item_sample} />
                   </div>
 
                   <div className='carousel-item'>
-                  <Card />
+                  <Card id={item_sample.id} data={item_sample} />
                   </div>
 
                   <div className='carousel-item'>
-                  <Card />
+                  <Card id={item_sample.id} data={item_sample}/>
                   </div>
 
                   <div className='carousel-item'>
-                  <Card />
+                  <Card id={item_sample.id} data={item_sample}/>
                   </div>
 
                   <div className='carousel-item'>
-                  <Card />
+                  <Card id={item_sample.id} data={item_sample}/>
                   </div>
 
                 </div>
         </div>
         
         <div className='flex items-center flex-col justify-center'>
-          <h1 className='pt-10 text-2xl text-tertiary'>Popular Items</h1>
-           <div className='grid grid-cols-1 md:grid-cols-5 md:gap-2'> 
+          <h1 className='pt-8 pb-1 text-2xl text-tertiary'>Popular Items</h1>
+           <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
              {db.map((item)=>(
-              <div className='bg-black'>
-              <p>{item.name}</p>
+              <div className=''>
+              
+              <Card 
+                id={item.id}
+                data={item} />
               </div>
              ))}
              
              
               <div className='h-auto max-w-full rounded-lg'>
-              <Card />
+              <Card id={item_sample.id} data={item_sample}/>
               </div>
 
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div>
-
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div>
-
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div>
-
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div><div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div>
-
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div>
-
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div>
-
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div>
-
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card />
-              </div>
 
             </div>
             
