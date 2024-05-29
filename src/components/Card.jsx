@@ -4,8 +4,8 @@ const Card = (props) => {
 
     const {name, price, discount, imageUrl, description, primaryCategory, secondaryCategory,details} = props.data;
     const formattedNumber = Intl.NumberFormat("en-US").format(price)
-    console.log(name)
-  return (
+    
+  return (  
     
     <div className="group my-3 flex  w-60 flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
             {/* product images and discount */}
