@@ -7,7 +7,7 @@ const Card = (props) => {
     
   return (  
     
-    <div className="group my-3 flex  w-60 flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
+    <div className="group my-3 flex  w-60 flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md hover:opacity-80 hover:border-tertiary ">
             {/* product images and discount */}
         <a className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl" href="#">
             <img className="peer absolute top-0 right-0 h-full max-w-60 object-cover" src={imageUrl? imageUrl: "https://m.media-amazon.com/images/I/61R+XI5OkOL.jpg"} alt="product image1" />

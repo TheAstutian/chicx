@@ -83,7 +83,7 @@ useEffect (()=>{
            <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
              {products ? (
               products.map((item)=>(
-              <div className=''>
+              <div className="">
               <Link to={`/products/${item.id}`}  > 
               <Card 
                 id={item.id}
@@ -94,12 +94,6 @@ useEffect (()=>{
               <p>Loading...</p>
              )} 
              
-             
-              <div className='h-auto max-w-full rounded-lg'>
-              <Card id={item_sample.id} data={item_sample}/>
-              </div>
-
-
             </div>
             
         </div>
