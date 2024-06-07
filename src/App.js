@@ -12,6 +12,8 @@ import Home from "./pages/Home";
 import './App.css';
 import Products from "./pages/Products";
 import Product from "./pages/Product";
+import AdminLogin from "./pages/AdminLogin";
+import AdminRegister from "./pages/AdminRegister";
 
 const Layout = () =>{
   return(
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
       {
         path:'/products/:id',
         element:<Product />
+      },
+      {
+        path:'/adminlogin',
+        element: <AdminLogin />
+      },
+      {
+        path:'adminregister',
+        element:<AdminRegister />
       }
     ]
   }

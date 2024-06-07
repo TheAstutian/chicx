@@ -37,7 +37,7 @@ const Products = () => {
         
         
         <div className='flex items-center flex-col justify-center'>
-          <h1 className='pt-8 pb-1 text-2xl text-tertiary'>Popular Items</h1>
+          <h1 className='pt-8 pb-1 text-2xl text-tertiary'>All Items</h1>
            <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
              {products ? (
               products.map((item)=>(
