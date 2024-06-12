@@ -25,7 +25,7 @@ const Layout = () =>{
   )
 }
 
-export const API_URL = 'http://localhost:8800';
+export const API_URL = process.env.API_URL;
 
 const router = createBrowserRouter([
   {
@@ -43,17 +43,18 @@ const router = createBrowserRouter([
       {
         path:'/products/:id',
         element:<Product />
-      },
-      {
-        path:'/adminlogin',
-        element: <AdminLogin />
-      },
-      {
-        path:'adminregister',
-        element:<AdminRegister />
       }
     ]
-  }
+  },
+  
+  {
+    path:'/adminlogin',
+    element: <AdminLogin />
+  },
+  {
+    path:'adminregister',
+    element:<AdminRegister />
+  },
 ])
 
 function App() {
