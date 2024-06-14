@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 import { API_URL } from '../App';
+import { AuthContext } from '../ContextStore';
 
 const AdminLogin = () => {
 
@@ -11,6 +13,9 @@ const AdminLogin = () => {
  })
  const [errorMessage, setErrorMessage] = useState("")
 
+ const navigate = useNavigate();
+ const {login} = useContext(AuthContext)
+
  const handleChange = e=>{
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
  }
@@ -19,9 +24,9 @@ const AdminLogin = () => {
     e.preventDefault()
     setErrorMessage("")
     try{
-        
-    const res = await axios.post(`${API_URL}/auth/admin-login`, inputs)
-    console.log(res)
+        await login(inputs) 
+    navigate('/')
+
     }catch(err){
         if(err.response.data){
             setErrorMessage(err.response.data)
