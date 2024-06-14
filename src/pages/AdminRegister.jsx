@@ -15,6 +15,7 @@ const [errorMessage, setErrorMessage] = useState("")
 const [termsChecked, setTermsChecked] = useState(false)
 
 const [error, setError] = useState(null); 
+const navigate = useNavigate()
 
 const handleChange = e =>{
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
@@ -37,7 +38,14 @@ const handleSubmit = async e =>{
     } else if (!termsChecked){
         setErrorMessage("Accept terms and conditions")
     } else{
-        console.log("successful ")
+       try{
+       await axios.post(`${API_URL}/auth/admin-register`, {inputs})
+        alert('New admin user successfully created')
+        navigate('/adminlogin')
+       }catch(err){
+        console.log(err.response.data)
+       setErrorMessage(err.response.data)
+       }
     }
     
 }
