@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 
+
 import { API_URL } from '../App';
+import { AuthContext } from '../ContextStore';
 
 const Product = () => {
 const [product, setProduct] = useState(null)
@@ -10,7 +12,8 @@ const [error, setError] = useState(null)
 
 const location = useLocation()
 const productId = location.pathname.split("/")[2]
-console.log(productId)
+const {currentUser} = useContext(AuthContext) 
+
 
 useEffect (()=>{
     const fetchProduct = async ()=>{
@@ -21,10 +24,30 @@ useEffect (()=>{
     return 
 }, []) 
 
-
+     
   return (
     <div className=''>{product? <>
-    
+    <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'>
+    <Link 
+             to='/products'
+              title="" 
+              className="px-3 py-2 text-sm font-medium text-secondary focus:outline-none bg-white rounded-lg border border-secondary hover:bg-tertiary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              role="button" 
+            > 
+               Back to All Items 
+      </Link> 
+
+     { currentUser&& <Link 
+             to='/NewProduct'
+              title="" 
+              className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              role="button" 
+            > 
+               Add New Item
+      </Link> }
+
+
+    </div>
         <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
     <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
@@ -37,7 +60,7 @@ useEffect (()=>{
           <h1
             className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"
           >{product? product.name : 
-           `Apple iMac 24" All-In-One Computer, Apple M1, 8GB RAM, 256GB SSD,
+           `ApplBack to All-In-One Computer, Apple M1, 8GB RAM, 256GB SSD,
             Mac OS, Pink`}
           </h1>
           <div className="mt-4 sm:items-center sm:gap-4 sm:flex">

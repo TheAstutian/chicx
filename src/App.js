@@ -14,6 +14,7 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
+import NewProduct from "./pages/NewProduct";
 
 const Layout = () =>{
   return(
@@ -23,7 +24,7 @@ const Layout = () =>{
     <Footer/>
     </>
   )
-}
+} 
 
 export const API_URL = process.env.REACT_APP_API_URL;
 
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
       {
         path:'/products/:id',
         element:<Product />
+      },
+      
+      {
+        path:'/NewProduct',
+        element:<NewProduct />
       }
     ]
   },

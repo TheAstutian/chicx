@@ -25,7 +25,7 @@ const AdminLogin = () => {
     setErrorMessage("")
     try{
         await login(inputs) 
-    navigate('/')
+    navigate('/products')
 
     }catch(err){
         if(err.response.data){
