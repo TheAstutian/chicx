@@ -37,9 +37,9 @@ const Products = () => {
 
   return (
     <div>
-        
+        { currentUser&& 
         <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'> 
-        { currentUser&& <>
+        
           <FaRegUser className='m-2 text-tertiary'/>  <p className='mr-5 p-1 text-tertiary '>  {currentUser.email}</p>
         <Link 
              to='/NewProduct' 
@@ -48,8 +48,8 @@ const Products = () => {
               role="button" 
             > 
                Add New Item
-      </Link></> }
-          </div>
+      </Link>
+          </div>}
         <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-8 pb-1 text-2xl text-tertiary'>All Items</h1>
            <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 

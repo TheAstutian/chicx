@@ -11,13 +11,13 @@ import { API_URL } from '../App';
 
   
 const item_sample = {
-  id: 1,
+  id: 419,
   name: 'Samsung Galaxy S21',
   description: 'Latest model with advanced features',
   price: 450000.00,
   primaryCategory: 'Electronics',
   secondaryCategory: 'Mobile Phones',
-  imageUrl: 'https://example.com/images/samsung-galaxy-s21.jpg',
+  imageUrl: 'https://images1.vinted.net/t/02_0189c_fFYTzsgdgRx1akoFu6AHd79P/f800/1718562268.jpeg?s=ee42e00896d42cfe454beef9988b16a41085979a',
   details: 'The Samsung Galaxy S21 offers a new camera design, a faster processor, and better software features.',
   date: '2024-02-15',
 }
