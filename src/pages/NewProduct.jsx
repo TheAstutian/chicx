@@ -21,6 +21,7 @@ const NewProduct = () => {
     const api = process.env.REACT_APP_API_KEY
 
     const {currentUser} = useContext(AuthContext);
+    const navigate=useNavigate()
 /*useEffect(()=>{
 
 },[name])*/
@@ -34,7 +35,7 @@ const upload = async()=>{
             imageupload.set('key', api)
             imageupload.append('image',image)
             const imagelink = await axios.post('https://api.imgbb.com/1/upload', imageupload)
-            console.log(imagelink.data.data.image.url)
+          return imagelink.data.data.image.url;
         }
 
     }catch(err){
@@ -50,13 +51,16 @@ const onSubmit =async e =>{
     try{
         const imglnk = await upload();
         await axios.post(`${API_URL}/auth/admin-add`, {
-            name, brand, price, discount,description, category,imglnk
+            name, brand, price, discount,description, category,imglnk,
+            date:  moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
         })
 
     }catch(err){
         console.log(err)
     }
     alert("new product successfully added")
+    
+    navigate("/products")
 
     console.log(name,brand,price,discount,description,category)
 }

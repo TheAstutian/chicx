@@ -14,6 +14,8 @@ const Products = () => {
   const [products, setProducts]= useState(null)
   const [error, setError]= useState(null)
 
+  const [store,setStore]= useState(null)
+
   const {currentUser} = useContext(AuthContext)
   
   useEffect (()=>{ 
@@ -29,9 +31,25 @@ const Products = () => {
           console.log(err)
         }
       }
-      loadProducts() 
+      loadProducts();
+      loadStore();
       return
     }, [])
+
+    const loadStore = async () =>{
+      try{
+
+        const fetchStore = await axios.get(`${API_URL}/store`)
+        if(fetchStore){
+          setStore(fetchStore.data)
+          console.log(store)
+        }
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    
 
 
 
@@ -50,16 +68,27 @@ const Products = () => {
                Add New Item
       </Link>
           </div>}
+          <div>
+            {store&& <>
+                {store.map((item)=>(
+                  <div className='p-2 pl-10 pt-5 m-2 mb-5 h-24 flex flex-row'> 
+                    <img className='h-20' src={item.imageUrl} />
+                    <h1>{item.name}</h1>
+                    
+                  </div>
+                ))}</>
+              } 
+          </div>
         <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-8 pb-1 text-2xl text-tertiary'>All Items</h1>
            <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
              {products ? (
               products.map((item)=>(
               <div className=''>
-              <Link to={`/products/${item.id}`}  > 
+              
               <Card 
-                id={item.id}
-                data={item} /></Link>
+                key={item.id}
+                data={item} />
               </div>
              ))
              ) : (

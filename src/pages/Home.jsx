@@ -84,10 +84,10 @@ useEffect (()=>{
              {products ? (
               products.map((item)=>(
               <div className="">
-              <Link to={`/products/${item.id}`}  > 
+             
               <Card 
-                id={item.id}
-                data={item} /></Link>
+                key={item.id}
+                data={item} />
               </div>
              ))
              ) : (
