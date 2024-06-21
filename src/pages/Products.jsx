@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios';
 import {FaRegUser} from 'react-icons/fa';
+import moment from 'moment';
 
 import Card from '../components/Card';
 import { Link } from 'react-router-dom';
@@ -68,14 +69,23 @@ const Products = () => {
                Add New Item
       </Link>
           </div>}
-          <div>
+          <div className=''>
+          <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>All Items</h1>
+          <hr className=' h-px my-2 bg-gray-400 border-0'/>
+          
             {store&& <>
-                {store.map((item)=>(
-                  <div className='p-2 pl-10 pt-5 m-2 mb-5 h-24 flex flex-row'> 
-                    <img className='h-20' src={item.imageUrl} />
-                    <h1>{item.name}</h1>
-                    
+              
+                {store.map((item)=>(<>
+                  <div className='p-2 pl-20 pt-5 m-2 mb-5 h-24 flex flex-row'> 
+                    <Link to={`/products/${item.id}`}><img className='h-20 hover:opacity-70' src={item.imageUrl} /></Link>
+                    <div className='ml-5'>
+                        <h1 className='text-black text-lg'>{item.name}</h1>
+                        <p className='text-black text-sm'>Category: <span className='text-gray-500'>{item.primaryCategory}</span></p>
+                        <p className='text-black text-sm'>Added: <span className='text-gray-500'>{moment(item.date).fromNow()}</span> </p>
+                    </div> 
+                                      
                   </div>
+                   <hr className=' h-px bg-gray-400 border-0'/></>
                 ))}</>
               } 
           </div>
