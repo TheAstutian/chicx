@@ -77,10 +77,10 @@ const Products = () => {
               
                 {store.map((item)=>(<>
                   <div className='p-2 pl-20 pt-5 m-2 mb-5 h-24 flex flex-row'> 
-                    <Link to={`/products/${item.id}`}><img className='h-20 hover:opacity-70' src={item.imageUrl} /></Link>
+                    <Link to={`/products/${item._id}`}><img className='h-20 hover:opacity-70' src={item.imageUrl} /></Link>
                     <div className='ml-5'>
                         <h1 className='text-black text-lg'>{item.name}</h1>
-                        <p className='text-black text-sm'>Category: <span className='text-gray-500'>{item.primaryCategory}</span></p>
+                        <p className='text-black text-sm'>Price: <span className='text-gray-500'>₦{item.price}</span></p>
                         <p className='text-black text-sm'>Added: <span className='text-gray-500'>{moment(item.date).fromNow()}</span> </p>
                     </div> 
                                       

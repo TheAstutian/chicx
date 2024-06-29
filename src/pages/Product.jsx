@@ -24,6 +24,17 @@ useEffect (()=>{
     return 
 }, []) 
 
+const deletePost= async()=>{
+  const alert = window.confirm('Delete post?')
+  if(alert) console.log('Clicked!') /*
+  try{
+    await axios.delete(`${API_URL}/delete/${productId}`)
+    navigate('/')
+  } catch(err){
+    console.log(err)
+  }*/
+}
+
      
   return (
     <div className=''>{product? <>
@@ -37,14 +48,33 @@ useEffect (()=>{
                Back to All Items 
       </Link> 
 
-     { currentUser&& <Link 
+     { currentUser&& <><Link 
              to='/NewProduct'
               title="" 
               className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
               role="button" 
             > 
-               Add New Item
-      </Link> }
+               Add New Product
+      </Link>
+        <Link 
+             to='/NewProduct'
+             state={product}
+              title="" 
+              className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              role="button" 
+            > 
+               Edit Product
+      </Link> 
+      
+        <span
+            onClick={deletePost}
+            title="" 
+            className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            role="button" 
+          > 
+          Delete Product
+          </span>
+          </> }
 
 
     </div>
@@ -171,7 +201,7 @@ useEffect (()=>{
                 <path
                   stroke="currentColor"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinejoin="round"
                   stroke-width="2"
                   d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
                 />
