@@ -50,6 +50,21 @@ const onSubmit =async e =>{
     e.preventDefault();
     if(!currentUser) return;
 
+    if (state){
+        
+        try{
+
+            await axios.post(`${API_URL}/auth/admin-update`, {
+            name, brand, price, discount,description, category,imglnk, date: state.date}
+        )
+
+        }catch(err){
+            console.log(err)
+        }
+
+        alert("Product updated successfully ")
+    }
+else {
     try{
         const imglnk = await upload();
         await axios.post(`${API_URL}/auth/admin-add`, {
@@ -61,10 +76,12 @@ const onSubmit =async e =>{
         console.log(err)
     }
     alert("new product successfully added")
+}
+   
     
     navigate("/products")
 
-    console.log(name,brand,price,discount,description,category)
+//    console.log(name,brand,price,discount,description,category)
 }
  
   return (
