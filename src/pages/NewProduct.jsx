@@ -10,7 +10,7 @@ const NewProduct = () => {
     const state = useLocation().state; 
     console.log(state)
 
-    const [image, setImage]=useState(state?.imagelink||"")
+    const [image, setImage]=useState(state?.imageUrl||"")
 
     const [name, setName] = useState(state?.name||"")
     const [brand,setBrand] = useState(state?.brand||"")
@@ -23,10 +23,11 @@ const NewProduct = () => {
     const api = process.env.REACT_APP_API_KEY
 
     const {currentUser} = useContext(AuthContext);
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 /*useEffect(()=>{
 
 },[name])*/
+
 
 const upload = async()=>{
     try{
@@ -44,42 +45,46 @@ const upload = async()=>{
         console.log(err)
     }
 }
- 
+   
 
 const onSubmit =async e =>{
     e.preventDefault();
     if(!currentUser) return;
 
     if (state){
-        
+       let imglnk;
+       if(image.name){
+       imglnk = await upload() 
+       }  else {
+        imglnk = image;
+       }
         try{
 
-            await axios.post(`${API_URL}/auth/admin-update`, {
-            name, brand, price, discount,description, category,imglnk, date: state.date}
+            await axios.patch(`${API_URL}/auth/admin-update`, {
+            name, brand, price, discount,description, category,id:state._id, imglnk}
         )
-
+        alert("Product updated successfully ")
+        navigate(`/products/${state._id.toString()}`)
+        return 
         }catch(err){
             console.log(err)
         }
+       
+    }else {
+        try{
+            const imglnk = await upload();
+            await axios.post(`${API_URL}/auth/admin-add`, {
+                name, brand, price, discount,description, category,imglnk,
+                date:  moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
+            })
 
-        alert("Product updated successfully ")
-    }
-else {
-    try{
-        const imglnk = await upload();
-        await axios.post(`${API_URL}/auth/admin-add`, {
-            name, brand, price, discount,description, category,imglnk,
-            date:  moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
-        })
-
-    }catch(err){
-        console.log(err)
-    }
+         }catch(err){
+              console.log(err)
+          }
     alert("new product successfully added")
-}
-   
-    
     navigate("/products")
+}    
+    
 
 //    console.log(name,brand,price,discount,description,category)
 }

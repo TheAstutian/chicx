@@ -13,7 +13,7 @@ const [error, setError] = useState(null)
 const location = useLocation()
 const productId = location.pathname.split("/")[2]
 const {currentUser} = useContext(AuthContext) 
-
+const navigate = useNavigate()
 
 useEffect (()=>{
     const fetchProduct = async ()=>{
@@ -25,15 +25,19 @@ useEffect (()=>{
 }, []) 
 
 const deletePost= async()=>{
-  const alert = window.confirm('Delete post?')
-  if(alert) console.log('Clicked!') /*
+  const confirmation = window.confirm('Are you sure?')
+  if(confirmation) {
   try{
-    await axios.delete(`${API_URL}/delete/${productId}`)
-    navigate('/')
+    await axios.delete(`${API_URL}/auth/admin-delete/${productId}`)
+   
   } catch(err){
     console.log(err)
-  }*/
+  }
+  alert("Product has been removed from store")
+  navigate("/products")
+  }
 }
+
 
      
   return (
@@ -245,13 +249,13 @@ const deletePost= async()=>{
             recordings. Six-speaker sound system for a remarkably robust and
             high-quality audio experience. Up to 256GB of ultrafast SSD storage.`}
           </p>
-
+{/*}
           <p className="text-gray-500 dark:text-gray-400">{product.details?
           product.details: 
            ` Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast
             Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
             Magic Keyboard or Magic Keyboard with Touch ID.`}
-          </p>
+          </p>{*/}
         </div>
       </div>
     </div>

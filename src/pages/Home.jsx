@@ -6,6 +6,7 @@ import Testimonials from '../components/Testimonials';
 import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../App';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 
 
@@ -91,7 +92,9 @@ useEffect (()=>{
               </div>
              ))
              ) : (
-              <p>Loading...</p>
+             <div className='pt-10 mt-10 mb-10 pb-10'>
+               <AiOutlineLoading3Quarters className="loading-icon"/>
+             </div>
              )} 
              
             </div>

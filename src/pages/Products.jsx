@@ -7,6 +7,7 @@ import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../App';
 import { AuthContext } from '../ContextStore';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 
  
@@ -41,9 +42,16 @@ const Products = () => {
       try{
 
         const fetchStore = await axios.get(`${API_URL}/store`)
-        if(fetchStore){
-          setStore(fetchStore.data)
-          console.log(store)
+        if(fetchStore){          
+          const sortedStore = fetchStore.data.sort(function compare(a,b){
+            var dateA = new Date (a.date);
+            var dateB = new Date (b.date);
+            return dateB - dateA
+          })
+
+
+          setStore(sortedStore)
+          
         }
 
       }catch(err){
@@ -70,25 +78,28 @@ const Products = () => {
       </Link>
           </div>}
           <div className=''>
-          <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>All Items</h1>
+          <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Awa Market</h1>
           <hr className=' h-px my-2 bg-gray-400 border-0'/>
           
-            {store&& <>
+            {store? <>
               
                 {store.map((item)=>(<>
                   <div className='p-2 pl-20 pt-5 m-2 mb-5 h-24 flex flex-row'> 
                     <Link to={`/products/${item._id}`}><img className='h-20 hover:opacity-70' src={item.imageUrl} /></Link>
                     <div className='ml-5'>
-                        <h1 className='text-black text-lg'>{item.name}</h1>
+                    <Link to={`/products/${item._id}`}>  <h1 className='text-black text-lg'>{item.name}</h1></Link>
                         <p className='text-black text-sm'>Price: <span className='text-gray-500'>₦{item.price}</span></p>
                         <p className='text-black text-sm'>Added: <span className='text-gray-500'>{moment(item.date).fromNow()}</span> </p>
                     </div> 
                                       
                   </div>
                    <hr className=' h-px bg-gray-400 border-0'/></>
-                ))}</>
+                ))}</>:
+                <div className='grid place-items-center py-20 my-10'>
+               <AiOutlineLoading3Quarters className="loading-icon"/>
+              </div>
               } 
-          </div>
+          </div> {/*
         <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-8 pb-1 text-2xl text-tertiary'>All Items</h1>
            <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
@@ -102,11 +113,13 @@ const Products = () => {
               </div>
              ))
              ) : (
-              <p>Loading...</p>
+             <div >
+               <AiOutlineLoading3Quarters className="loading-icon"/>
+              </div>
              )} 
              
             </div>
-            </div>
+            </div>*/}
     </div>
   )
 }
