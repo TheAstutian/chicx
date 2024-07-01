@@ -20,7 +20,9 @@ useEffect (()=>{
       const Product = await axios.get(`${API_URL}/products/${productId}`)
      setProduct(Product.data)
     }
+    
     fetchProduct()
+    
     return 
 }, []) 
 
@@ -39,6 +41,12 @@ const deletePost= async()=>{
 }
 
 
+
+  let displayPrice;
+  if(product){
+    displayPrice = product.price*(1-(product.discount/100))
+  } 
+  const formattedNumber = Intl.NumberFormat("en-US").format(displayPrice)
      
   return (
     <div className=''>{product? <>
@@ -81,13 +89,14 @@ const deletePost= async()=>{
           </> }
 
 
-    </div>
+    </div> 
         <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
     <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-        <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
+        <div className="relative shrink-0 max-w-md lg:max-w-lg mx-auto">
           <img className="w-full dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
           <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
+        <span className=" absolute top-2 right-2 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${product.discount}% OFF`: null }</span>
         </div>
 
         <div className="mt-6 sm:mt-8 lg:mt-0">
@@ -99,12 +108,18 @@ const deletePost= async()=>{
           </h1>
           <p className='text-black text-sm my-3'>Category: <span className='text-gray-500'>{product.primaryCategory}</span></p>
           
+     
           
           <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
             <p
               className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white"
             >
-              ₦ {product.price? Intl.NumberFormat("en-US").format(product.price) : "1,249.99"}
+              ₦ {product.price? formattedNumber : "Not available"}
+            </p>
+            <p
+              className="line-through  text-gray-900  dark:text-white"
+            >
+               {product.discount? `₦${product.price}` : ""}
             </p>
 
             <div className="flex items-center gap-2 mt-2 sm:mt-0">

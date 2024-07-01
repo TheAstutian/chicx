@@ -30,7 +30,7 @@ const Navbar = () => {
         ):
         (
         <>
-            <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}><Link to ='/about'>About Us</Link></li>
+            <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}><Link to ='/'>About Us</Link></li>
             <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}><Link to ='/adminlogin'>Login</Link></li>
             <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}><Link to ='/adminregister'>Sign Up</Link></li>
             
@@ -70,7 +70,7 @@ const Navbar = () => {
                 ):
                 (
                     <>
-                    <li className={`p-2 text-xs border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`}><Link to ='/about'>About Us</Link></li>
+                    <li className={`p-2 text-xs border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`}><Link to ='/'>About Us</Link></li>
                     <li className={`p-2 text-xs border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`}><Link to ='/adminlogin'>Login</Link></li>
                     <li className={`p-2 text-xs border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`}><Link to ='/adminregister'>Sign Up</Link></li>
                     </>
