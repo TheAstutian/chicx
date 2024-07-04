@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 
 const Card = (props) => {
 
-    const {name, price, discount, imageUrl, description, primaryCategory, secondaryCategory,details, id} = props.data;
-    
+    const {name, price, discount, imageUrl,_id} = props.data;
+    let id;
+    if (_id){
+      id=_id.toString()
+    }
+
     let displayPrice;
     if(discount){
       displayPrice = price*(1-(discount/100))

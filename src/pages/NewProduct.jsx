@@ -18,6 +18,8 @@ const NewProduct = () => {
     const [discount, setDiscount]= useState(state?.discount||"")
     const [description, setDescription] =useState(state?.description||"")
     const [category, setCategory]=useState(state?.primaryCategory||'')
+    const [deal, setDeal] = useState(state?.deal|| false)
+    const [popular, setPopular] = useState(state?.popular|| false)
     const [error,setError] = useState('')
 
     const api = process.env.REACT_APP_API_KEY
@@ -27,6 +29,7 @@ const NewProduct = () => {
 /*useEffect(()=>{
 
 },[name])*/
+
 
 
 const upload = async()=>{
@@ -45,12 +48,19 @@ const upload = async()=>{
         console.log(err)
     }
 }
-   
+
+const handleDeal=(e)=>{
+setDeal(!deal)
+}
+
+const handlePopular=(e)=>{
+    setPopular(!popular)
+    }
 
 const onSubmit =async e =>{
     e.preventDefault();
-    if(!currentUser) return;
-
+    if(!currentUser) return; 
+    
     if (state){
        let imglnk;
        if(image.name){
@@ -61,7 +71,7 @@ const onSubmit =async e =>{
         try{
 
             await axios.patch(`${API_URL}/auth/admin-update`, {
-            name, brand, price, discount,description, category,id:state._id, imglnk}
+            name, brand, price, discount,description, category,id:state._id, imglnk, deal, popular}
         )
         alert("Product updated successfully ")
         navigate(`/products/${state._id.toString()}`)
@@ -74,7 +84,7 @@ const onSubmit =async e =>{
         try{
             const imglnk = await upload();
             await axios.post(`${API_URL}/auth/admin-add`, {
-                name, brand, price, discount,description, category,imglnk,
+                name, brand, price, discount,description, category,imglnk, deal, popular,
                 date:  moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
             })
 
@@ -116,23 +126,41 @@ const onSubmit =async e =>{
                   <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Category</label>
                   <select id="category" value={category} onChange = {e=>setCategory(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                       <option defaultValue="">Select category</option>
-                      <option value="Wall Decors">Wall Decors</option>
-                      <option value="Kitchen">Kitchen</option>
-                      <option value="Resin Craft Tools & Materials">Resin Craft Tools & Materials</option>
-                      <option value="Home Exercise">Home Exercise</option>
-                      <option value="Souvenirs">Souvenirs Idea</option>
-                      <option value="Kiddies">Kiddies</option>
-                      <option value="Bedroom">Bedroom</option>
-                      <option value="Bath and Toilet">Bath & Toilet</option>
+                      <option value="Kitchen Utensils & Home Essentials">Kitchen Utensils & Home Essentials</option>
+                      <option value="Gifts & Souvenirs">Gifts & Souvenirs</option>
+                      <option value="Babies & Kids">Babies & Kids</option>
+                      <option value="Decors">Decors</option>
+                      <option value="Exercise & Fitness Supplies">Exercise & Fitness Supplies</option>
+                      <option value="Resin Materials & Tools">Resin Materials & Tools</option>
+                      
                   </select>
               </div>    
               <div>
-                <label className='block mb-2 text-sm font-medium text-gray-900 ' htmlFor='file'>Product Image</label>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' htmlFor='file'>Product Image 1</label>
                 <input type='file' name='' id="image"  onChange={e=>setImage(e.target.files[0])} />
             </div>    
               <div>
-                  <label htmlFor="item-weight" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item Weight (kg)</label>
-                  <input type="number" name="item-weight" id="item-weight" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="12" required=""/>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' htmlFor='file'>Product Image 2</label>
+                <input type='file' name='' id="image"  onChange={e=>setImage(e.target.files[0])} />
+            </div>    
+              <div>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' htmlFor='file'>Product Image 3</label>
+                <input type='file' name='' id="image"  onChange={e=>setImage(e.target.files[0])} />
+            </div>    
+              <div>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' htmlFor='file'>Product Image 4</label>
+                <input type='file' name='' id="image"  onChange={e=>setImage(e.target.files[0])} />
+            </div>    
+              <div className='flex items-center mb-4'>
+                  <label htmlFor="deals"   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add to latest deals?</label>
+                  <input type="checkbox"  value={deal} onChange={handleDeal} name="deals" id="deals" className="m-2 mt-0 p-2 "  required=""/>
+                  
+              </div> 
+              
+              <div className='flex items-center mb-4'>
+                  <label htmlFor="popular"   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add to popular items?</label>
+                  <input type="checkbox"  value={popular} onChange={handlePopular} name="popular" id="popular" className="m-2 mt-0 p-2 "  required=""/>
+                  
               </div> 
                <div className="sm:col-span-2">
                   <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>

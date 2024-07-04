@@ -29,6 +29,7 @@ const item_sample = {
 const Home = () => {
 
 const [products, setProducts] = useState(null)
+const [deals, setDeals] = useState(null)
 const [error, setError]= useState('')
 
 
@@ -41,6 +42,12 @@ useEffect (()=>{
         
         setProducts(fetchProducts.data) 
       }
+
+      const fetchDeals = await axios.get(`${API_URL}/deals`)
+      if(fetchDeals){
+        setDeals(fetchDeals.data)
+      }console.log('works') 
+      console.log(deals)
     } catch(err){
       console.log(err)
     }
@@ -56,26 +63,18 @@ useEffect (()=>{
         <div className='flex items-center flex-col justify-center' >
             <h1 className='pt-10  text-2xl text-tertiary'>Latest Deals</h1>
                 <div  className=' carousel w-2/3 rounded-box ' > 
-                  <div className='carousel-item '>
-                  <Card id={item_sample.id} data={item_sample} />
-                  </div>
 
+                {deals? (deals.map((item)=>(
                   <div className='carousel-item'>
-                  <Card id={item_sample.id} data={item_sample} />
-                  </div>
-
-                  <div className='carousel-item'>
-                  <Card id={item_sample.id} data={item_sample}/>
-                  </div>
-
-                  <div className='carousel-item'>
-                  <Card id={item_sample.id} data={item_sample}/>
-                  </div>
-
-                  <div className='carousel-item'>
-                  <Card id={item_sample.id} data={item_sample}/>
-                  </div>
-
+                     <Card 
+                      key={item._id}
+                      data={item} />
+                    </div>
+                ))):(
+                 
+                    <AiOutlineLoading3Quarters className="loading-icon"/>
+                  
+             )}
                 </div>
         </div>
         
@@ -87,7 +86,7 @@ useEffect (()=>{
               <div className="">
              
               <Card 
-                key={item.id}
+                key={item._id}
                 data={item} />
               </div>
              ))
