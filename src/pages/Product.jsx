@@ -94,33 +94,33 @@ const deletePost= async()=>{
     <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
         <div className="relative shrink-0 max-w-md lg:max-w-lg mx-auto">
-          <img className="w-full dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
+          <img className="w-full px-5 md:px-0 dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
           <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
         <span className=" absolute top-2 right-2 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${product.discount}% OFF`: null }</span>
         </div>
 
         <div className="mt-6 sm:mt-8 lg:mt-0">
           <h1
-            className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"
+            className="text-xl font-normal md:font-semibold px-5 md:px-1 text-gray-900 text-sm md:text-2xl dark:text-white"
           >{product? product.name : 
            `ApplBack to All-In-One Computer, Apple M1, 8GB RAM, 256GB SSD,
             Mac OS, Pink`}
           </h1>
-          <p className='text-black text-sm my-3'>Category: <span className='text-gray-500'>{product.primaryCategory}</span></p>
+          <p className='text-black pl-5 md:pl-0 text-sm my-3'>Category: <span className='text-gray-500'>{product.primaryCategory}</span></p>
           
      
           
-          <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
+          <div className="mt-4 sm:items-center px-5 md:px-0 sm:gap-4 md:flex">
             <p
               className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white"
             >
               ₦ {product.price? formattedNumber : "Not available"}
             </p>
             <p
-              className="line-through  text-gray-900  dark:text-white"
+              className="line-through  py-1 md:py-0 text-gray-900  dark:text-white"
             >
-               {product.discount? `₦${product.price}` : ""}
-            </p>
+               {product.discount>0? `₦${product.price}` : ""}
+            </p> 
 
             <div className="flex items-center gap-2 mt-2 sm:mt-0">
               <div className="flex items-center gap-1">
@@ -208,7 +208,7 @@ const deletePost= async()=>{
             <a
               href="#"
               title=""
-              className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="flex items-center justify-center py-2.5 px-5 my-2 md:my-0 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
               role="button"
             > 
               Add to Cart
@@ -244,7 +244,7 @@ const deletePost= async()=>{
 
           <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
-          <p className="mb-6 text-gray-500 dark:text-gray-400">{product.description? 
+          <p className="mb-6 px-3 md:px-0 text-gray-500 dark:text-gray-400">{product.description? 
              product.description: 
             `Studio quality three mic array for crystal clear calls and voice
             recordings. Six-speaker sound system for a remarkably robust and

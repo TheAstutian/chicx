@@ -34,7 +34,7 @@ const Card = (props) => {
             <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div>
             <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div>
         </div> -->*/}
-            <span className="absolute top-0 left-0 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{discount? `${discount}% OFF`: null }</span>
+            <span className="absolute top-0 left-0 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{discount>0? `${discount}% OFF`: null }</span>
         </Link>
 
 

@@ -84,13 +84,17 @@ const Products = () => {
             {store? <>
               
                 {store.map((item)=>(<>
-                  <div className='p-2 pl-20 pt-5 m-2 mb-5 h-24 flex flex-row'> 
-                    <Link to={`/products/${item._id}`}><img className='h-20 hover:opacity-70' src={item.imageUrl} /></Link>
-                    <div className='ml-5'>
-                    <Link to={`/products/${item._id}`}>  <h1 className='text-black text-lg'>{item.name}</h1></Link>
-                        <p className='text-black text-sm'>Price: <span className='text-gray-500'>₦{item.price}</span></p>
-                        <p className='text-black text-sm'>Added: <span className='text-gray-500'>{moment(item.date).fromNow()}</span> </p>
+                  <div style={{"width":"100%"}} className='p-2  pl-1 md:pl-20 pt-5 m-2 mb-10 md:mb-5 h-32 md:h-26 flex flex-row'> 
+                   <div className=' flex-none w-32 '> 
+                         <Link to={`/products/${item._id}`}><img className='h-28 md:h-24 m-auto hover:opacity-70' src={item.imageUrl} /></Link>
+                    </div>
+                    <div className='ml-5  flex-1 w-64 mr-10  pr-10'>
+                       <Link to={`/products/${item._id}`}>  <p className='text-black text-sm md:text-lg line-clamp-3 md:line-clamp-1 font-bold md:font-medium'>{item.name}</p></Link>
+                       <p className='text-black text-sm'>Price: <span className='text-tertiary font-bold md:font-medium'>₦{item.price}</span></p>
+                    <p className='text-black text-sm'>Discount: <span className='text-tertiary font-bold md:font-medium'> {item.discount>0? "Yes": "No"}</span> </p>
+                    <p className='text-black text-sm'>Added: <span className='text-gray-500'>{moment(item.date).fromNow()}</span> </p>
                     </div> 
+
                                       
                   </div>
                    <hr className=' h-px bg-gray-400 border-0'/></>
