@@ -67,7 +67,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App"> 
-      <div className="">
+      <div className=" scroll-smooth">
         <RouterProvider router={router} />
       </div>
     </div>

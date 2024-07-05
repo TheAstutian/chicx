@@ -40,7 +40,7 @@ const Card = (props) => {
 
   <div className="mt-4 px-5 pb-5">
     
-      <h5 className="text-sm tracking-tight text-slate-900">{name? name : 'Nike Air MX Super 2500 - Red'} </h5>
+      <h5 className="text-sm tracking-tight line-clamp-2 text-slate-900">{name? name : 'Not Available'} </h5>
     
     <div className="mt-2 mb-1 flex items-center justify-between">
       <p>

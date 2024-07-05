@@ -57,7 +57,7 @@ useEffect (()=>{
 }, [])
 
   return (
-    <div className='bg-[#e5e5e5]'>
+    <div className='bg-[#e5e5e5] '>
         <Hero/>
 
         <div className='flex items-center flex-col justify-center' >
