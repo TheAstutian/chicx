@@ -43,8 +43,11 @@ const deletePost= async()=>{
 
 
   let displayPrice;
+  let displayDiscount;
   if(product){
-    displayPrice = product.price*(1-(product.discount/100))
+
+    displayPrice = product.price-product.discount
+    displayDiscount = Math.round(product.discount/product.price*1000)/10
   } 
   const formattedNumber = Intl.NumberFormat("en-US").format(displayPrice)
      
@@ -96,7 +99,7 @@ const deletePost= async()=>{
         <div className="relative shrink-0 max-w-md lg:max-w-lg mx-auto">
           <img className="w-full px-5 md:px-0 dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
           <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
-        <span className=" absolute top-2 right-2 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${product.discount}% OFF`: null }</span>
+        <span className=" absolute top-2 right-2 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${displayDiscount}% OFF`: null }</span>
         </div>
 
         <div className="mt-6 sm:mt-8 lg:mt-0">
@@ -119,7 +122,7 @@ const deletePost= async()=>{
             <p
               className="line-through  py-1 md:py-0 text-gray-900  dark:text-white"
             >
-               {product.discount>0? `₦${product.price}` : ""}
+               {product.discount>0? `₦${product.price}` : ""}    
             </p> 
 
             <div className="flex items-center gap-2 mt-2 sm:mt-0">

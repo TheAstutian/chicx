@@ -21,7 +21,7 @@ const Footer = () => {
                     </svg>
                     GoldyVhista    
                 </a>
-                <p className="my-6 text-[#171717] dark:text-gray-400">Wholesale and retail seller of consumer goods and high quality merchandise. Bring deals.</p>
+                <p className="my-6 text-[#171717] dark:text-gray-400">Retail seller of consumer goods and high quality merchandise. Bring deals.</p>
                 <ul className="flex flex-wrap justify-center items-center mb-6  text-gray-900 dark:text-white">
                     <li>
                         <a href="#" className="mr-4 hover:underline md:mr-6 ">About GDVSTA</a>

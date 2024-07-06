@@ -8,7 +8,19 @@ const Card = (props) => {
     if (_id){
       id=_id.toString()
     }
+   
 
+  let displayPrice;
+  let displayDiscount;
+  if(discount){
+
+    displayPrice = price- discount;
+    displayDiscount = Math.round(discount/price*1000)/10
+  } 
+  const formattedNumber = Intl.NumberFormat("en-US").format(displayPrice)
+     
+
+/*
     let displayPrice;
     if(discount){
       displayPrice = price*(1-(discount/100))
@@ -16,7 +28,7 @@ const Card = (props) => {
       displayPrice = price;
     }
        
-    const formattedNumber = Intl.NumberFormat("en-US").format(displayPrice)
+    const formattedNumber = Intl.NumberFormat("en-US").format(displayPrice)*/
     
   return (  
     
@@ -34,7 +46,7 @@ const Card = (props) => {
             <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div>
             <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div>
         </div> -->*/}
-            <span className="absolute top-0 left-0 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{discount>0? `${discount}% OFF`: null }</span>
+            <span className="absolute top-0 left-0 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{discount>0? `${displayDiscount}% OFF`: null }</span>
         </Link>
 
 
