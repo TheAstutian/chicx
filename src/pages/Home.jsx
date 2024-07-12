@@ -28,7 +28,7 @@ const item_sample = {
 
 const Home = () => {
 
-const [products, setProducts] = useState(null)
+const [popular, setPopular] = useState(null)
 const [deals, setDeals] = useState(null)
 const [error, setError]= useState('')
 
@@ -40,7 +40,7 @@ useEffect (()=>{
       const fetchProducts = await axios.get(`${API_URL}/products`)
       if(fetchProducts){ 
         
-        setProducts(fetchProducts.data) 
+        setPopular(fetchProducts.data) 
       }
 
       const fetchDeals = await axios.get(`${API_URL}/deals`)
@@ -81,8 +81,8 @@ useEffect (()=>{
         <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-8 pb-1 text-2xl text-tertiary'>Popular Items</h1>
            <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
-             {products ? (
-              products.map((item)=>(
+             {popular ? (
+              popular.map((item)=>(
               <div className="">
              
               <Card 

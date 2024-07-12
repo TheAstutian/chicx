@@ -13,10 +13,11 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
  
 const Products = () => {
 
-  const [products, setProducts]= useState(null)
+  
   const [error, setError]= useState(null)
 
   const [store,setStore]= useState(null)
+  const [currentStore, setCurrentStore] = useState(null); 
 
   const {currentUser} = useContext(AuthContext)
   
@@ -24,19 +25,25 @@ const Products = () => {
       const loadProducts = async()=>{
         
         try{
-          const fetchProducts = await axios.get(`${API_URL}/products`)
-          if(fetchProducts){ 
-            
-            setProducts(fetchProducts.data) 
+          const fetchStore = await axios.get(`${API_URL}/store`)
+          if(fetchStore){ 
+            setStore(fetchStore.data)  
           }
         } catch(err){
           console.log(err)
         }
       }
       loadProducts();
-      loadStore();
+      
       return
-    }, [])
+    }, [currentStore])
+
+    const changeStore = (store)=>{
+      if(store){
+        setCurrentStore(store)
+      }
+    }
+    
 
     const loadStore = async () =>{
       try{
@@ -58,8 +65,6 @@ const Products = () => {
         console.log(err)
       }
     }
-    
-
 
 
   return (
@@ -81,9 +86,9 @@ const Products = () => {
           <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Awa Market</h1>
           <hr className=' h-px my-2 bg-gray-400 border-0'/>
           
-            {store? <>
+            {currentStore? <>
               
-                {store.map((item)=>(<>
+                {currentStore.map((item)=>(<>
                   <div style={{"width":"100%"}} className='p-2  pl-1 md:pl-20 pt-5 m-2 mb-10 md:mb-5 h-32 md:h-26 flex flex-row'> 
                    <div className=' flex-none w-32 '> 
                          <Link to={`/products/${item._id}`}><img className='h-28 md:h-24 m-auto hover:opacity-70' src={item.imageUrl} /></Link>
