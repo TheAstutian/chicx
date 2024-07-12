@@ -20,6 +20,8 @@ const Products = () => {
   const [currentStore, setCurrentStore] = useState(null); 
 
   const {currentUser} = useContext(AuthContext)
+
+  const [currentPage, setCurrentPage] = useState(1);
   
   useEffect (()=>{ 
       const loadProducts = async()=>{
@@ -34,16 +36,37 @@ const Products = () => {
         }
       }
       loadProducts();
-      
+      setActiveArray();
+      window.scrollTo(0,0)
       return
-    }, [currentStore])
+    }, [])
 
     const changeStore = (store)=>{
       if(store){
         setCurrentStore(store)
       }
     }
+
+    var totalPages; 
+    if(store){ totalPages = Math.ceil(store.length/15)}
     
+    const paginate = (array,pageNumber,itemsPerPage) =>{
+      const startIndex = (pageNumber-1)*itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+
+      return array.slice(startIndex, endIndex); 
+    }
+
+    const  setActiveArray = async ()=>{
+      if(store){
+        const activeArray = await paginate(store,currentPage,15)
+       setCurrentStore(activeArray)
+       console.log('it is done')
+      }
+
+    }
+    //var activeArray = paginate(store,currentPage,10);
+   
 
     const loadStore = async () =>{
       try{
@@ -103,11 +126,32 @@ const Products = () => {
                                       
                   </div>
                    <hr className=' h-px bg-gray-400 border-0'/></>
-                ))}</>:
+                ))}
+
+                </>:
                 <div className='grid place-items-center py-20 my-10'>
                <AiOutlineLoading3Quarters className="loading-icon"/>
               </div>
               } 
+
+                <div className='p-3 my-5 mr-3 relative'>
+                <nav className=" absolute bottom-0 right-0 inline-flex items-center p-1 rounded bg-white space-x-2" >
+                  <a onClick={() => setCurrentPage(currentPage => Math.max(currentPage - 1, 1))} disabled={currentPage === 1} className="p-1 rounded border text-tertiary bg-white hover:text-white cursor-pointer hover:bg-tertiary hover:border-white" >
+                  <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                  </svg>
+                  </a>
+                  <span className="text-tertiary">{` Page ${currentPage} of ${totalPages} `}</span>
+                  <a onClick={() => setCurrentPage(currentPage => Math.min(currentPage + 1, totalPages))} disabled={currentPage === totalPages} className="p-1 rounded border cursor-pointer text-tertiary bg-white hover:text-white hover:bg-tertiary hover:border-black">
+                     <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                  </a>
+                </nav></div>
+
+
           </div> {/*
         <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-8 pb-1 text-2xl text-tertiary'>All Items</h1>
@@ -129,7 +173,9 @@ const Products = () => {
              
             </div>
             </div>*/}
+             
     </div>
+    
   )
 }
 
