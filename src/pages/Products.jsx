@@ -22,14 +22,19 @@ const Products = () => {
   const {currentUser} = useContext(AuthContext)
 
   const [currentPage, setCurrentPage] = useState(1);
-  
+  const [totalPages, setTotalPages] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   useEffect (()=>{ 
       const loadProducts = async()=>{
         
         try{
-          const fetchStore = await axios.get(`${API_URL}/store`)
+          const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}&rows=${rowsPerPage}`)
           if(fetchStore){ 
-            setStore(fetchStore.data)  
+            
+            const TotalPages = Math.ceil(fetchStore.data[0].totalCount[0].count/rowsPerPage)
+            console.log(fetchStore.data[0].totalData)
+            setTotalPages(TotalPages)
+            setCurrentStore(fetchStore.data[0].totalData)
           }
         } catch(err){
           console.log(err)
@@ -39,7 +44,7 @@ const Products = () => {
       setActiveArray();
       window.scrollTo(0,0)
       return
-    }, [])
+    }, [currentPage])
 
     const changeStore = (store)=>{
       if(store){
@@ -47,8 +52,7 @@ const Products = () => {
       }
     }
 
-    var totalPages; 
-    if(store){ totalPages = Math.ceil(store.length/15)}
+     
     
     const paginate = (array,pageNumber,itemsPerPage) =>{
       const startIndex = (pageNumber-1)*itemsPerPage;
