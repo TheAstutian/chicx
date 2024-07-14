@@ -28,11 +28,12 @@ const Products = () => {
       const loadProducts = async()=>{
         
         try{
-          const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}&rows=${rowsPerPage}`)
+          const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}`)
           if(fetchStore){ 
             
             const TotalPages = Math.ceil(fetchStore.data[0].totalCount[0].count/rowsPerPage)
-            console.log(fetchStore.data[0].totalData)
+            console.log(fetchStore)
+           /* console.log(fetchStore.data[0].totalData)*/
             setTotalPages(TotalPages)
             setCurrentStore(fetchStore.data[0].totalData)
           }
@@ -110,7 +111,13 @@ const Products = () => {
       </Link>
           </div>}
           <div className=''>
+          
           <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Awa Market</h1>
+          <div className='px-3 py-2 flex flex-row justify-start md:justify-between '>
+            <div><p>Categories</p></div>
+            <div><p>Search</p></div>
+          </div>
+          
           <hr className=' h-px my-2 bg-gray-400 border-0'/>
           
             {currentStore? <>
@@ -139,7 +146,7 @@ const Products = () => {
               } 
 
                 <div className='p-3 my-5 mr-3 relative'>
-                <nav className=" absolute bottom-0 right-0 inline-flex items-center p-1 rounded bg-white space-x-2" >
+                <nav className=" absolute bottom-0 right-0 inline-flex items-center p-1 rounded bg-gray space-x-2" >
                   <a onClick={() => setCurrentPage(currentPage => Math.max(currentPage - 1, 1))} disabled={currentPage === 1} className="p-1 rounded border text-tertiary bg-white hover:text-white cursor-pointer hover:bg-tertiary hover:border-white" >
                   <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
