@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios';
 import {FaRegUser} from 'react-icons/fa';
+import { IoIosArrowForward, IoIosArrowBack, IoIosArrowDown} from "react-icons/io";
+import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
 import moment from 'moment';
 
 import Card from '../components/Card';
@@ -13,13 +15,13 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
  
 const Products = () => {
 
-  
+  const {currentUser} = useContext(AuthContext)
   const [error, setError]= useState(null)
 
   const [store,setStore]= useState(null)
   const [currentStore, setCurrentStore] = useState(null); 
-
-  const {currentUser} = useContext(AuthContext)
+  const [displayCategory, setDisplayCategory]= useState('');
+  
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -28,12 +30,14 @@ const Products = () => {
       const loadProducts = async()=>{
         
         try{
-          const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}`)
+          
+          const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}&category=${displayCategory}`)
           if(fetchStore){ 
             
             const TotalPages = Math.ceil(fetchStore.data[0].totalCount[0].count/rowsPerPage)
-            console.log(fetchStore)
+            
            /* console.log(fetchStore.data[0].totalData)*/
+           
             setTotalPages(TotalPages)
             setCurrentStore(fetchStore.data[0].totalData)
           }
@@ -41,11 +45,11 @@ const Products = () => {
           console.log(err)
         }
       }
-      loadProducts();
-      setActiveArray();
+      loadProducts(); 
+      
       window.scrollTo(0,0)
       return
-    }, [currentPage])
+    }, [currentPage, displayCategory])
 
     const changeStore = (store)=>{
       if(store){
@@ -61,15 +65,7 @@ const Products = () => {
 
       return array.slice(startIndex, endIndex); 
     }
-
-    const  setActiveArray = async ()=>{
-      if(store){
-        const activeArray = await paginate(store,currentPage,15)
-       setCurrentStore(activeArray)
-       console.log('it is done')
-      }
-
-    }
+  
     //var activeArray = paginate(store,currentPage,10);
    
 
@@ -94,9 +90,10 @@ const Products = () => {
       }
     }
 
-
+ 
   return (
-    <div>
+    <div >
+      {/*ADMIN SECTION*/}
         { currentUser&& 
         <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'> 
         
@@ -110,12 +107,63 @@ const Products = () => {
                Add New Item
       </Link>
           </div>}
+
+          {/*HEADING AND CONTENT SECTION*/}
           <div className=''>
           
-          <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Awa Market</h1>
-          <div className='px-3 py-2 flex flex-row justify-start md:justify-between '>
-            <div><p>Categories</p></div>
-            <div><p>Search</p></div>
+          <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Awa Market {displayCategory? `: ${displayCategory}` :('') }</h1>
+          <div className='px-3 py-2 flex flex-row  md:justify-between '>
+            <div className='dropdown px-3 py-2 flex flex-row md:pl-10 md:ml-10'>
+                
+              <div tabIndex={0} role="button" className='btn btn-sm btn-outline bg-gray hover:bg-tertiary text-tertiary hover:text-white m-1'>Shop by category <IoIosArrowDown /> </div>
+              <ul tabIndex={0} className='dropdown-content menu bg-tertiary rounded-box z-[1] w-52 p-2 ml-1 shadow'>
+                <li onClick={()=>{setDisplayCategory('') }} className='text-zinc'><a>All Categories</a></li>
+                <li onClick={()=>setDisplayCategory('Babies & Kids')} className='text-white'><a>Babies & Kids</a></li>
+                <li onClick={()=>setDisplayCategory('Kitchen Utensils & Home Essentials')} className='text-white'><a> Kitchen Utensils & Home Essentials</a></li>
+                <li onClick={()=>setDisplayCategory('Gifts & Souvenirs')}className='text-white'><a> Gifts & Souvenirs</a></li>
+                <li onClick={()=>setDisplayCategory('Decors ')}className='text-white'><a> Decors</a></li>
+                <li onClick={()=>setDisplayCategory('Exercise & Fitness Supplies')} className='text-white'><a> Exercise & Fitness Supplies </a></li>
+                <li onClick={()=>setDisplayCategory('Resin Materials & Tools')}className='text-white'><a> Resin Materials & Tools</a></li>
+            
+              </ul>
+
+
+            </div>
+            <div className='px-3 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
+            <input
+    type="search" 
+    className="peer block min-h-[auto] w-full  rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
+    placeholder="Search"
+    aria-label="Search"
+    id="exampleFormControlInput"
+    aria-describedby="basic-addon1" />     
+  <label
+    for="exampleFormControlInput"
+    className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.47rem] pl-1 leading-[1.8] text-neutral-500 italic transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-tertiary"
+    >Search
+  </label>
+  <button
+    className="relative z-[2] -ms-0.5 flex items-center rounded-e bg-tertiary px-3  text-xs font-medium uppercase leading-normal text-gray shadow-tertiary transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+    type="button"
+    id="button-addon1" 
+    data-twe-ripple-init
+    data-twe-ripple-color="light"> 
+    <span className="[&>svg]:h-5 [&>svg]:w-5">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+      </svg>
+    </span>
+  </button>
+
+            </div>
           </div>
           
           <hr className=' h-px my-2 bg-gray-400 border-0'/>
@@ -138,52 +186,35 @@ const Products = () => {
                   </div>
                    <hr className=' h-px bg-gray-400 border-0'/></>
                 ))}
-
+ 
                 </>:
                 <div className='grid place-items-center py-20 my-10'>
                <AiOutlineLoading3Quarters className="loading-icon"/>
               </div>
               } 
+              </div>
 
+{/*PAGINATION HERE */}
                 <div className='p-3 my-5 mr-3 relative'>
                 <nav className=" absolute bottom-0 right-0 inline-flex items-center p-1 rounded bg-gray space-x-2" >
+                  <a onClick={()=> setCurrentPage(1)} className="p-1 rounded border cursor-pointer text-tertiary bg-white hover:text-white hover:bg-tertiary hover:border-black">
+                    <RxDoubleArrowLeft/>
+                  </a>
                   <a onClick={() => setCurrentPage(currentPage => Math.max(currentPage - 1, 1))} disabled={currentPage === 1} className="p-1 rounded border text-tertiary bg-white hover:text-white cursor-pointer hover:bg-tertiary hover:border-white" >
-                  <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                  </svg>
+                  <IoIosArrowBack />
                   </a>
                   <span className="text-tertiary">{` Page ${currentPage} of ${totalPages} `}</span>
                   <a onClick={() => setCurrentPage(currentPage => Math.min(currentPage + 1, totalPages))} disabled={currentPage === totalPages} className="p-1 rounded border cursor-pointer text-tertiary bg-white hover:text-white hover:bg-tertiary hover:border-black">
-                     <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-                      </svg>
+                  <IoIosArrowForward />
                   </a>
-                </nav></div>
+                  <a onClick={()=> setCurrentPage(totalPages)} className="p-1 rounded border cursor-pointer text-tertiary bg-white hover:text-white hover:bg-tertiary hover:border-black">
+                  <RxDoubleArrowRight/>
+                  </a>
+                </nav>
+                </div>
 
 
-          </div> {/*
-        <div className='flex items-center flex-col justify-center'>
-          <h1 className='pt-8 pb-1 text-2xl text-tertiary'>All Items</h1>
-           <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
-             {products ? (
-              products.map((item)=>(
-              <div className=''>
-              
-              <Card 
-                key={item.id}
-                data={item} />
-              </div>
-             ))
-             ) : (
-             <div >
-               <AiOutlineLoading3Quarters className="loading-icon"/>
-              </div>
-             )} 
-             
-            </div>
-            </div>*/}
+          
              
     </div>
     
