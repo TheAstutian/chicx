@@ -65,17 +65,19 @@ useEffect (()=>{
                 <div  className=' carousel w-2/3 rounded-box ' > 
 
                 {deals? (deals.map((item)=>(
-                  <div className='carousel-item'>
+                  <div className='carousel-item m-1'>
                      <Card 
                       key={item._id}
                       data={item} />
+                
                     </div>
                 ))):(
-                 
-                    <AiOutlineLoading3Quarters className="loading-icon"/>
-                  
+                   <div className='items-center'>
+                     <AiOutlineLoading3Quarters className="loading-icon"/>
+                     </div> 
              )}
                 </div>
+                
         </div>
         
         <div className='flex items-center flex-col justify-center'>

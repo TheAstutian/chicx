@@ -6,6 +6,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../ContextStore';
 import { API_URL } from '../App';
 
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import  FroalaEditor from 'react-froala-wysiwyg';
+
+
+
 const NewProduct = () => {
     const state = useLocation().state; 
     console.log(state)
@@ -76,10 +82,10 @@ const onSubmit =async e =>{
         alert("Product updated successfully ")
         navigate(`/products/${state._id.toString()}`)
         return 
-        }catch(err){
-            console.log(err)
-        }
-       
+        }catch(err){ 
+            console.log(err)       
+        }     
+          
     }else {
         try{
             const imglnk = await upload();
@@ -97,6 +103,12 @@ const onSubmit =async e =>{
     
 
 //    console.log(name,brand,price,discount,description,category)
+}
+
+let config = {
+    documentReady: true,
+    heightMin:300,
+    width: '100%'
 }
  
   return (
@@ -153,18 +165,27 @@ const onSubmit =async e =>{
             </div>    
               <div className='flex items-center mb-4'>
                   <label htmlFor="deals"   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add to latest deals?</label>
-                  <input type="checkbox"  value={deal} onChange={handleDeal} name="deals" id="deals" className="m-2 mt-0 p-2 "  required=""/>
+                  <input type="checkbox"  checked={deal} onChange={handleDeal} name="deals" id="deals" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
                   
               </div> 
               
               <div className='flex items-center mb-4'>
                   <label htmlFor="popular"   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add to popular items?</label>
-                  <input type="checkbox"  value={popular} onChange={handlePopular} name="popular" id="popular" className="m-2 mt-0 p-2 "  required=""/>
+                  <input type="checkbox"  checked={popular} onChange={handlePopular} name="popular" id="popular" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
                   
               </div> 
                <div className="sm:col-span-2">
-                  <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                  <textarea id="description" rows="8" onChange={e=>{setDescription(e.target.value)}} value={description}className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your description here"></textarea>
+                    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <FroalaEditor className=''
+                                    tag='textarea'
+                                    model={description}
+                                    onModelChange={event=>{setDescription(event)}}
+                                    config={config}
+                                    value={description}
+                                    />
+
+                  {/*<label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                  <textarea id="description" rows="8" onChange={e=>{setDescription(e.target.value)}} value={description}className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your description here"></textarea>*/}
               </div>
           </div>
           <button type="submit" onClick={onSubmit} className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-tertiary rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-secondary">
@@ -181,18 +202,3 @@ const onSubmit =async e =>{
 export default NewProduct
 
 
-
-/*    const categories = [
-      {  name: "", 
-        subs: [ "Cookware", "Cleaners", "Etc" ]},
-
-    {  name: "Kitchen", 
-       subs: ["Cookware", "Cleaners", "Etc" ]},
-
-    {  name: "Kitchen", 
-       subs: ["Cookware", "Cleaners", "Etc"  ]},
-
-     {  name: "Kitchen", 
-        subs: ["Cookware", "Cleaners", "Etc"]},
-                        
-    ]*/

@@ -5,6 +5,7 @@ import {Link, useLocation, useNavigate} from 'react-router-dom';
 
 import { API_URL } from '../App';
 import { AuthContext } from '../ContextStore';
+import parse from 'html-react-parser';
 
 const Product = () => {
 const [product, setProduct] = useState(null)
@@ -246,12 +247,11 @@ const deletePost= async()=>{
           </div>
 
           <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
-
+          {product.description? parse(`${product.description}`): `No description listed`}
+{/*}
           <p className="mb-6 px-3 md:px-0 text-gray-500 dark:text-gray-400">{product.description? 
              product.description: 
-            `Studio quality three mic array for crystal clear calls and voice
-            recordings. Six-speaker sound system for a remarkably robust and
-            high-quality audio experience. Up to 256GB of ultrafast SSD storage.`}
+            `No description listed`}
           </p>
 {/*}
           <p className="text-gray-500 dark:text-gray-400">{product.details?
