@@ -118,8 +118,8 @@ const Products = () => {
           <div className=''>
           
           <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Awa Market {displayCategory? `: ${displayCategory}` :('') }</h1>
-          <div className='px-3 py-2 flex flex-row  md:justify-between '>
-            <div className='dropdown px-3 py-2 flex flex-row md:pl-10 md:ml-10'>
+          <div className='md:px-3 py-2 flex flex-row  justify-between '>
+            <div className='dropdown md:px-3 py-2 flex flex-row md:pl-10 md:ml-10'>
                 
               <div tabIndex={0} role="button" className='btn btn-sm btn-outline bg-gray hover:bg-tertiary text-tertiary hover:text-white m-1'>Shop by category <IoIosArrowDown /> </div>
               <ul tabIndex={0} className='dropdown-content menu bg-tertiary rounded-box z-[1] w-52 p-2 ml-1 shadow'>
@@ -135,10 +135,10 @@ const Products = () => {
 
 
             </div>
-            <div className='px-3 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
+            <div className='ml-5 md:px-3 mt-1 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
             <input
                   type="search" 
-                  className="peer block min-h-[auto] w-full  rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
+                  className="peer block min-h-[auto] w-3/4 md:w-5/6  rounded border-0 bg-transparent  md:px-3 py-[0.32rem] leading-[1.6] outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
                   placeholder="Search"
                   onChange={(e)=>{setSearchQuery(e.target.value)}}
                   onKeyDown={(e)=>{handleKeyPress(e)}}
