@@ -6,6 +6,11 @@ import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { API_URL } from '../App';
 import { AuthContext } from '../ContextStore';
 import parse from 'html-react-parser';
+import ImageGallery from 'react-image-gallery';
+
+
+
+import "react-image-gallery/styles/css/image-gallery.css";
 
 const Product = () => {
 const [product, setProduct] = useState(null)
@@ -24,6 +29,7 @@ useEffect (()=>{
     
     fetchProduct()
     
+    
     return 
 }, []) 
 
@@ -40,6 +46,27 @@ const deletePost= async()=>{
   navigate("/products")
   }
 }
+
+let galleryImages = []
+const loadImages =(url )=>{
+if (product){
+  galleryImages.push({
+    original: url,
+    thumbnail: url
+  })
+} else return 
+}
+
+const imagesLoaded =()=>{
+
+  if(product) { 
+    loadImages(product.imageUrl)
+    loadImages(product.imageUrl2)
+    loadImages(product.imageUrl3)
+    loadImages(product.imageUrl4)
+  }
+}
+imagesLoaded()
 
 
 
@@ -98,8 +125,17 @@ const deletePost= async()=>{
     <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
         <div className="relative shrink-0 max-w-md lg:max-w-lg mx-auto">
-          <img className="w-full px-5 md:px-0 dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
-          <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
+          <ImageGallery 
+                className="w-full px-5 md:px-0 dark:hidden"
+                showBullets={false}
+                showFullscreenButton={true}
+                showPlayButton={false}
+                thumbnailHeight={20}
+                thumbnailWidth={20}
+                items={galleryImages}
+                 />
+          {/*<img className="w-full px-5 md:px-0 dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
+          <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />*/}
         <span className=" absolute top-2 right-2 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${displayDiscount}% OFF`: null }</span>
         </div>
 

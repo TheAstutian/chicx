@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -28,6 +28,10 @@ const NewProduct = () => {
 
     const [image, setImage]=useState(state?.imageUrl||"")
 
+    const [image2, setImage2]=useState(state?.imageUrl2||"")
+    const [image3, setImage3]=useState(state?.imageUrl3||"")
+    const [image4, setImage4]=useState(state?.imageUrl4||"")
+
     const [name, setName] = useState(state?.name||"")
     const [brand,setBrand] = useState(state?.brand||"")
     const [price,setPrice] = useState(state?.price||"")
@@ -44,20 +48,22 @@ const NewProduct = () => {
     const navigate = useNavigate()
 /*useEffect(()=>{
 
-},[name])*/
+},[image,image2,image3,image4])*/
 
 
 
-const upload = async()=>{
+const upload = async(image)=>{
     try{
         if(!image) {
             return null;
         } else if (image.name){
             const imageupload = new FormData();
+            console.log(imageupload)
             imageupload.set('key', api)
             imageupload.append('image',image)
-            const imagelink = await axios.post('https://api.imgbb.com/1/upload', imageupload)
-          return imagelink.data.data.image.url;
+            const response = await axios.post('https://api.imgbb.com/1/upload', imageupload)
+            
+            return response.data.data.image.url;
         }
 
     }catch(err){
@@ -65,29 +71,31 @@ const upload = async()=>{
     }
 }
 
-const handleDeal=(e)=>{
-setDeal(!deal)
-}
 
-const handlePopular=(e)=>{
-    setPopular(!popular)
-    }
 
 const onSubmit =async e =>{
     e.preventDefault();
     if(!currentUser) return; 
     
+    const uploadImage = async(image)=>{
+        if(image&&image.name){
+            return await upload(image)
+        } else{
+            return image;
+        }
+    }
+
+
     if (state){
-       let imglnk;
-       if(image.name){
-       imglnk = await upload() 
-       }  else {
-        imglnk = image;
-       }
+       
         try{
+            const imglnk = await uploadImage(image);
+            const imglnk2 = await uploadImage(image2);
+            const imglnk3 = await uploadImage(image3);
+            const imglnk4 = await uploadImage(image4);
 
             await axios.patch(`${API_URL}/auth/admin-update`, {
-            name, brand, price, discount,description, category,id:state._id, imglnk, deal, popular}
+            name, brand, price, discount,description, category,id:state._id, imglnk, imglnk2, imglnk3, imglnk4, deal, popular}
         )
         alert("Product updated successfully ")
         navigate(`/products/${state._id.toString()}`)
@@ -98,9 +106,12 @@ const onSubmit =async e =>{
           
     }else {
         try{
-            const imglnk = await upload();
+            const imglnk = await uploadImage(image);
+            const imglnk2 = await uploadImage(image2);
+            const imglnk3 = await uploadImage(image3);
+            const imglnk4 = await uploadImage(image4);
             await axios.post(`${API_URL}/auth/admin-add`, {
-                name, brand, price, discount,description, category,imglnk, deal, popular,
+                name, brand, price, discount,description, category,imglnk, deal, popular, imglnk2, imglnk3, imglnk4,
                 date:  moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
             })
 
@@ -127,15 +138,6 @@ let config = {
             color:'black'
         }
     }
-   /* {
-        'moreParagraph':{
-            'buttons':['alignLeft','alignCenter','alignRight','formatUL','formatOLSimple','formatOL'],
-        },
-        'moreRich':{
-            'buttons':['emoticons','specialCharacters']
-        }
-    }*/
-    
 }
  
   return (
@@ -180,25 +182,25 @@ let config = {
             </div>    
               <div>
                 <label className='block mb-2 text-sm font-medium text-gray-900 ' htmlFor='file'>Product Image 2</label>
-                <input type='file' name='' id="image"  onChange={e=>setImage(e.target.files[0])} />
+                <input type='file' name='' id="image2"  onChange={e=>setImage2(e.target.files[0])} />
             </div>    
               <div>
                 <label className='block mb-2 text-sm font-medium text-gray-900 ' htmlFor='file'>Product Image 3</label>
-                <input type='file' name='' id="image"  onChange={e=>setImage(e.target.files[0])} />
+                <input type='file' name='' id="image3"  onChange={e=>setImage3(e.target.files[0])} />
             </div>    
               <div>
                 <label className='block mb-2 text-sm font-medium text-gray-900 ' htmlFor='file'>Product Image 4</label>
-                <input type='file' name='' id="image"  onChange={e=>setImage(e.target.files[0])} />
+                <input type='file' name='' id="image4"  onChange={e=>setImage4(e.target.files[0])} />
             </div>    
               <div className='flex items-center mb-4'>
                   <label htmlFor="deals"   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add to latest deals?</label>
-                  <input type="checkbox"  checked={deal} onChange={handleDeal} name="deals" id="deals" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
+                  <input type="checkbox"  checked={deal} onChange={()=>setDeal(!deal)} name="deals" id="deals" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
                   
               </div> 
               
               <div className='flex items-center mb-4'>
                   <label htmlFor="popular"   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add to popular items?</label>
-                  <input type="checkbox"  checked={popular} onChange={handlePopular} name="popular" id="popular" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
+                  <input type="checkbox"  checked={popular} onChange={()=>setPopular(!popular)} name="popular" id="popular" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
                   
               </div> 
                <div className="sm:col-span-2">
