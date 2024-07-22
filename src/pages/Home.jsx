@@ -72,8 +72,8 @@ useEffect (()=>{
                 
                     </div>
                 ))):(
-                   <div className='items-center'>
-                     <AiOutlineLoading3Quarters className="loading-icon"/>
+                   <div className=' w-full items-center justify-center pt-10 h-40'>
+                     <AiOutlineLoading3Quarters className="loading-icon mx-auto"/>
                      </div> 
              )}
                 </div>

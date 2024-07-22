@@ -11,6 +11,16 @@ import 'froala-editor/css/froala_editor.pkgd.min.css';
 import  FroalaEditor from 'react-froala-wysiwyg';
 
 
+import 'froala-editor/css/plugins.pkgd.min.css'; // Import plugin CSS if required
+
+import 'froala-editor/js/plugins/align.min.js';
+import 'froala-editor/js/plugins/font_size.min.js';
+
+import 'froala-editor/js/plugins/emoticons.min.js';
+import 'froala-editor/js/plugins/lists.min.js';
+import 'froala-editor/js/plugins/colors.min.js'; 
+// Import other plugins as needed
+
 
 const NewProduct = () => {
     const state = useLocation().state; 
@@ -106,9 +116,26 @@ const onSubmit =async e =>{
 }
 
 let config = {
-    documentReady: true,
-    heightMin:300,
-    width: '100%'
+    
+    heightMin:200,
+    heightMax:500,
+    toolbarButtons:[
+        'fontSize','textColor','backgroundColor','bold','italic','underline','strikeThrough','outdent','indent','alignLeft','alignCenter','alignRight','formatOL','formatUL','emoticons','undo','redo'
+    ],
+    editor: {
+        style:{
+            color:'black'
+        }
+    }
+   /* {
+        'moreParagraph':{
+            'buttons':['alignLeft','alignCenter','alignRight','formatUL','formatOLSimple','formatOL'],
+        },
+        'moreRich':{
+            'buttons':['emoticons','specialCharacters']
+        }
+    }*/
+    
 }
  
   return (
@@ -132,7 +159,7 @@ let config = {
               </div>
               <div className="w-full">
                   <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount</label>
-                  <input type="number" name="discount" onChange={e=>setDiscount(e.target.value)} id="discount" value={discount} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Numbers only, no symbols, e.g. 20" required=""/>
+                  <input type="number" name="discount" onChange={e=>setDiscount(e.target.value)} id="discount" value={discount} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Original Price - Selling Price. No commas " required=""/>
               </div>
               <div>
                   <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Category</label>
@@ -176,7 +203,7 @@ let config = {
               </div> 
                <div className="sm:col-span-2">
                     <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                    <FroalaEditor className=''
+                    <FroalaEditor className='text-black'
                                     tag='textarea'
                                     model={description}
                                     onModelChange={event=>{setDescription(event)}}
