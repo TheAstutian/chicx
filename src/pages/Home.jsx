@@ -61,7 +61,7 @@ useEffect (()=>{
         <Hero/>
 
         <div className='flex items-center flex-col justify-center' >
-            <h1 className='pt-10  text-2xl text-tertiary'>Latest Deals</h1>
+            <h1 className='pt-10  text-2xl text-tertiary'>Shop Latest Deals</h1>
                 <div  className=' carousel w-2/3 rounded-box ' > 
 
                 {deals? (deals.map((item)=>(
@@ -81,7 +81,7 @@ useEffect (()=>{
         </div>
         
         <div className='flex items-center flex-col justify-center'>
-          <h1 className='pt-8 pb-1 text-2xl text-tertiary'>Popular Items</h1>
+          <h1 className='pt-8 pb-1 text-2xl text-tertiary'>Shop Popular Deals</h1>
            <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
              {popular ? (
               popular.map((item)=>(
@@ -102,7 +102,7 @@ useEffect (()=>{
             
         </div>
         <div className='  flex justify-end pt-3 pr-20 pb-10' >
-          <button className='px-5 py-3  font-thin text-white rounded-lg bg-secondary hover:bg-tertiary hover:text-white  focus:ring-4 focus:ring-primary '><Link to ='/products'>See all di market</Link></button>
+          <button className='px-5 py-3  font-thin text-white rounded-lg bg-secondary hover:bg-tertiary hover:text-white  focus:ring-4 focus:ring-primary '><Link to ='/products'>Shop All Products</Link></button>
         </div>
        
         <Testimonials />

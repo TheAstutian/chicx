@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 
 import './App.css';
 import Products from "./pages/Products";
+import About from "./pages/About";
 import Product from "./pages/Product";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path:'/',
         element:<Home />
+      },
+      {
+        path:'/about',
+        element:<About />
       },
       { 
         path:'/products',

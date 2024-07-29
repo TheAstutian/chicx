@@ -18,7 +18,7 @@ const Navbar = () => {
    
 
   return (  <>      
-    <div className='max-w-screen-2xl bg-[#171717] flex justify-between items-center h-8 max-w-[1240px] mx-auto px-4 text-[#e5e5e5]'>
+    <div className='max-w-screen-2xl bg-[#171717] bg-tertiary flex justify-between items-center h-8 max-w-[1240px] mx-auto px-4 text-[#e5e5e5]'>
             {/*Logo*/}
        <Link to='/'> <h1 className='w-full text-lg font-mono font-thin '> GDVSTA </h1></Link>
         <ul className='hidden md:flex' /*style={{"border": "2px solid red"}} */>
@@ -30,7 +30,7 @@ const Navbar = () => {
         ):
         (
         <>
-            <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}><Link to ='/'>About Us</Link></li>
+            <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}><Link to ='/About'>About Us</Link></li>
             <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}><Link to ='/adminlogin'>Login</Link></li>
             <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}><Link to ='/adminregister'>Sign Up</Link></li>
             
@@ -57,8 +57,8 @@ const Navbar = () => {
         <ul
             className={
                 nav
-                ? 'fixed md:hidden left-0 top-0 w-[60%] h-full border-r-gray-900 bg-[#171717] ease-in-out duration-500'
-                : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
+                ? 'fixed md:hidden left-0 top-0 w-[40%] h-60 z-10 border-r-gray-900 bg-[#171717] bg-tertiary ease-in-out duration-500'
+                : 'ease-in-out w-[40%] duration-500 fixed top-0 bottom-0 left-[-100%]'
             }>
                 <h1 className='w-full text-sm font-thin text-gray-200 m-4 '>GDVSTA</h1>
 

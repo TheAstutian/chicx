@@ -117,7 +117,7 @@ const Products = () => {
           {/*HEADING AND CONTENT SECTION*/}
           <div className=''>
           
-          <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Awa Market {displayCategory? `: ${displayCategory}` :('') }</h1>
+          <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Start Shopping {displayCategory? `: ${displayCategory}` :('') }</h1>
           <div className='md:px-3 py-2 flex flex-row  justify-between '>
             <div className='dropdown md:px-3 py-2 flex flex-row md:pl-10 md:ml-10'>
                 

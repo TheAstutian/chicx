@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -24,7 +25,7 @@ const Footer = () => {
                 <p className="my-6 text-[#171717] dark:text-gray-400">Sales of consumer goods and high quality merchandise. Bring deals.</p>
                 <ul className="flex flex-wrap justify-center items-center mb-6  text-gray-900 dark:text-white">
                     <li>
-                        <a href="#" className="mr-4 hover:underline md:mr-6 ">About GDVSTA</a>
+                        <Link to='/About' className="mr-4 hover:underline md:mr-6 ">About GDVSTA</Link>
                     </li>
                     <li>
                         <a href="#" className="mr-4 hover:underline md:mr-6">How it works</a>
