@@ -4,21 +4,23 @@ import {Link, useLocation, useNavigate} from 'react-router-dom';
 
 
 import { API_URL } from '../App';
-import { AuthContext } from '../ContextStore';
+import { AuthContext, CartContext } from '../ContextStore';
 import parse from 'html-react-parser';
 import ImageGallery from 'react-image-gallery';
 
 
-
 import "react-image-gallery/styles/css/image-gallery.css";
+
 
 const Product = () => {
 const [product, setProduct] = useState(null)
 const [error, setError] = useState(null)
+const [notification, setNotification] = useState({show:false, message:""})
 
 const location = useLocation()
 const productId = location.pathname.split("/")[2]
 const {currentUser} = useContext(AuthContext) 
+const{cartItems, addToCart}= useContext(CartContext)
 const navigate = useNavigate()
 
 useEffect (()=>{
@@ -32,6 +34,18 @@ useEffect (()=>{
     
     return 
 }, []) 
+
+const handleAddToCart=()=>{
+  addToCart(product);
+  showNotification(`Item added to your cart!`)
+}
+const showNotification=(message)=>{
+  setNotification({show:true, message})
+  
+  setTimeout(()=>{
+    setNotification({show:false, message:''})
+  }, 3000)
+}
 
 const deletePost= async()=>{
   const confirmation = window.confirm('Are you sure?')
@@ -121,7 +135,7 @@ imagesLoaded()
 
 
     </div> 
-        <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
+        <section className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
     <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
         <div className="relative shrink-0 max-w-md lg:max-w-lg mx-auto">
@@ -245,14 +259,15 @@ imagesLoaded()
           </div>
 
           <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-            <a
-              href="#"
+           
+            <span
+              onClick={handleAddToCart}
               title=""
-              className="flex items-center justify-center py-2.5 px-5 my-2 md:my-0 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="flex items-center justify-center py-2.5 px-5 my-2 md:my-0 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-primary hover:bg-primary hover:text-white focus:z-10 focus:ring-4 focus:ring-blue"
               role="button"
             > 
               Add to Cart
-            </a>
+            </span>
 
             <a
               href={`https://wa.me/2348145887534?text=I'm%20interested%20in%20${product.name}%20.Is%20it%20for%20sale?%20`}
@@ -301,6 +316,10 @@ imagesLoaded()
     </div>
   </section>
   </>:<p>Loading</p>}
+  {notification.show && (
+        <div className="fixed top-5 right-0 m-4 p-2 bg-gray-100 border border-gray-300 font-semibold text-xs text-gray-600 rounded shadow-md">
+          {notification.message}
+        </div>)}
     </div>
   )
 }

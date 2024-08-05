@@ -3,10 +3,10 @@ import React from 'react'
 const About = () => {
   return (
     <div>
-        <div className='pl-10 pt-5 ml-10 mt-5 w-full'>
-            <h1 className='text-tertiary font-semibold text-3xl pl-10 ml-10'>About Goldyvhista Hubz</h1>
+        <div className='pl-5 md:pl-10 pt-5 md:ml-10 mt-5 w-full'>
+            <h1 className='text-tertiary font-semibold text-3xl md:text-3xl p-2 md:pl-10 md:ml-10'>About Goldyvhista Hubz</h1>
         </div>
-        <div className='pl-10 pt-5 m-5 w-1/2'>
+        <div className='px-5 md:pl-10 pt-3 md:pt-5 mx-1 md:m-5 w-full md:w-1/2'>
             <span className='block text-black text-xl pb-3 leading-relaxed'>
                 Discover the beautiful world of Goldyvhista Hubz, your premium destination for quality kitchen utensils, kiddies essentials, household supplies, and souveniers. 
             </span>

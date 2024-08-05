@@ -98,7 +98,7 @@ const Products = () => {
 
  
   return (
-    <div >
+    <div className=' scroll-smooth' >
       {/*ADMIN SECTION*/}
         { currentUser&& 
         <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'> 

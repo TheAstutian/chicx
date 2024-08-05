@@ -76,7 +76,7 @@ const upload = async(image)=>{
 const onSubmit =async e =>{
     e.preventDefault();
     if(!currentUser) return; 
-    
+    const sellingPrice = price-discount
     const uploadImage = async(image)=>{
         if(image&&image.name){
             return await upload(image)
@@ -95,7 +95,7 @@ const onSubmit =async e =>{
             const imglnk4 = await uploadImage(image4);
 
             await axios.patch(`${API_URL}/auth/admin-update`, {
-            name, brand, price, discount,description, category,id:state._id, imglnk, imglnk2, imglnk3, imglnk4, deal, popular}
+            name, brand, price, sellingPrice, discount,description, category,id:state._id, imglnk, imglnk2, imglnk3, imglnk4, deal, popular}
         )
         alert("Product updated successfully ")
         navigate(`/products/${state._id.toString()}`)
@@ -111,7 +111,7 @@ const onSubmit =async e =>{
             const imglnk3 = await uploadImage(image3);
             const imglnk4 = await uploadImage(image4);
             await axios.post(`${API_URL}/auth/admin-add`, {
-                name, brand, price, discount,description, category,imglnk, deal, popular, imglnk2, imglnk3, imglnk4,
+                name, brand, price, sellingPrice, discount,description, category,imglnk, deal, popular, imglnk2, imglnk3, imglnk4,
                 date:  moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
             })
 
