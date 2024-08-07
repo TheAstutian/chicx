@@ -25,7 +25,7 @@ const Navbar = () => {
    
 
   return (  <>      
-    <div className='max-w-screen-2xl bg-[#171717] bg-tertiary flex justify-between items-center h-8 max-w-[1240px] mx-auto px-4 text-[#e5e5e5]'>
+    <div className='scroll-smooth max-w-screen-2xl bg-[#171717] bg-tertiary flex justify-between items-center h-8 max-w-[1240px] mx-auto px-4 text-[#e5e5e5]'>
             {/*Logo*/}
        <Link to='/'> <h1 className='w-full text-lg font-mono font-thin '> GDVSTA </h1></Link>
         <ul className='hidden md:flex' /*style={{"border": "2px solid red"}} */>

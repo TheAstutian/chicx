@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useRef, useContext} from 'react'
 import axios from 'axios';
 import {FaRegUser} from 'react-icons/fa';
 import { IoIosArrowForward, IoIosArrowBack, IoIosArrowDown} from "react-icons/io";
@@ -16,6 +16,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const Products = () => {
 
   const {currentUser} = useContext(AuthContext)
+  const currentUserRef = useRef(currentUser)
   const [error, setError]= useState(null)
 
   const [store,setStore]= useState(null)
@@ -100,7 +101,7 @@ const Products = () => {
   return (
     <div className=' scroll-smooth' >
       {/*ADMIN SECTION*/}
-        { currentUser&& 
+        { currentUserRef.current.type==='admin'&& 
         <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'> 
         
           <FaRegUser className='m-2 text-tertiary'/>  <p className='mr-5 p-1 text-tertiary '>  {currentUser.email}</p>

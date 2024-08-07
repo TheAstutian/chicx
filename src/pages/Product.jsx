@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import axios from 'axios';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 
@@ -20,6 +20,7 @@ const [notification, setNotification] = useState({show:false, message:""})
 const location = useLocation()
 const productId = location.pathname.split("/")[2]
 const {currentUser} = useContext(AuthContext) 
+const currentUserRef = useRef(currentUser)
 const{cartItems, addToCart}= useContext(CartContext)
 const navigate = useNavigate()
 
@@ -27,10 +28,8 @@ useEffect (()=>{
     const fetchProduct = async ()=>{
       const Product = await axios.get(`${API_URL}/products/${productId}`)
      setProduct(Product.data)
-    }
-    
+    }   
     fetchProduct()
-    
     
     return 
 }, []) 
@@ -105,7 +104,7 @@ imagesLoaded()
                Back to All Items 
       </Link> 
 
-     { currentUser&& <><Link 
+     { currentUserRef.current.type==='admin'? (<><Link 
              to='/NewProduct'
               title="" 
               className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -131,7 +130,7 @@ imagesLoaded()
           > 
           Delete Product
           </span>
-          </> }
+          </>):('') }
 
 
     </div> 

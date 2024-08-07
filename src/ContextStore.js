@@ -10,6 +10,7 @@ export const AuthContextProvider = ({children}) =>{
     
     const login = async (inputs)=>{
         const res = await axios.post(`${API_URL}/auth/admin-login`, inputs)
+        
         setCurrentUser(res.data)
     }
 

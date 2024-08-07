@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -45,6 +45,7 @@ const NewProduct = () => {
     const api = process.env.REACT_APP_API_KEY
 
     const {currentUser} = useContext(AuthContext);
+    const currentUserRef = useRef(currentUser)
     const navigate = useNavigate()
 /*useEffect(()=>{
 
@@ -141,7 +142,9 @@ let config = {
 }
  
   return (
-    <div>
+    currentUserRef.current.type==='admin'&&(
+
+        <div>
         <section className="bg-white dark:bg-gray-900">
   <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
       <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new product</h2>
@@ -225,6 +228,7 @@ let config = {
 </section>
 
     </div>
+    )
   )
 }
 
