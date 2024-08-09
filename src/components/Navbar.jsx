@@ -4,13 +4,14 @@ import{BsCart4} from 'react-icons/bs'
 import {Link} from 'react-router-dom'
 import { AuthContext, CartContext } from '../ContextStore';
 import Cart from '../pages/Cart';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
     //manage navbar visibility
     const [nav, setNav] = useState(false);
     const [showCart, setShowCart]= useState(false)
-    
+    const navigate = useNavigate()
      
     const {currentUser, logout} = useContext(AuthContext)
     const{cartItems}= useContext(CartContext)
@@ -22,6 +23,10 @@ const Navbar = () => {
         setShowCart(!showCart)
     }
 
+    const logUserOut =()=>{
+        logout()
+        navigate('/')
+    }
    
 
   return (  <>      
@@ -33,7 +38,7 @@ const Navbar = () => {
         {currentUser? (
             <>
             <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}> Welcome, {currentUser.email}</li>
-            <li className = {`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`} onClick={logout}> Logout </li>
+            <li className = {`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`} onClick={()=>logUserOut()}> Logout </li>
             </>
         ):
         (
@@ -69,7 +74,7 @@ const Navbar = () => {
                 {currentUser? (
                     <>
                       <li className={`p-2 text-lg border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`}> Welcome, {currentUser.email}</li>
-                      <li className = {`p-2 text-xs border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`} onClick={logout}> Logout </li>
+                      <li className = {`p-2 text-xs border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`} onClick={()=>logUserOut()}> Logout </li>
                     </>
                 ):
                 (

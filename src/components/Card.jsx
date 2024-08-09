@@ -32,27 +32,21 @@ const Card = (props) => {
     
   return (  
     
-    <div className="group my-3 flex  w-60 flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md hover:opacity-80 hover:border-tertiary ">
+    <div className="group my-3 flex  w-60 flex-col h-full overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md hover:opacity-80 hover:border-tertiary ">
             {/* product images and discount */}
-        <Link className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl" to={`/products/${id}`}>
-            <img className="peer absolute top-0 right-0 h-full max-w-60 object-cover" src={imageUrl? imageUrl: "https://m.media-amazon.com/images/I/61R+XI5OkOL.jpg"} alt="product image1" />
-            {/*other images
-            <img className="peer absolute top-0 right-0 h-full max-w-60 object-cover" src="https://images.unsplash.com/flagged/photo-1556637640-2c80d3201be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60?a=b" alt="product image1" />
-            <img className="peer absolute top-0 -right-96 h-full max-w-60  object-cover transition-all delay-100 duration-1000 hover:right-0 peer-hover:right-0" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="product image2" />
-            <img className="peer absolute top-0 -right-96 h-full max-w-60  object-cover transition-all delay-100 duration-1000 hover:right-0 peer-hover:right-0" src="https://m.media-amazon.com/images/I/61R+XI5OkOL.jpg" alt="product image" />
-                }
-            {/*<-- <div class="absolute  bottom-0 mb-4 flex space-x-4 w-full justify-center">
-            <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div> 
-            <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div>
-            <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div>
-        </div> -->*/}
+        <Link className="" to={`/products/${id}`}>
+            <div className='relative mx-3 mt-5 flex h-60 overflow-hidden rounded-xl'>
+              <img className="peer absolute top-0 right-0 h-full  object-center" src={imageUrl? imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"} alt="product image1" />          
             <span className="absolute top-0 left-0 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{discount>0? `${displayDiscount}% OFF`: null }</span>
+            </div>
         </Link>
 
 
-  <div className="mt-4 px-5 pb-5">
+  <div className="mt-4 px-5 ">
     
+      <div className='h-10'>
       <h5 className="text-sm tracking-tight line-clamp-2 text-slate-900">{name? name : 'Not Available'} </h5>
+      </div>
     
     <div className="mt-2 mb-1 flex items-center justify-between">
       <p>

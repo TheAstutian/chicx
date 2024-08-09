@@ -101,7 +101,7 @@ const Products = () => {
   return (
     <div className=' scroll-smooth' >
       {/*ADMIN SECTION*/}
-        { currentUserRef.current.type==='admin'&& 
+        { currentUser? ( currentUser.type==='admin'?(
         <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'> 
         
           <FaRegUser className='m-2 text-tertiary'/>  <p className='mr-5 p-1 text-tertiary '>  {currentUser.email}</p>
@@ -113,7 +113,7 @@ const Products = () => {
             > 
                Add New Item
       </Link>
-          </div>}
+          </div>):('')):('')}
 
           {/*HEADING AND CONTENT SECTION*/}
           <div className=''>

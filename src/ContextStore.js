@@ -16,6 +16,7 @@ export const AuthContextProvider = ({children}) =>{
 
     const logout = async(inputs)=>{
         setCurrentUser(null)
+        
     }
 
     useEffect(()=>{

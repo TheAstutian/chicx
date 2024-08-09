@@ -16,6 +16,7 @@ import Product from "./pages/Product";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
 import NewProduct from "./pages/NewProduct";
+import Checkout from "./pages/Checkout";
 
 const Layout = () =>{
   return(
@@ -55,7 +56,11 @@ const router = createBrowserRouter([
       {
         path:'/NewProduct',
         element:<NewProduct />
-      }
+      },
+      {
+        path:'/Checkout',
+        element:<Checkout />
+      },
     ]
   },
   

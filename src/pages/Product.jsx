@@ -104,7 +104,7 @@ imagesLoaded()
                Back to All Items 
       </Link> 
 
-     { currentUserRef.current.type==='admin'? (<><Link 
+     { currentUser? (currentUser.type==='admin'? (<><Link 
              to='/NewProduct'
               title="" 
               className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -130,7 +130,7 @@ imagesLoaded()
           > 
           Delete Product
           </span>
-          </>):('') }
+          </>):('')):('') }
 
 
     </div> 
