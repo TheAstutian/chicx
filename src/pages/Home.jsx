@@ -60,7 +60,7 @@ useEffect (()=>{
     <div className='bg-[#e5e5e5] '>
         <Hero/>
 
-        <div className='flex items-center flex-col justify-center' >
+        <div className='flex items-center md:py-5 flex-col justify-center' >
             <h1 className='pt-10  text-2xl text-tertiary'>Shop Latest Deals</h1>
                 <div  className=' carousel w-2/3 rounded-box ' > 
 
@@ -82,7 +82,7 @@ useEffect (()=>{
         
         <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-8 pb-1 text-2xl text-tertiary'>Shop Popular Deals</h1>
-           <div className='grid grid-cols-1 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-5'> 
+           <div className='grid grid-cols-1 md:grid-cols-3 gap-5 lg:grid-cols-4 lg:gap-5'> 
              {popular ? (
               popular.map((item)=>(
               <div className="">

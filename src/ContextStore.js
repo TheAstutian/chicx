@@ -35,6 +35,7 @@ export const CartContext = createContext();
 export const CartProvider =({children})=>{
     const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems')) || [] )
     const [cartItemsTotal, setCartItemsTotal]= useState(0)
+
     const addToCart =(item)=>{
         const isItemInCart = cartItems.find((cartItem)=> cartItem._id===item._id)
 
@@ -47,6 +48,27 @@ export const CartProvider =({children})=>{
             )
         } else {
             setCartItems([...cartItems, {...item, quantity:1}])
+        }
+    }
+
+    const deleteFromCart = (item)=>{
+        const isItemInCart = cartItems.find((cartItem)=>cartItem._id===item._id)
+        if(isItemInCart){
+            setCartItems(cartItems.filter((cartItem)=>cartItem._id!==item._id))
+        }
+    }
+
+    const setItemQuantity =(item, quantity) =>{
+        const isItemInCart = cartItems.find((cartItem)=>cartItem._id===item._id)
+
+        if(isItemInCart){
+            setCartItems(
+                cartItems.map((cartItem)=>
+                    cartItem._id===item.id?
+                {...cartItem, quantity:quantity} 
+                : cartItem
+                )
+            )
         }
     }
 
@@ -80,12 +102,12 @@ export const CartProvider =({children})=>{
 
     useEffect(()=>{
         localStorage.setItem("cartItems", JSON.stringify(cartItems))
-        console.log('cart Items updated:', cartItems)
+        
           setCartItemsTotal(getCartTotal());
     },[cartItems])
 
     return (
-        <CartContext.Provider value={{cartItems,addToCart,removeFromCart,clearCart,cartItemsTotal}}>{children}</CartContext.Provider>
+        <CartContext.Provider value={{cartItems,addToCart,removeFromCart,clearCart, deleteFromCart, cartItemsTotal}}>{children}</CartContext.Provider>
     )
 }
 

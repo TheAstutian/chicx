@@ -4,10 +4,16 @@ import {CiSquarePlus, CiSquareMinus} from "react-icons/ci"
 import{BsCart4} from 'react-icons/bs'
 import {AiOutlineClose} from 'react-icons/ai';
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 
 const Cart = ({showModal, toggle}) => {
     const {cartItems, addToCart, removeFromCart, clearCart, cartItemsTotal} = useContext(CartContext);
-    
+    const navigate = useNavigate()
+    const toCheckOut = ()=>{
+      toggle()
+      navigate('/Checkout')
+    }
   return (
     <div className='relative scroll-smooth '>
     <div  className={`flex flex-col fixed h-full overflow-y-auto right-0 top-0 z-10 bg-gray-100 md:border-l-2 md:border-b-2 md:border-tertiary  px-2 py-5 w-full md:w-1/4 text-black text-sm transform transition-transform ease-in-out duration-500 ${showModal ? 'translate-x-0' : 'translate-x-full '}`}>
@@ -63,10 +69,10 @@ const Cart = ({showModal, toggle}) => {
         Clear cart
       </p>
       
-      <Link to='/checkout'
+      <span onClick={()=>toCheckOut()}
         className="px-3 py-1 bg-tertiary text-white text-xs hover:cursor-pointer uppercase rounded hover:bg-secondary focus:outline-none focus:bg-gray-700" >
         Checkout
-      </Link>
+      </span>
 
         </div>
     </div>

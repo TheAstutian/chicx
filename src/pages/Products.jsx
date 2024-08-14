@@ -116,7 +116,7 @@ const Products = () => {
           </div>):('')):('')}
 
           {/*HEADING AND CONTENT SECTION*/}
-          <div className=''>
+          <div className='w-full'>
           
           <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Start Shopping {displayCategory? `: ${displayCategory}` :('') }</h1>
           <div className='md:px-3 py-2 flex flex-row  justify-between '>
@@ -175,7 +175,7 @@ const Products = () => {
             {currentStore? <>
               
                 {currentStore.map((item)=>(<>
-                  <div style={{"width":"100%"}}  key={`${item._id}`} className='p-2  pl-1 md:pl-20 pt-5 m-2 mb-10 md:mb-5 h-32 md:h-26 flex flex-row'> 
+                  <div   key={`${item._id}`} className='p-2  pl-1 md:pl-20 pt-5 m-2 mb-10 md:mb-5 h-32 md:h-26 flex flex-row'> 
                    <div className=' flex-none w-32 '> 
                          <Link to={`/products/${item._id}`}><img className='h-28 md:h-24 m-auto hover:opacity-70' src={item.imageUrl} /></Link>
                     </div>
