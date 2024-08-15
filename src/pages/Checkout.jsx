@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { CartContext } from '../ContextStore';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
-
+import { Link } from 'react-router-dom';
 
 const Checkout = () => {
 
@@ -37,13 +37,13 @@ const Checkout = () => {
                         {cartItems.map((item)=>(
                                    <div  key={item._id} className='rounded py-5 md:flex md:flex-row bg-[#e5e5e5] m-2 '>
                                      
-                                 <div className=' md:w-2/5 p-4 md:p-2 md:pt-5'><img className='mx-auto w-1/2 ' src={item.imageUrl} /></div>
+                                 <div className=' md:w-2/5 p-4 md:p-2 md:pt-5'><Link to ={`/products/${item._id}`}><img className='mx-auto w-1/2 ' src={item.imageUrl} /></Link></div>
                                  <div className='p-3 pl-12 md:pl-0 w-2/3 mx-auto md:w-3/5'> 
                                         <p className=' text-black text-base text-left font-semibold'>{item.name}</p> 
                                         <p className='text-black text-sm mb-1 font-light'>Price per unit: <b className='text-sm'>₦{item.sellingPrice}</b></p>
                                         <div className='flex flex-row '> 
-                                          <span className='flex flex-row border border-black rounded-lg text-xs py-1 px-2 bg-gray-700'><p className='text-silver text-ms font-light '> <b>Quantity: </b></p> <MdOutlineKeyboardArrowDown  size={15} onClick={()=>removeFromCart(item)} className='text-white mt-0.5 ml-1 cursor-pointer' /> <span className='text-silver'>{item.quantity}</span> <MdOutlineKeyboardArrowUp size={15} onClick={()=>addToCart(item)} className='text-white mt-0.5 cursor-pointer mr-1 font-light' /> </span>
-                                          <span className=" ml-10 cursor-pointer border-black rounded-lg text-xs py-1 px-2 bg-gray-700 hover:bg-gray-300 text-silver hover:text-gray-700" onClick={()=>deleteFromCart(item)}>Delete</span>
+                                          <span className='flex flex-row border border-secondary rounded-lg text-xs py-1 px-2 bg-secondary'><p className='text-white text-ms font-light '> <b>Quantity: </b></p> <MdOutlineKeyboardArrowDown  size={15} onClick={()=>removeFromCart(item)} className='text-white mt-0.5 ml-1 cursor-pointer' /> <span className='text-gray-300'>{item.quantity}</span> <MdOutlineKeyboardArrowUp size={15} onClick={()=>addToCart(item)} className='text-white mt-0.5 cursor-pointer mr-1 font-light' /> </span>
+                                          <span className=" ml-10 cursor-pointer border-black rounded-lg text-xs py-1 px-2 bg-secondary hover:bg-tertiary text-white hover:text-white" onClick={()=>deleteFromCart(item)}>Delete</span>
                                          </div>
                                         <p className='text-black mt-2 text-tertiary font-light'>SubTotal: <b> ₦{item.sellingPrice * item.quantity} </b></p>
                                  </div>

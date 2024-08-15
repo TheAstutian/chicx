@@ -28,7 +28,7 @@ const Products = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [rowsPerPage, setRowsPerPage] = useState(20)
   useEffect (()=>{ 
       const loadProducts = async()=>{
         
@@ -38,8 +38,6 @@ const Products = () => {
           if(fetchStore){ 
             
             const TotalPages = Math.ceil(fetchStore.data[0].totalCount[0].count/rowsPerPage)
-            
-           /* console.log(fetchStore.data[0].totalData)*/
            console.log(searchQuery)
             setTotalPages(TotalPages)
             setCurrentStore(fetchStore.data[0].totalData)
@@ -72,9 +70,6 @@ const Products = () => {
         
      }
     
-  
-    //var activeArray = paginate(store,currentPage,10);
-   
 
     const loadStore = async () =>{
       try{
