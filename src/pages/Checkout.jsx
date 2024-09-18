@@ -2,8 +2,16 @@ import React, {useContext, useState} from 'react'
 import { CartContext } from '../ContextStore';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import ReactGA from 'react-ga4';
 
 const Checkout = () => {
+
+  
+  ReactGA.send({
+    hitType:"pageview",
+    page:"/Checkout",
+    title:"Checkout"
+  })
 
     const {cartItems, addToCart, removeFromCart, deleteFromCart, clearCart, cartItemsTotal} = useContext(CartContext);
     const [dropdown, setDropdown] = useState('false')

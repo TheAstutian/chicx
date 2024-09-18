@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { API_URL } from '../App';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+import ReactGA from 'react-ga4';
 
 
   
@@ -28,9 +29,15 @@ const item_sample = {
 
 const Home = () => {
 
+  ReactGA.send({
+    hitType: "pageview",
+    page:"/",
+    title:"Home",
+  })
 const [popular, setPopular] = useState(null)
 const [deals, setDeals] = useState(null)
 const [error, setError]= useState('')
+
 
 
 useEffect (()=>{ 

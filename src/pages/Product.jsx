@@ -10,9 +10,17 @@ import ImageGallery from 'react-image-gallery';
 
 
 import "react-image-gallery/styles/css/image-gallery.css";
+import ReactGA from 'react-ga4'
 
 
 const Product = () => {
+
+  ReactGA.send({
+    hitType:"pageview",
+    page:"/product",
+    title:"Product"
+  })
+
 const [product, setProduct] = useState(null)
 const [error, setError] = useState(null)
 const [notification, setNotification] = useState({show:false, message:""})

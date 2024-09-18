@@ -11,10 +11,15 @@ import { API_URL } from '../App';
 import { AuthContext } from '../ContextStore';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-
+import ReactGA from 'react-ga4'
  
 const Products = () => {
 
+  ReactGA.send({
+    hitType:"pageview",
+    page:"/products",
+    title:"Store"
+  })
   const {currentUser} = useContext(AuthContext)
   const currentUserRef = useRef(currentUser)
   const [error, setError]= useState(null)

@@ -18,6 +18,8 @@ import AdminRegister from "./pages/AdminRegister";
 import NewProduct from "./pages/NewProduct";
 import Checkout from "./pages/Checkout";
 
+import ReactGA from 'react-ga4';
+
 const Layout = () =>{
   return(
     <>
@@ -75,6 +77,9 @@ const router = createBrowserRouter([
 ])
 
 function App() {
+
+  ReactGA.initialize('G-77ZCG9D534')
+
   return (
     <div className="App"> 
       <div className=" scroll-smooth">
