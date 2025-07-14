@@ -11,21 +11,6 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import ReactGA from 'react-ga4';
 
 
-  
-const item_sample = {
-  id: 419,
-  name: 'Samsung Galaxy S21',
-  description: 'Latest model with advanced features',
-  price: 450000.00,
-  primaryCategory: 'Electronics',
-  secondaryCategory: 'Mobile Phones',
-  imageUrl: 'https://images1.vinted.net/t/02_0189c_fFYTzsgdgRx1akoFu6AHd79P/f800/1718562268.jpeg?s=ee42e00896d42cfe454beef9988b16a41085979a',
-  details: 'The Samsung Galaxy S21 offers a new camera design, a faster processor, and better software features.',
-  date: '2024-02-15',
-}
-
-
-
 
 const Home = () => {
 
@@ -38,37 +23,36 @@ const [popular, setPopular] = useState(null)
 const [deals, setDeals] = useState(null)
 const [error, setError]= useState('')
 
-
-
 useEffect (()=>{ 
-  const loadProducts = async()=>{
-    
-    try{
-      const fetchProducts = await axios.get(`${API_URL}/products`)
-      if(fetchProducts){ 
-        
-        setPopular(fetchProducts.data) 
-      }
-
-      const fetchDeals = await axios.get(`${API_URL}/deals`)
-      if(fetchDeals){
-        setDeals(fetchDeals.data)
-      }console.log('works') 
-      console.log(deals)
-    } catch(err){
-      console.log(err)
-    }
-  }
   loadProducts() 
   return
 }, [])
+
+const loadProducts = async()=>{
+    
+  try{
+    const fetchProducts = await axios.get(`${API_URL}/products`)
+    if(fetchProducts){ 
+      
+      setPopular(fetchProducts.data) 
+    }
+
+    const fetchDeals = await axios.get(`${API_URL}/deals`)
+    if(fetchDeals){
+      setDeals(fetchDeals.data)
+    } 
+    
+  } catch(err){
+    console.log(err)
+  }
+}
 
   return (
     <div className='bg-[#e5e5e5] '>
         <Hero/>
 
         <div className='flex items-center md:py-5 flex-col justify-center' >
-            <h1 className='pt-10  text-2xl text-tertiary'>Shop Latest Deals</h1>
+            <h1 className='pt-10  text-2xl text-tertiary'> Latest Deals</h1>
                 <div  className=' carousel w-2/3 rounded-box ' > 
 
                 {deals? (deals.map((item)=>(
@@ -79,7 +63,7 @@ useEffect (()=>{
                 
                     </div>
                 ))):(
-                   <div className=' w-full items-center justify-center pt-10 h-40'>
+                   <div className=' w-full items-center justify-center py-10 my-10 h-40'>
                      <AiOutlineLoading3Quarters className="loading-icon mx-auto"/>
                      </div> 
              )}
@@ -88,28 +72,30 @@ useEffect (()=>{
         </div>
         
         <div className='flex items-center flex-col justify-center'>
-          <h1 className='pt-8 pb-1 text-2xl text-tertiary'>Shop Popular Deals</h1>
-           <div className='grid grid-cols-1 md:grid-cols-3 gap-5 lg:grid-cols-4 lg:gap-5'> 
+          <h1 className='pt-8 pb-1 text-2xl text-tertiary'> Popular </h1>
+           
              {popular ? (
-              popular.map((item)=>(
+              <div className='grid grid-cols-2 md:grid-cols-3 gap-5 lg:grid-cols-4 lg:gap-5'> 
+              {popular.map((item)=>(
               <div className="">
              
               <Card 
                 key={item._id}
                 data={item} />
               </div>
-             ))
-             ) : (
-             <div className='pt-10 mt-10 mb-10 pb-10'>
-               <AiOutlineLoading3Quarters className="loading-icon"/>
+             ))}
+             </div> 
+             ) 
+             : 
+             (
+             <div className='py-10 my-10 w-full'>
+               <AiOutlineLoading3Quarters className="w-full loading-icon"/>
              </div>
              )} 
-             
-            </div>
             
         </div>
-        <div className='  flex justify-end pt-3 pr-20 pb-10' >
-          <button className='px-5 py-3  font-thin text-white rounded-lg bg-secondary hover:bg-tertiary hover:text-white  focus:ring-4 focus:ring-primary '><Link to ='/products'>Shop All Products</Link></button>
+        <div className='  flex justify-center p-10' >
+          <button className='px-5 py-3  font-thin text-white rounded-lg bg-secondary hover:bg-tertiary hover:text-white  focus:ring-4 focus:ring-primary '><Link to ='/products'> Show More</Link></button>
         </div>
        
         <Testimonials />

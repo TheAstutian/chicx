@@ -35,27 +35,29 @@ const Products = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(20)
   useEffect (()=>{ 
-      const loadProducts = async()=>{
-        
-        try{
-          
-          const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}&searchquery=${searchQuery}&category=${displayCategory}`)
-          if(fetchStore){ 
-            
-            const TotalPages = Math.ceil(fetchStore.data[0].totalCount[0].count/rowsPerPage)
-           console.log(searchQuery)
-            setTotalPages(TotalPages)
-            setCurrentStore(fetchStore.data[0].totalData)
-          }
-        } catch(err){
-          console.log(err)
-        }
-      }
+
       loadProducts(); 
       
       window.scrollTo(0,0)
       return
     }, [currentPage, displayCategory, activateSearch])
+
+    const loadProducts = async()=>{
+        
+      try{
+        
+        const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}&searchquery=${searchQuery}&category=${displayCategory}`)
+        if(fetchStore){ 
+          
+          const TotalPages = Math.ceil(fetchStore.data[0].totalCount[0].count/rowsPerPage)
+         console.log(searchQuery)
+          setTotalPages(TotalPages)
+          setCurrentStore(fetchStore.data[0].totalData)
+        }
+      } catch(err){
+        console.log(err)
+      }
+    }
 
     const changeCategory = (category)=>{
     setDisplayCategory(category)
@@ -152,7 +154,7 @@ const Products = () => {
                 <button onClick={onSearch}
                   className="relative z-[2] -ms-0.5 flex items-center rounded-e bg-tertiary px-3  text-xs font-medium uppercase leading-normal text-gray shadow-tertiary transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                   type="button"> 
-                  <span className="[&>svg]:h-5 [&>svg]:w-5">
+                  <span className="[&>svg]:h-5 [&>svg]:w-5 ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

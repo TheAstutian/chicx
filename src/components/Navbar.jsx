@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import { AuthContext, CartContext } from '../ContextStore';
 import Cart from '../pages/Cart';
 import { useNavigate } from 'react-router-dom';
-
+import gdvsta from '../GDVSTA.PNG';
 
 const Navbar = () => {
     //manage navbar visibility
@@ -30,9 +30,9 @@ const Navbar = () => {
    
 
   return (  <>      
-    <div className='scroll-smooth max-w-screen-2xl bg-[#171717] bg-tertiary flex justify-between items-center h-12 max-w-[1240px] mx-auto px-4 text-[#e5e5e5]'>
+    <div className='scroll-smooth  bg-[#171717] bg-tertiary flex justify-between items-center h-12 mx-auto px-4 text-[#e5e5e5]'>
             {/*Logo*/}
-       <Link to='/'> <h1 className='w-full text-lg font-mono font-thin '> GDVSTA </h1></Link>
+       <Link to='/'> <img className='w-20' src={gdvsta} alt="mockup"/>{/*<h1 className='w-full text-lg font-mono font-thin '>  GDVSTA </h1>*/} </Link>
         <ul className='hidden md:flex' /*style={{"border": "2px solid red"}} */>
        
         {currentUser? (
@@ -70,6 +70,7 @@ const Navbar = () => {
                 : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
             }>
                 <h1 className='w-full text-lg font-semibold text-gray-200 m-4 '>GDVSTA</h1>
+                
                 
                 {currentUser? (
                     <>
