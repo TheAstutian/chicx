@@ -32,7 +32,7 @@ const Card = (props) => {
     
   return (  
     
-    <div className="group my-3 flex md:w-52 w-60 flex-col h-full overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md hover:opacity-80 hover:border-tertiary ">
+    <div className="group my-3 flex w-60 flex-col h-full overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md hover:opacity-80 hover:border-tertiary ">
             {/* product images and discount */}
         <Link className="" to={`/products/${id}`}>
             <div className='relative mx-3 mt-5 flex h-60 overflow-hidden rounded-xl'>

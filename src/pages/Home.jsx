@@ -75,7 +75,7 @@ const loadProducts = async()=>{
           <h1 className='pt-8 pb-1 text-2xl text-tertiary'> Popular </h1>
            
              {popular ? (
-              <div className='grid grid-cols-2 md:grid-cols-3 gap-5 lg:grid-cols-4 lg:gap-5'> 
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-5 lg:grid-cols-4 lg:gap-5'> 
               {popular.map((item)=>(
               <div className="">
              
