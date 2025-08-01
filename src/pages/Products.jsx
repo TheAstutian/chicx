@@ -13,6 +13,14 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import ReactGA from 'react-ga4'
  
+export const capitalizeTitle = (string) =>{
+  return string.split(' ').map(word=>{
+    if(word.charAt(0) === word.charAt(0).toUpperCase && word.charAt(1) === word.charAt(1).toUpperCase ){
+      return word
+    } else return word.charAt(0).toUpperCase()+ word.slice(1)
+  }).join(' ')
+ }
+ 
 const Products = () => {
 
   ReactGA.send({
@@ -99,7 +107,7 @@ const Products = () => {
       }
     }
 
- 
+
   return (
     <div className=' scroll-smooth' >
       {/*ADMIN SECTION*/}
@@ -118,35 +126,26 @@ const Products = () => {
           </div>):('')):('')}
 
           {/*HEADING AND CONTENT SECTION*/}
-          <div className='w-full'>
+          <div className='w-full flex flex-col'>
           
           <h1 className='pt-8 pb-1 ml-10 text-2xl text-tertiary'>Start Shopping {displayCategory? `: ${displayCategory}` :('') }</h1>
-          <div className='md:px-3 py-2 flex flex-row  justify-between '>
-            <div className='dropdown md:px-3 py-2 flex flex-row md:pl-10 md:ml-10'>
-                
-              <div tabIndex={0} role="button" className='btn btn-sm btn-outline bg-gray hover:bg-tertiary text-tertiary hover:text-white m-1'>Shop by category <IoIosArrowDown /> </div>
-              <ul tabIndex={0} className='dropdown-content menu bg-tertiary rounded-box z-[1] w-52 p-2 ml-1 shadow'>
-                <li onClick={()=>{changeCategory('') }} className='text-zinc'><span>All Categories</span></li>
-                <li onClick={()=>changeCategory('Babies & Kids')} className='text-white'><span>Babies & Kids</span></li>
-                <li onClick={()=>changeCategory('Kitchen Utensils & Home Essentials')} className='text-white'><span> Kitchen Utensils & Home Essentials</span></li>
-                <li onClick={()=>changeCategory('Gifts & Souvenirs')}className='text-white'><span> Gifts & Souvenirs</span></li>
-                <li onClick={()=>changeCategory('Decors ')}className='text-white'><span> Decors</span></li>
-                <li onClick={()=>changeCategory('Exercise & Fitness Supplies')} className='text-white'><span> Exercise & Fitness Supplies </span></li>
-                <li onClick={()=>changeCategory('Resin Materials & Tools')}className='text-white'><span> Resin Materials & Tools</span></li>
-            
-              </ul>
+
+          <div className='grid grid-cols-5'>
 
 
-            </div>
-            <div className='ml-5 md:px-3 mt-1 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
+          
+
+          <div className='flex flex-col col-span-5 md:col-span-1 md:pt-3'>
+
+          <div className='mx-5 md:col-span-1 md:ml-3 mt-1 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
             <input
                   type="search" 
-                  className="peer block min-h-[auto] w-3/4 md:w-full  rounded border-0 bg-transparent  md:px-3 py-[0.32rem] leading-[1.6] outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
+                  className="peer block min-h-[auto] w-full rounded border-0 bg-transparent  outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
                   placeholder="Search"
                   onChange={(e)=>{setSearchQuery(e.target.value)}}
                   onKeyDown={(e)=>{handleKeyPress(e)}}
                    />     
-                <label
+              <label
                   htmlFor="exampleFormControlInput"
                   className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.47rem] pl-1 leading-[1.8] text-neutral-500 italic transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-tertiary"
                   >Search
@@ -170,34 +169,69 @@ const Products = () => {
                 </button>
 
             </div>
+
+              <div className='mx-5 dropdown md:hidden md:px-3 py-2 flex flex-row md:pl-10 md:ml-10'>
+                  
+                <div tabIndex={0} role="button" className='btn btn-sm btn-outline bg-gray hover:bg-tertiary text-tertiary hover:text-white m-1'>Shop by category <IoIosArrowDown /> </div>
+                <ul tabIndex={0} className='dropdown-content menu bg-tertiary rounded-box z-[1] w-52 p-2 ml-1 shadow'>
+                  <li onClick={()=>{changeCategory('') }} className='text-zinc'><span>All Categories</span></li>
+                  <li onClick={()=>changeCategory('Babies & Kids')} className='text-white'><span>Babies & Kids</span></li>
+                  <li onClick={()=>changeCategory('Kitchen Utensils & Home Essentials')} className='text-white'><span> Kitchen Utensils & Home Essentials</span></li>
+                  <li onClick={()=>changeCategory('Gifts & Souvenirs')}className='text-white'><span> Gifts & Souvenirs</span></li>
+                  <li onClick={()=>changeCategory('Decors ')}className='text-white'><span> Decors</span></li>
+                  <li onClick={()=>changeCategory('Exercise & Fitness Supplies')} className='text-white'><span> Exercise & Fitness Supplies </span></li>
+                  <li onClick={()=>changeCategory('Resin Materials & Tools')}className='text-white'><span> Resin Materials & Tools</span></li>
+                </ul>
+
+
+              </div>
+            <div className='hidden md:block mt-1 p-2'>
+            <ul tabIndex={0} className='dropdown-content menu  z-[1] p-2 ml-1 '>
+                  <li onClick={()=>{changeCategory('') }} className='text-zinc'><span>All Categories</span></li>
+                  <li onClick={()=>changeCategory('Babies & Kids')} className='text-gray-500'><span>Babies & Kids</span></li>
+                  <li onClick={()=>changeCategory('Kitchen Utensils & Home Essentials')} className='text-gray-500'><span> Kitchen Utensils & Home Essentials</span></li>
+                  <li onClick={()=>changeCategory('Gifts & Souvenirs')}className='text-gray-500'><span> Gifts & Souvenirs</span></li>
+                  <li onClick={()=>changeCategory('Decors ')}className='text-gray-500'><span> Decors</span></li>
+                  <li onClick={()=>changeCategory('Exercise & Fitness Supplies')} className='text-gray-500'><span> Exercise & Fitness Supplies </span></li>
+                  <li onClick={()=>changeCategory('Resin Materials & Tools')}className='text-gray-500'><span> Resin Materials & Tools</span></li>
+                </ul>
+              </div>  
+            
           </div>
           
-          <hr key="2" className=' h-px my-2 bg-gray-400 border-0'/>
+          <hr key="2" className=' col-span-5 h-px mt-2 bg-gray-400 border-0 md:hidden'/>
           
-            {currentStore? <>
+            {currentStore? <div className='col-span-5 md:col-span-4 md:flex md:flex-row md:flex-wrap'>
               
                 {currentStore.map((item)=>(<>
-                  <div   key={`${item._id}`} className='p-2  pl-1 md:pl-20 pt-5 m-2 mb-10 md:mb-5 h-32 md:h-26 flex flex-row'> 
-                   <div className=' flex-none w-32 '> 
-                         <Link to={`/products/${item._id}`}><img className='h-28 md:h-24 m-auto hover:opacity-70' src={item.imageUrl} /></Link>
+                  <div   key={`${item._id}`} className='flex flex-row p-2  pl-1 pt-5 m-2 md:my-3 md:p-1 md:flex-col md:border md:border-gray-300 md:w-56 md:h-68 md:rounded-sm'> 
+                   <div className=' flex-none w-32 md:w-full  '> 
+                         <Link to={`/products/${item._id}`} className='relative'><img className='h-32 md:h-full md:w-full p-1 rounded-lg m-auto hover:opacity-70' src={item.imageUrl} />
+                         <span className="absolute top-0 left-0 m-2 rounded-full bg-red-600 px-2 text-center text-xs font-normal text-white"> {item.popular? "Popular": ""} </span>
+                         {/*<span className="absolute top-5 left-0 m-2 rounded-full bg-red-600 px-2 text-center text-xs font-normal text-white"> {item.deal? "Good deal": ""} </span>*/}
+                         </Link>
                     </div>
-                    <div className='ml-5  flex-1 w-64 mr-10  pr-10'>
-                       <Link to={`/products/${item._id}`}>  <p className='text-black text-sm md:text-lg line-clamp-3 md:line-clamp-1 font-bold md:font-medium'>{item.name}</p></Link>
-                       <p className='text-black text-sm'>Price: <span className='text-tertiary font-bold md:font-medium'>₦{item.price}</span></p>
-                    <p className='text-black text-sm'>Discount: <span className='text-tertiary font-bold md:font-medium'> {item.discount>0? "Yes": "No"}</span> </p>
-                    <p className='text-black text-sm'>Added: <span className='text-gray-500'>{moment(item.date).fromNow()}</span> </p>
+                    <div className='ml-5  pt-5 flex-1 md:flex-none w-64 md:w-full mr-10  pr-10 md:w-full mr-2 pr-2 md:pt-2 md:mx-2'>
+                  
+                    <Link to={`/products/${item._id}`}> 
+                      <> <span className='text-tertiary font-bold md:font-medium '>₦{Intl.NumberFormat("en-US").format(item.sellingPrice)}     </span><span className='line-through text-xs text-red-500'>{} ₦{item.price}</span></>
+                       <p className='text-black mt-2 md:mt-0 md:text-base line-clamp-3 md:line-clamp-3 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p>
+                       </Link>   
+                  {/*}  <p className='hidden text-black text-sm'>Discount: <span className='text-tertiary font-bold md:font-medium'> {item.discount>0? "Yes": "No"}</span> </p>
+                    <p className=' hidden text-black text-sm'>Added: <span className='text-gray-500'>{moment(item.date).fromNow()}</span> </p>*/}
                     </div> 
 
                                       
                   </div>
-                   <hr className=' h-px bg-gray-400 border-0'/></>
+                   <hr className=' col-span-5 h-px bg-gray-400 border-0 md:col-span-0 md:hidden'/></>
                 ))}
  
-                </>:
+                </div>:
                 <div className='grid place-items-center py-20 my-10'>
                <AiOutlineLoading3Quarters className="loading-icon"/>
               </div>
               } 
+        </div>
               </div>
 
 {/*PAGINATION HERE */}

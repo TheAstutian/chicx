@@ -16,3 +16,29 @@
     transform: rotate(720deg);
   }
 }
+
+/* In your global CSS file or a specific CSS module */
+
+/* Styles for the main gallery images */
+.image-gallery-slide .image-gallery-image {
+  height: 400px; /* Or whatever fixed height you want */
+  width: 100%; /* Ensure it takes full width of its container */
+  object-fit: contain; /* OR cover */
+  /* 'contain' scales the image down to fit, preserving aspect ratio. 
+     This will leave empty space if the aspect ratio doesn't match the container. */
+  /* 'cover' scales the image up to cover the entire container, potentially cropping. 
+     This ensures no empty space, but parts of the image might be cut off. */
+  /* 'fill' stretches the image to fit, distorting aspect ratio if needed. (Generally avoid for images) */
+}
+
+/* Optional: Styles for the thumbnails to ensure they are uniform as well */
+.image-gallery-thumbnail .image-gallery-thumbnail-image {
+  height: 80px; /* Example fixed height for thumbnails */
+  width: 100%; /* Ensure full width within its container */
+  object-fit: cover; /* or contain, depending on preference */
+}
+
+/* If you are using TailwindCSS and prefer utility classes within the component */
+/* For `react-image-gallery`, direct utility classes on the component prop won't directly
+   target the inner `img` tags. You'd still need a CSS file or modify the library's render methods.
+   However, you can wrap the gallery and constrain its outer container. */

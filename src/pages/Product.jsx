@@ -7,7 +7,7 @@ import { API_URL } from '../App';
 import { AuthContext, CartContext } from '../ContextStore';
 import parse from 'html-react-parser';
 import ImageGallery from 'react-image-gallery';
-
+import { capitalizeTitle } from './Products';
 
 import "react-image-gallery/styles/css/image-gallery.css";
 import ReactGA from 'react-ga4'
@@ -145,15 +145,16 @@ imagesLoaded()
         <section className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
     <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-        <div className="relative shrink-0 max-w-md my-5 lg:max-w-lg mx-auto">
+        <div className="relative shrink-0 max-w-md my-5 lg:max-w-lg mx-auto  ">
           <ImageGallery 
-                className="w-full px-5 md:px-0 dark:hidden"
+                className=" image-gallery-slide image-gallery-image w-full px-5 md:px-0 dark:hidden h-150"
                 showBullets={false}
                 showFullscreenButton={true}
                 showPlayButton={false}
                 thumbnailHeight={20}
                 thumbnailWidth={20}
                 items={galleryImages}
+                originalHeight={100}
                  />
           {/*<img className="w-full px-5 md:px-0 dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
           <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />*/}
@@ -162,27 +163,27 @@ imagesLoaded()
 
         <div className="mt-6 sm:mt-8 lg:mt-0">
           <h1
-            className="text-xl font-normal md:font-semibold px-5 md:px-1 text-gray-900 text-sm md:text-2xl dark:text-white"
-          >{product? product.name : 
+            className="text-2xl md:font-semibold px-5 md:px-1 text-gray-900 md:text-3xl dark:text-white"
+          >{product? capitalizeTitle(product.name) : 
            `ApplBack to All-In-One Computer, Apple M1, 8GB RAM, 256GB SSD,
             Mac OS, Pink`}
           </h1>
-          <p className='text-black pl-5 md:pl-0 text-sm my-3'>Category: <span className='text-gray-500'>{product.primaryCategory}</span></p>
+          <p className='text-black pl-5 md:pl-0 text-sm my-3'> <span className='text-gray-500'>{product.primaryCategory}</span></p>
           
      
           
           <div className="mt-4 sm:items-center px-5 md:px-0 sm:gap-4 md:flex">
-            <p
-              className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white"
+            <span
+              className="text-2xl font-normal text-gray-600 sm:text-2xl dark:text-white"
             >
-              ₦ {product.price? formattedNumber : "Not available"}
-            </p>
-            <p
+              ₦ {product.price? formattedNumber+" " : "Not available"}
+            </span>
+            <span
               className="line-through  py-1 md:py-0 text-gray-900  dark:text-white"
             >
                {product.discount>0? `₦${product.price}` : ""}    
-            </p> 
-
+            </span> 
+              {/*}
             <div className="flex items-center gap-2 mt-2 sm:mt-0">
               <div className="flex items-center gap-1">
                 <svg
@@ -262,8 +263,8 @@ imagesLoaded()
               >
                 345 Reviews
               </a>
-            </div>
-          </div>
+            </div>*/}
+          </div> 
 
           <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
            
@@ -288,7 +289,7 @@ imagesLoaded()
           </div>
 
           <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
-          {product.description? parse(`${product.description}`): `No description listed`}
+          {product.description? parse(`${product.description}`): ` `}
 {/*}
           <p className="mb-6 px-3 md:px-0 text-gray-500 dark:text-gray-400">{product.description? 
              product.description: 
@@ -307,7 +308,7 @@ imagesLoaded()
   </section>
   </>:<p>Loading</p>}
   {notification.show && (
-        <div className="fixed top-5 right-0 m-4 p-2 bg-gray-100 border border-gray-300 font-semibold text-xs text-gray-600 rounded shadow-md">
+        <div className="fixed top-5 right-0 m-4 p-2 bg-gray-100 border border-gray-300 font-semibold text-sm text-gray-600 rounded shadow-md">
           {notification.message}
         </div>)}
     </div>

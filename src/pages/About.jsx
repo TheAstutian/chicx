@@ -8,16 +8,16 @@ const About = () => {
         </div>
         <div className='px-5 md:pl-10 pt-3 md:pt-5 mx-1 md:m-5 w-full md:w-1/2'>
             <span className='block text-black text-xl pb-3 leading-relaxed'>
-                Discover the beautiful world of Goldyvhista Hubz, your premium destination for quality kitchen utensils, kiddies essentials, household supplies, and souveniers. 
+                 Goldyvhista Hubz is your premium destination for quality kitchen utensils, kiddies essentials, household supplies, and souveniers. 
             </span>
             <span  className='block text-black text-xl pb-3 leading-relaxed'>
-            Say goodbye to compromising quality for affordability. With our services, you can enjoy exceptional deals on essential products that will make your life easier. From sleek kitchen utensils to captivating wall decors, we've curated a diverse selection to meet all your household needs.  
+            Stop compromising quality for affordability. With Goldyvhista Hubz, you can enjoy exceptional deals on essential products that will make your life easier. From sleek kitchen utensils to captivating wall decors, we've curated a diverse selection of items that meet all your household needs.  
             </span>
             <span className='block text-black text-xl pb-3 leading-relaxed'>
-                This platform is designed with simplicity and convenience in mind. Shop to your heart's delight.  You can also call or DM 08145887534 to place orders. Experience the satisfaction of investing in your home. 
+              Shop to your heart's delight.  Call or DM 08145887534 to place orders. 
             </span>
             <span  className='block text-black text-xl pb-3 leading-relaxed'>
-            Shop now and elevate your living space with Goldyvhista Hubz. Distance is not a barrier!
+            Elevate the aesthetics of your home. Make your life easier. 
             </span>
         </div>
     </div>

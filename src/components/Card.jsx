@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { capitalizeTitle } from '../pages/Products';
 const Card = (props) => {
 
     const {name, price, discount, imageUrl,_id} = props.data;
@@ -44,7 +44,7 @@ const Card = (props) => {
 
   <div className="mt-4 px-5 ">
       <div className='h-5 md:h-10'>
-      <h5 className="text-sm font-medium tracking-tight line-clamp-2 text-slate-900">{name? name : 'Not Available'} </h5>
+      <h5 className="text-sm font-medium tracking-tight line-clamp-2 text-slate-900">{name? capitalizeTitle(name) : 'Not Available'} </h5>
       </div>
     
     <div className="mt-1 md:mt-2 md:mb-1 flex items-center justify-between">
