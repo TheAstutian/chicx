@@ -145,30 +145,30 @@ let config = {
     currentUserRef.current.type==='admin'&&(
 
         <div>
-        <section className="bg-white dark:bg-gray-900">
+        <section className="bg-white ">
   <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-      <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new product</h2>
+      <h2 className="mb-4 text-xl font-bold text-gray-900 ">Add a new product</h2>
       <form action="#">
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div className="sm:col-span-2">
-                  <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
-                  <input type="text" value={name} name="name" onChange={e=>setName(e.target.value)} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required=""/>
+                  <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Product Name</label>
+                  <input type="text" value={name} name="name" onChange={e=>setName(e.target.value)} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Type product name" required=""/>
               </div> 
               <div className="w-full">
-                  <label htmlFor="brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                  <input type="text" value={brand} name="brand" id="brand" onChange={e=>setBrand(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Product brand" required=""/>
+                  <label htmlFor="brand" className="block mb-2 text-sm font-medium text-gray-900 ">Brand</label>
+                  <input type="text" value={brand} name="brand" id="brand" onChange={e=>setBrand(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Product brand" required=""/>
               </div>
               <div className="w-full">
-                  <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                  <input type="number" value={price} name="price" onChange={e=>setPrice(e.target.value)} id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Numbers only, no symbols, e.g. ₦15,000" required=""/>
+                  <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 ">Price</label>
+                  <input type="number" value={price} name="price" onChange={e=>setPrice(e.target.value)} id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Numbers only, no symbols, e.g. ₦15,000" required=""/>
               </div>
               <div className="w-full">
-                  <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount</label>
-                  <input type="number" name="discount" onChange={e=>setDiscount(e.target.value)} id="discount" value={discount} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Original Price - Selling Price. No commas " required=""/>
+                  <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 ">Discount</label>
+                  <input type="number" name="discount" onChange={e=>setDiscount(e.target.value)} id="discount" value={discount} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Original Price - Selling Price. No commas " required=""/>
               </div>
               <div>
-                  <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Category</label>
-                  <select id="category" value={category} onChange = {e=>setCategory(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                  <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 "> Category</label>
+                  <select id="category" value={category} onChange = {e=>setCategory(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
                       <option defaultValue="">Select category</option>
                       <option value="Kitchen Utensils & Home Essentials">Kitchen Utensils & Home Essentials</option>
                       <option value="Gifts & Souvenirs">Gifts & Souvenirs</option>
@@ -196,18 +196,18 @@ let config = {
                 <input type='file' name='' id="image4"  onChange={e=>setImage4(e.target.files[0])} />
             </div>    
               <div className='flex items-center mb-4'>
-                  <label htmlFor="deals"   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add to latest deals?</label>
+                  <label htmlFor="deals"   className="block mb-2 text-sm font-medium text-gray-900 ">Add to latest deals?</label>
                   <input type="checkbox"  checked={deal} onChange={()=>setDeal(!deal)} name="deals" id="deals" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
                   
               </div> 
               
               <div className='flex items-center mb-4'>
-                  <label htmlFor="popular"   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add to popular items?</label>
+                  <label htmlFor="popular"   className="block mb-2 text-sm font-medium text-gray-900 ">Add to popular items?</label>
                   <input type="checkbox"  checked={popular} onChange={()=>setPopular(!popular)} name="popular" id="popular" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
                   
               </div> 
                <div className="sm:col-span-2">
-                    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
                     <FroalaEditor className='text-black'
                                     tag='textarea'
                                     model={description}
@@ -220,7 +220,7 @@ let config = {
                   <textarea id="description" rows="8" onChange={e=>{setDescription(e.target.value)}} value={description}className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your description here"></textarea>*/}
               </div>
           </div>
-          <button type="submit" onClick={onSubmit} className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-tertiary rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-secondary">
+          <button type="submit" onClick={onSubmit} className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-tertiary rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-secondary">
              {state? "Update Product": "Add product"} 
           </button>
       </form>

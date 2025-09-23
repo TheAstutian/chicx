@@ -118,7 +118,7 @@ const Products = () => {
         <Link 
              to='/NewProduct' 
               title="" 
-              className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 "
               role="button" 
             > 
                Add New Item
@@ -140,14 +140,14 @@ const Products = () => {
           <div className='mx-5 md:col-span-1 md:ml-3 mt-1 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
             <input
                   type="search" 
-                  className="peer block min-h-[auto] w-full rounded border-0 bg-transparent  outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
+                  className="peer block min-h-[auto] w-full rounded border-0 bg-transparent  outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
                   placeholder="Search"
                   onChange={(e)=>{setSearchQuery(e.target.value)}}
                   onKeyDown={(e)=>{handleKeyPress(e)}}
                    />     
               <label
                   htmlFor="exampleFormControlInput"
-                  className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.47rem] pl-1 leading-[1.8] text-neutral-500 italic transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-tertiary"
+                  className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.47rem] pl-1 leading-[1.8] text-neutral-500 italic transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none"
                   >Search
                 </label>
                 <button onClick={onSearch}
