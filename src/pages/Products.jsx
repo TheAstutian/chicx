@@ -109,7 +109,7 @@ const Products = () => {
 
 
   return (
-    <div className=' scroll-smooth' >
+    <div className=' bg-[#e5e5e5] scroll-smooth' >
       {/*ADMIN SECTION*/}
         { currentUser? ( currentUser.type==='admin'?(
         <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'> 
