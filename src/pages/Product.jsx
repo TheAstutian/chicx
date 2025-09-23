@@ -106,7 +106,7 @@ imagesLoaded()
     <Link 
              to='/products'
               title="" 
-              className="px-3 py-2 text-sm font-medium text-secondary focus:outline-none bg-white rounded-lg border border-secondary hover:bg-tertiary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="px-3 py-2 text-sm font-medium text-secondary focus:outline-none bg-white rounded-lg border border-secondary hover:bg-tertiary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 "
               role="button" 
             > 
                Back to All Items 
@@ -115,7 +115,7 @@ imagesLoaded()
      { currentUser? (currentUser.type==='admin'? (<><Link 
              to='/NewProduct'
               title="" 
-              className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 "
               role="button" 
             > 
                Add New Product
@@ -124,7 +124,7 @@ imagesLoaded()
              to='/NewProduct'
              state={product}
               title="" 
-              className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 "
               role="button" 
             > 
                Edit Product
@@ -133,7 +133,7 @@ imagesLoaded()
         <span
             onClick={deletePost}
             title="" 
-            className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 "
             role="button" 
           > 
           Delete Product
@@ -142,12 +142,12 @@ imagesLoaded()
 
 
     </div> 
-        <section className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
+        <section className="py-8 bg-white md:py-16 antialiased">
     <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
         <div className="relative shrink-0 max-w-md my-5 lg:max-w-lg mx-auto  ">
           <ImageGallery 
-                className=" image-gallery-slide image-gallery-image w-full px-5 md:px-0 dark:hidden h-150"
+                className=" image-gallery-slide image-gallery-image w-full px-5 md:px-0 h-150"
                 showBullets={false}
                 showFullscreenButton={true}
                 showPlayButton={false}
@@ -163,7 +163,7 @@ imagesLoaded()
 
         <div className="mt-6 sm:mt-8 lg:mt-0">
           <h1
-            className="text-2xl md:font-semibold px-5 md:px-1 text-gray-900 md:text-3xl dark:text-white"
+            className="text-2xl md:font-semibold px-5 md:px-1 text-gray-900 md:text-3xl "
           >{product? capitalizeTitle(product.name) : 
            `ApplBack to All-In-One Computer, Apple M1, 8GB RAM, 256GB SSD,
             Mac OS, Pink`}
@@ -174,12 +174,12 @@ imagesLoaded()
           
           <div className="mt-4 sm:items-center px-5 md:px-0 sm:gap-4 md:flex">
             <span
-              className="text-2xl font-normal text-gray-600 sm:text-2xl dark:text-white"
+              className="text-2xl font-normal text-gray-600 sm:text-2xl "
             >
               ₦ {product.price? formattedNumber+" " : "Not available"}
             </span>
             <span
-              className="line-through  py-1 md:py-0 text-gray-900  dark:text-white"
+              className="line-through  py-1 md:py-0 text-gray-900  "
             >
                {product.discount>0? `₦${product.price}` : ""}    
             </span> 
@@ -280,7 +280,7 @@ imagesLoaded()
             <a
               href={`https://wa.me/2348145887534?text=I'm%20interested%20in%20${product.name}%20.Is%20it%20available?%20`}
               title=""
-              className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-secondary hover:bg-secondary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-secondary hover:bg-secondary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
               role="button"
             >
               Buy now
@@ -288,7 +288,7 @@ imagesLoaded()
 
           </div>
 
-          <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+          <hr className="my-6 md:my-8 border-gray-200 " />
           {product.description? parse(`${product.description}`): ` `}
 {/*}
           <p className="mb-6 px-3 md:px-0 text-gray-500 dark:text-gray-400">{product.description? 
