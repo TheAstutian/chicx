@@ -37,7 +37,7 @@ const Navbar = () => {
        
         {currentUser? (
             <>
-            <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}> Welcome, {currentUser.email}</li>
+            <li className={`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`}> Welcome,  <Link to ='/userprofile'> {currentUser.email}</Link></li>
             <li className = {`p-4 text-sm  hover:rounded-full rounded-l m-2 cursor-pointer duration-300 hover:text-primary font-normal`} onClick={()=>logUserOut()}> Logout </li>
             </>
         ):
@@ -74,7 +74,7 @@ const Navbar = () => {
                 
                 {currentUser? (
                     <>
-                      <li className={`p-2 text-lg border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`}> Welcome, {currentUser.email}</li>
+                      <li className={`p-2 text-lg border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`} onClick={handleNav}> Welcome, <Link to ='/userprofile'> {currentUser.email}</Link></li>
                       <li className = {`p-2 text-xs border-b  duration-300 hover:text-primary cursor-pointer border-gray-600`} onClick={()=>logUserOut()}> Logout </li>
                     </>
                 ):

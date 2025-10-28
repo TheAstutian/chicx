@@ -14,6 +14,13 @@ export const AuthContextProvider = ({children}) =>{
         setCurrentUser(res.data)
     }
 
+    const updateUserDetails = async (email,inputs) =>{
+        const updateProfile = await axios.patch(`${API_URL}/user/update/${email}`, {inputs})
+        const updatedUser = updateProfile.data.data
+        setCurrentUser(updatedUser)
+//        return updatedUser; 
+    }
+
     const logout = async(inputs)=>{
         setCurrentUser(null)
         
@@ -24,7 +31,7 @@ export const AuthContextProvider = ({children}) =>{
     }, [currentUser])
 
     return (
-        <AuthContext.Provider value={{currentUser, login, logout}}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{currentUser, updateUserDetails, login, logout}}>{children}</AuthContext.Provider>
     )
 }
 

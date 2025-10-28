@@ -204,7 +204,10 @@ const Products = () => {
             {currentStore? <div className='col-span-5 md:col-span-4 md:flex md:flex-row md:flex-wrap'>
               
                 {currentStore.map((item)=>(<>
+
+                
                   <div   key={`${item._id}`} className='flex flex-row p-2  pl-1 pt-5 m-2 md:my-3 md:p-1 md:flex-col md:border md:border-gray-300 md:w-56 md:h-68 md:rounded-sm'> 
+                 
                    <div className=' flex-none w-32 md:w-full  '> 
                          <Link to={`/products/${item._id}`} className='relative'><img className='h-32 md:h-full md:w-full p-1 rounded-lg m-auto hover:opacity-70' src={item.imageUrl} />
                          <span className="absolute top-0 left-0 m-2 rounded-full bg-red-600 px-2 text-center text-xs font-normal text-white"> {item.popular? "Popular": ""} </span>

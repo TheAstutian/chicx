@@ -19,6 +19,9 @@ import NewProduct from "./pages/NewProduct";
 import Checkout from "./pages/Checkout";
 
 import ReactGA from 'react-ga4';
+import RegConfirm from "./pages/RegConfirm";
+import ResendVerificationEmail from "./pages/ResendVerificationEmail";
+import UserProfile from "./pages/UserProfile";
 
 const Layout = () =>{
   return(
@@ -62,6 +65,17 @@ const router = createBrowserRouter([
         path:'/Checkout',
         element:<Checkout />
       },
+      {
+        path:'/Regconfirm',
+        element:<RegConfirm/>
+      }, 
+      {
+        path:'/Resendverificationemail', 
+        element: <ResendVerificationEmail/>
+      }, {
+        path:'/userprofile',
+        element: <UserProfile/>
+      }
     ]
   },
   

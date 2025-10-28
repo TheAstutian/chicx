@@ -11,6 +11,7 @@ import { capitalizeTitle } from './Products';
 
 import "react-image-gallery/styles/css/image-gallery.css";
 import ReactGA from 'react-ga4'
+import RelatedProduct from '../components/RelatedProduct';
 
 
 const Product = () => {
@@ -34,13 +35,14 @@ const navigate = useNavigate()
 
 useEffect (()=>{
     const fetchProduct = async ()=>{
+      window.scrollTo(0,0)
       const Product = await axios.get(`${API_URL}/products/${productId}`)
      setProduct(Product.data)
     }   
     fetchProduct()
     
     return 
-}, []) 
+}, [productId]) 
 
 const handleAddToCart=()=>{
   addToCart(product);
@@ -142,7 +144,7 @@ imagesLoaded()
 
 
     </div> 
-        <section className="py-8 bg-white md:py-16 antialiased">
+        <section className="pt-8 bg-white md:pt-16 antialiased">
     <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
         <div className="relative shrink-0 max-w-md my-5 lg:max-w-lg mx-auto  ">
@@ -306,7 +308,24 @@ imagesLoaded()
       </div>
     </div>
   </section>
-  </>:<p>Loading</p>}
+  <hr className=' mt-10 col-span-5 h-px bg-gray-400 border-0 md:col-span-0 '/>
+<div className='pb-5'>
+<RelatedProduct id= {productId}/>
+</div>
+  
+  </>
+  
+  :
+  <div className="flex items-center justify-center h-svh w-full text-gray-700">
+  <div className=" z-10 -ml-2 h-8 w-8 animate-bounce">
+    <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="currentColor" stroke="currentColor" stroke-width="0" viewBox="0 0 16 16">
+      <path d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z"></path>
+    </svg>
+  </div>
+</div>
+  
+  }
+
   {notification.show && (
         <div className="fixed top-5 right-0 m-4 p-2 bg-gray-100 border border-gray-300 font-semibold text-sm text-gray-600 rounded shadow-md">
           {notification.message}

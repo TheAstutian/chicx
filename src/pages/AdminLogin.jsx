@@ -1,6 +1,8 @@
 import React, {useState, useContext} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { Turnstile } from '@marsidev/react-turnstile'
 import axios from 'axios';
+import gdvsta from '../GDVSTA.PNG';
 
 import { API_URL } from '../App';
 import { AuthContext } from '../ContextStore';
@@ -12,26 +14,60 @@ const AdminLogin = () => {
     password:""
  })
  const [errorMessage, setErrorMessage] = useState("")
+ const [status, setStatus] = React.useState()
 
  const navigate = useNavigate();
  const {login} = useContext(AuthContext)
 
  const handleChange = e=>{
+    setErrorMessage("")
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
  }
 
- const handleSubmit = async e =>{
-    e.preventDefault()
-    setErrorMessage("")
-    try{
-        await login(inputs) 
-    navigate('/products')
 
+const verifyTraffic = async (token)=>{
+    //console.log(token,'the token is here')
+    try{
+
+        const payload = {token: token}
+        const verifyToken = await axios.post(`${API_URL}/turnstile`, payload)
+        if(verifyToken){
+            setStatus('solved')
+        } 
+        return  
     }catch(err){
-        if(err.response.data){
-            setErrorMessage(err.response.data)
+        console.log(err)
+    } 
+} 
+ const handleSubmit = async e =>{
+    
+    e.preventDefault() 
+    
+    if (status==='solved') {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (inputs.email==="" || !inputs.email){
+            setErrorMessage("Please enter your email address. ")
+            return 
+        } else if (inputs.password==="" || !inputs.password){
+            setErrorMessage("Please enter your password")
+            return 
+        } else if (!emailRegex.test(inputs.email)){
+            setErrorMessage("Please enter a valid email address")
+            return 
+        }
+
+        
+        try{
+            await login(inputs) 
+        navigate('/products')
+    
+        }catch(err){
+            if(err.response.data){
+                setErrorMessage(err.response.data)
+            }
         }
     }
+    
     
  }
 
@@ -39,9 +75,9 @@ const AdminLogin = () => {
     <div>
         <section className="bg-gray-50 ">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 ">
-                <img className="w-8 h-8 mr-2" src="https://www.svgrepo.com/show/427491/delivery-logistics-shipping.svg" alt="logo" />
-                GDVSTA    
+            <a href="/" className="flex items-center mb-3 text-2xl font-semibold text-tertiary ">
+                <img className="w-20 h-15 " src={gdvsta} alt="logo" />
+                Goldyvhista Hubz
             </a> 
             <div className="w-full bg-white rounded-lg shadow   md:mt-0 sm:max-w-md xl:p-0 ">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -70,10 +106,16 @@ const AdminLogin = () => {
                          
                         </div>
                         <p className='mt-2 pl-2 text-red-500 text-xs text'>{errorMessage&& errorMessage}</p>
-                        <button onClick={handleSubmit} type="submit" className="w-full text-white bg-tertiary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Sign in</button>
+                        <button onClick={handleSubmit} disabled={status==="solved"? false : true} type="submit" className={status!="solved"? 'w-full bg-gray-500 text-sm px-5 py-2.5 text-center font-medium rounded-lg ':`w-full cursor-pointer text-white bg-tertiary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center` }>Sign in</button>
                         <p className="text-sm font-light text-gray-500 ">
                             Don’t have an account yet? <Link to="/adminregister" className="font-medium text-primary-600 hover:underline ">Sign up</Link>
                         </p>
+                        <Turnstile 
+                        siteKey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
+                            onError={() => setStatus('error')}
+                              onExpire={() => setStatus('expired')}
+                        onSuccess={verifyTraffic}
+                         />
                     </form>
                 </div>
             </div>

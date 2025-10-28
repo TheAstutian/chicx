@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import gdvsta from '../GDVSTA.PNG';
 import { API_URL } from '../App';
-
+import { Turnstile } from '@marsidev/react-turnstile'
 
 
 const AdminRegister = () => {
@@ -13,14 +14,31 @@ const [inputs, setInputs] = useState({
 });
 const [errorMessage, setErrorMessage] = useState("")
 const [termsChecked, setTermsChecked] = useState(false)
+const [status, setStatus] = useState()
 
-const [error, setError] = useState(null); 
+const [error, setError] = useState(""); 
 const navigate = useNavigate()
 
 const handleChange = e =>{
     setInputs(prev=>({...prev, [e.target.name]: e.target.value.toLowerCase()}))
    
 }
+
+const verifyTraffic = async (token)=>{
+    //console.log(token,'the token is here')
+    try{
+
+        const payload = {token: token}
+        const verifyToken = await axios.post(`${API_URL}/turnstile`, payload)
+        if(verifyToken){
+            setStatus('solved')
+            console.log(verifyToken)
+        } 
+        return  
+    }catch(err){
+        console.log(err)
+    } 
+} 
 
 const checkHandler = ()=>{
     setTermsChecked(!termsChecked)
@@ -39,9 +57,13 @@ const handleSubmit = async e =>{
         setErrorMessage("Accept terms and conditions")
     } else{
        try{
-       await axios.post(`${API_URL}/auth/admin-register`, {inputs})
-        alert('New user successfully created')
-        navigate('/adminlogin')
+       const regSuccess = await axios.post(`${API_URL}/auth/admin-register`, {inputs})
+        if(regSuccess){
+            navigate(`/Regconfirm?status=verifyemail&username=${inputs.email}`)
+        } else {
+            setErrorMessage("An error occurred with the registration, please try again later")
+        }
+        
        }catch(err){
         console.log(err.response.data)
        setErrorMessage(err.response.data)
@@ -54,9 +76,9 @@ const handleSubmit = async e =>{
         <div>
              <section className="bg-gray-50 dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                        <img className="w-8 h-8 mr-2" src="https://www.svgrepo.com/show/427491/delivery-logistics-shipping.svg" alt="logo"/>
-                        GDVSTA    
+                    <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-tertiary dark:text-white">
+                        <img className="w-20 h-15" src={gdvsta}  alt="logo"/>
+                        Goldyvhista Hubz
                     </a>
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -85,10 +107,16 @@ const handleSubmit = async e =>{
                                         <p className='mt-2 pl-2 text-red-500 text-xs text'>{errorMessage&& errorMessage}</p>
                                     </div>
                                 </div>
-                                <button type="submit" onClick={handleSubmit} className="w-full text-white bg-tertiary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary">Create an account</button>
+                                <button type="submit" disabled={status==="solved"? false: true} onClick={handleSubmit} className={status!="solved"? "w-full bg-gray-500 text-sm px-5 py-2.5 text-center font-medium rounded-lg" : "w-full text-white bg-tertiary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"}>Create an account</button>
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Already have an account? <Link to="/adminlogin" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                                 </p>
+                                <Turnstile 
+                                                        siteKey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
+                                                            onError={() => setStatus('error')}
+                                                              onExpire={() => setStatus('expired')}
+                                                        onSuccess={verifyTraffic}
+                                                         />
                             </form>
                         </div>
                     </div>
