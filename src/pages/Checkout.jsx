@@ -38,7 +38,7 @@ const Guest = ({ setCheckoutStep, setShowModal, guestUser, setGuestUser }) => {
 }
 
 const verifyTraffic = async (token)=>{
-  //console.log(token,'the token is here')
+  
   try{
 
       const payload = {token: token}
@@ -159,7 +159,7 @@ return
                   onClick={submitGuestData}
                   disabled={status==="solved"? false : true}  
               >
-                  Confirm Order
+                   Order
               </button>
           </form>
       </div>
@@ -212,7 +212,6 @@ const Checkout = () => {
       if(currentUser){
         //Trigger Modal with user information passed as second argument. 
        setUserDetails(currentUser)
-       console.log(userDetails)
        setShowModal(true)
         return 
       }  
@@ -328,7 +327,7 @@ const Checkout = () => {
                 e.preventDefault();
                 setShowModal(false)
             }}>Close</button>
-            <CheckoutModal cartItems={cartItems} total={cartItemsTotal} userDetails={currentUser? userDetails: guestUser} />
+            <CheckoutModal showModal={showModal} setShowModal={setShowModal} cartItems={cartItems} total={cartItemsTotal} userDetails={currentUser? userDetails: guestUser} />
             </div>
           )
         }

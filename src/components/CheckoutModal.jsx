@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const CheckoutModal = (props) =>{
 
-    const {cartItems, total, userDetails } = props;  
+    window.scrollTo(0,0)
+    const {cartItems, total, userDetails, showModal, setShowModal } = props;  
     //recieve buyer information and goods information. 
     // And then send data to backend. 
     const [order, setOrder] = useState({
@@ -22,7 +23,7 @@ const CheckoutModal = (props) =>{
         //return with yes or no alert, then redirect to user page or homepage
         try{
             const orderPlaced = await axios.post(`${API_URL}/order`, {order})
-            console.log (orderPlaced.data.message, 'order')
+           
             if (orderPlaced) {
                 alert('Order Placed')
                 navigate('/products')
@@ -36,8 +37,8 @@ const CheckoutModal = (props) =>{
 
     return (
         <>    
-                        <div className=" w-full md:min-w-92 md:w-1/2 px-10 md:px-1 md:mx-auto">
-                        <div className="flex flex-col p-6 space-y-4 divide-y mx-10 sm:mx-1 sm:w-92 sm:p-10 divide-gray-700 bg-gray-100 text-gray-900">
+                        <div className=" w-full md:min-w-92 md:w-1/2 px-2 md:px-10 md:px-1 md:mx-auto">
+                        <div className="flex flex-col p-6 space-y-4 divide-y mx-2 md:mx-10 sm:mx-1 sm:w-92 sm:p-10 divide-gray-700 bg-gray-100 text-gray-900">
                 <h2 className="text-2xl font-semibold">Order Details</h2>
                 <ul className="flex flex-col pt-4 space-y-2">
                     {
@@ -101,8 +102,8 @@ const CheckoutModal = (props) =>{
 
                     <div className="space-y-6">
                         <div className="flex space-x-5 px-3 justify-between">
-                        {/*<button onClick={()=>} type="button" className="w-full py-2 font-semibold border rounded bg-gray-100 text-gray-900 border-tertiary hover:bg-gray-200">Back</button>*/}
-                        <button onClick={placeOrder} type="button" className="w-full py-2 font-semibold border rounded bg-tertiary text-gray-100 border-gray-100 hover:bg-secondary ">Confirm</button>     
+                        {<button onClick={()=>setShowModal(false)} type="button" className="w-1/2 md:w-full py-2 font-semibold border rounded bg-gray-100 text-gray-900 border-tertiary hover:bg-gray-200">Back</button>}
+                        <button onClick={placeOrder} type="button" className="w-1/2 md:w-full py-2 font-semibold border rounded bg-tertiary text-gray-100 border-gray-100 hover:bg-secondary ">Confirm Order </button>     
                         </div>
                         
                     </div>

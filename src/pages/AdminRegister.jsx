@@ -32,7 +32,7 @@ const verifyTraffic = async (token)=>{
         const verifyToken = await axios.post(`${API_URL}/turnstile`, payload)
         if(verifyToken){
             setStatus('solved')
-            console.log(verifyToken)
+            
         } 
         return  
     }catch(err){
@@ -65,7 +65,7 @@ const handleSubmit = async e =>{
         }
         
        }catch(err){
-        console.log(err.response.data)
+        
        setErrorMessage(err.response.data)
        }
     }

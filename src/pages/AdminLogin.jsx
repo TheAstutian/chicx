@@ -26,7 +26,7 @@ const AdminLogin = () => {
 
 
 const verifyTraffic = async (token)=>{
-    //console.log(token,'the token is here')
+   
     try{
 
         const payload = {token: token}

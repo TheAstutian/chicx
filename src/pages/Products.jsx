@@ -58,7 +58,6 @@ const Products = () => {
         if(fetchStore){ 
           
           const TotalPages = Math.ceil(fetchStore.data[0].totalCount[0].count/rowsPerPage)
-         console.log(searchQuery)
           setTotalPages(TotalPages)
           setCurrentStore(fetchStore.data[0].totalData)
         }
@@ -80,7 +79,6 @@ const Products = () => {
     }
      const onSearch = async (e)=>{
         e.preventDefault()
-        console.log(searchQuery)
         setActivateSearch(!activateSearch)
         
      }

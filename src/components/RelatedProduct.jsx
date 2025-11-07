@@ -14,7 +14,7 @@ useEffect (()=>{
       const Product = await axios.get(`${API_URL}/relateditems/${id}`)
       setRelatedItems(Product.data.relatedItems)
       setOtherItems(Product.data.others)
-     console.log(Product.data)
+
     }   
     fetchRelatedItems()
     

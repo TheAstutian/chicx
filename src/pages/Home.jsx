@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import Hero from '../components/Hero'
@@ -7,6 +7,7 @@ import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../App';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 
 import ReactGA from 'react-ga4';
 
@@ -21,7 +22,6 @@ const Home = () => {
   })
 const [popular, setPopular] = useState(null)
 const [deals, setDeals] = useState(null)
-const [error, setError]= useState('')
 
 useEffect (()=>{ 
   loadProducts() 
@@ -34,13 +34,9 @@ const loadProducts = async()=>{
     const fetchProducts = await axios.get(`${API_URL}/products`)
     if(fetchProducts){ 
       
-      setPopular(fetchProducts.data) 
+      setPopular(fetchProducts.data.popularProducts) 
+      setDeals(fetchProducts.data.latestDeals)
     }
-
-    const fetchDeals = await axios.get(`${API_URL}/deals`)
-    if(fetchDeals){
-      setDeals(fetchDeals.data)
-    } 
     
   } catch(err){
     console.log(err)
@@ -56,8 +52,8 @@ const loadProducts = async()=>{
                 <div  className=' carousel w-2/3 rounded-box ' > 
 
                 {deals? (deals.map((item)=>(
-                  <div className='carousel-item m-1'>
-                     <Card 
+                  <div className='carousel-item my-3 mx-0.5 h-full'>
+                     <Card className="bg-blue-300"
                       key={item._id}
                       data={item} />
                 

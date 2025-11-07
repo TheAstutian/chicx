@@ -24,7 +24,6 @@ import 'froala-editor/js/plugins/colors.min.js';
 
 const NewProduct = () => {
     const state = useLocation().state; 
-    console.log(state)
 
     const [image, setImage]=useState(state?.imageUrl||"")
 
@@ -59,7 +58,6 @@ const upload = async(image)=>{
             return null;
         } else if (image.name){
             const imageupload = new FormData();
-            console.log(imageupload)
             imageupload.set('key', api)
             imageupload.append('image',image)
             const response = await axios.post('https://api.imgbb.com/1/upload', imageupload)
@@ -123,8 +121,6 @@ const onSubmit =async e =>{
     navigate("/products")
 }    
     
-
-//    console.log(name,brand,price,discount,description,category)
 }
 
 let config = {
