@@ -57,7 +57,7 @@ const showNotification=(message)=>{
 
                     <div className='w-full px-2 md:px-3'>
                     <Link to={`/products/${item._id}`}> 
-                       <div className='h-12  md:py-2'><p className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2 md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
+                       <div className='h-12 md:h-14 md:py-2 md:mb-3'><p className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2 md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
                         </Link>   
                        <div className='flex flex-row justify-between md:px-2'>
                           <div className='flex flex-col'> <span className='text-tertiary font-bold text-sm md:text-base '>₦{Intl.NumberFormat("en-US").format(item.sellingPrice)}     </span><span className='line-through text-xs text-red-500'>{} ₦{item.price}</span></div>
@@ -83,7 +83,7 @@ const showNotification=(message)=>{
     return (
         <>
 
-        <div className="">
+        <div className="bg-zinc-100">
          {relatedItems? 
          <>
          <div className='mb-5 p-3'>
