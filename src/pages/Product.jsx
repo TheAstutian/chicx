@@ -8,6 +8,8 @@ import { AuthContext, CartContext } from '../ContextStore';
 import parse from 'html-react-parser';
 import ImageGallery from 'react-image-gallery';
 import { capitalizeTitle } from './Products';
+import { FaAngleRight } from "react-icons/fa6";
+import { IoMdClose } from "react-icons/io";
 
 import "react-image-gallery/styles/css/image-gallery.css";
 import ReactGA from 'react-ga4'
@@ -25,6 +27,7 @@ const Product = () => {
 const [product, setProduct] = useState(null)
 const [error, setError] = useState(null)
 const [notification, setNotification] = useState({show:false, message:""})
+const [toggleDescription, setToggleDescription] = useState(false)
 
 const location = useLocation()
 const productId = location.pathname.split("/")[2]
@@ -32,6 +35,11 @@ const {currentUser} = useContext(AuthContext)
 const currentUserRef = useRef(currentUser)
 const{cartItems, addToCart}= useContext(CartContext)
 const navigate = useNavigate()
+
+const changeToggleDescription = () =>{
+  setToggleDescription(!toggleDescription)
+}
+
 
 useEffect (()=>{
     const fetchProduct = async ()=>{
@@ -91,7 +99,29 @@ const imagesLoaded =()=>{
 }
 imagesLoaded()
 
+const ProductDescription = () =>{
 
+  return (
+        <div className='flex flex-col w-full'>
+
+        <div className='flex flex-row pb-2 md:justify-between md:pb-5 '> 
+          <h1 className='text-md pl-2 md:text-2xl '>Product Description </h1>
+          <span className=" p-1 md:p-2 cursor-pointer "> {toggleDescription? <IoMdClose onClick={changeToggleDescription}/> : <FaAngleRight onClick={changeToggleDescription}/> } </span>
+        </div>
+    {
+      toggleDescription? 
+      (
+          <>
+                <div className='prose prose-sm sm:prose-base max-w-none py-2 px-1 '> {/*[&>p]:mb-4 [&>p]:min-h-[0.5rem] [&>h1]:mt-3 [&>h1]:mb-2 [&>ul]:list-disc [&>ul]:ml-2 */}
+                  {product.description? parse(`${product.description}`): ` `}
+                </div>
+          </>
+      ): 
+null
+    }          
+        </div>
+  )
+}
 
   let displayPrice;
   let displayDiscount;
@@ -104,23 +134,30 @@ imagesLoaded()
      
   return (
     <div className=''>{product? <>
-    <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'>
-    <Link 
+    <div className='flex flex-col md:flex-row md:justify-between bg-white md:py-2.5 md:pt-4 md:px-5 md:pl-8'>
+    <div className='flex flex-row'>
+      <p className='py-3 pl-3 md:pl-10 text-sm md:text-lg text-gray-500 cursor-pointer md:font-normal'>
+      {product.primaryCategory} / {product.name}
+      </p>
+    </div>
+
+     { currentUser? (currentUser.type==='admin'? (<div className='flex flex-row py-3 pl-3 justify-left'>
+
+      <Link 
              to='/products'
               title="" 
-              className="px-3 py-2 text-sm font-medium text-secondary focus:outline-none bg-white rounded-lg border border-secondary hover:bg-tertiary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 "
+              className="px-1 md:px-3 py-1 md:py-2 text-sm font-medium text-secondary focus:outline-none bg-white rounded-lg border border-secondary hover:bg-tertiary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 "
               role="button" 
             > 
-               Back to All Items 
+               Back 
       </Link> 
-
-     { currentUser? (currentUser.type==='admin'? (<><Link 
+     <Link 
              to='/NewProduct'
               title="" 
               className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 "
               role="button" 
             > 
-               Add New Product
+               Add New 
       </Link>
         <Link 
              to='/NewProduct'
@@ -129,7 +166,7 @@ imagesLoaded()
               className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 "
               role="button" 
             > 
-               Edit Product
+               Edit 
       </Link> 
       
         <span
@@ -138,18 +175,22 @@ imagesLoaded()
             className="mx-1 px-3 py-2 text-sm font-medium text-white focus:outline-none bg-tertiary rounded-lg border border-gray-200 hover:bg-white hover:border-tertiary hover:text-tertiary focus:z-10 focus:ring-4 focus:ring-gray-100 "
             role="button" 
           > 
-          Delete Product
+          Delete 
           </span>
-          </>):('')):('') }
+          </div>):('')):('') }
 
 
     </div> 
-        <section className="pt-8 bg-white md:pt-16 antialiased">
-    <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
-      <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-        <div className="relative shrink-0 max-w-md my-5 lg:max-w-lg mx-auto  ">
+
+
+   <section className="pt-2 bg-white md:pt-5 ">
+    <div className="flex flex-col">
+      <div className=" md:flex md:justify-center  md:gap-10 ">
+
+
+        <div className="px-4 relative my-5 md:flex md:w-1/3">
           <ImageGallery 
-                className=" image-gallery-slide image-gallery-image w-full px-5 md:px-0 h-150"
+                className=" image-gallery-slide w-full image-gallery-image px-2 md:px-0 h-150"
                 showBullets={false}
                 showFullscreenButton={true}
                 showPlayButton={false}
@@ -160,31 +201,101 @@ imagesLoaded()
                  />
           {/*<img className="w-full px-5 md:px-0 dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
           <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />*/}
-        <span className=" absolute top-2 right-2 m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${displayDiscount}% OFF`: null }</span>
+        <span className=" absolute top-2  m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${displayDiscount}% OFF`: null }</span>
         </div>
 
-        <div className="mt-6 sm:mt-8 lg:mt-0">
+
+        <div className="px-4 mt-6 md:flex md:flex-col md:mt-8 ">
           <h1
             className="text-2xl md:font-semibold px-5 md:px-1 text-gray-900 md:text-3xl "
           >{product? capitalizeTitle(product.name) : 
-           `ApplBack to All-In-One Computer, Apple M1, 8GB RAM, 256GB SSD,
-            Mac OS, Pink`}
+           `Product Name Not Available`}
           </h1>
-          <p className='text-black pl-5 md:pl-0 text-sm my-3'> <span className='text-gray-500'>{product.primaryCategory}</span></p>
-          
-     
+          <p className=' pl-5 md:pl-0 text-sm my-3 text-gray-500'>{product.primaryCategory}</p>
           
           <div className="mt-4 sm:items-center px-5 md:px-0 sm:gap-4 md:flex">
-            <span
-              className="text-2xl font-normal text-gray-600 sm:text-2xl "
+            <span className="text-2xl font-bold text-black " > ₦ {product.price? formattedNumber+" " : "Not available"} </span>
+            <span  className="line-through  py-1 md:py-0 text-red-500 text-xs " >   {product.discount>0? `₦${product.price}` : ""}   </span> 
+          </div> 
+
+          <div className="mt-6  sm:mt-8 gap-2 sm:gap-4 flex items-center">
+           
+
+            <a
+              href={`https://wa.me/2348145887534?text=I'm%20interested%20in%20${product.name}%20.Is%20it%20available?%20`}
+              title=""
+              className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-secondary hover:bg-secondary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+              role="button"
             >
-              ₦ {product.price? formattedNumber+" " : "Not available"}
+              Buy now
+            </a>
+
+            <span
+              onClick={handleAddToCart}
+              title=""
+              className="flex items-center justify-center py-2.5 px-5 my-2 md:my-0 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-primary hover:bg-primary hover:text-white focus:z-10 focus:ring-4 focus:ring-blue"
+              role="button"
+            > 
+              Add to Cart
             </span>
-            <span
-              className="line-through  py-1 md:py-0 text-gray-900  "
-            >
-               {product.discount>0? `₦${product.price}` : ""}    
-            </span> 
+
+          </div>
+
+          <hr className="my-6 md:my-8 border-gray-200 " />
+            <div>
+              <h1 className='text-md pl-2 font-semibold md:text-lg '>Top Highlights</h1>
+  <div className=' prose prose-sm pt-2 px-1 prose-li:leading-6 prose-ul:leading-6 md:mx-auto '>
+                  {product.highlights? parse(`${product.highlights}`): ` `}
+                </div>
+
+              
+            </div>
+        </div>
+
+      </div>
+
+        <hr className="mt-6 mb-2 md:mt-8 border-1 border-gray-400 " />
+
+        <div className='mx-2 md:w-3/5 md:mx-auto pt-3 px-1 md:px-2 '>
+
+           <ProductDescription />
+          </div>
+
+    </div>
+  </section>
+  <hr className='  h-px bg-gray-400 border-0 md:col-span-0 '/>
+
+
+
+<div className='pb-5'>
+<RelatedProduct id= {productId}/>
+</div>
+  
+  </>
+  
+  :
+  <div className="flex items-center justify-center h-svh w-full text-gray-700">
+  <div className=" z-10 -ml-2 h-8 w-8 animate-bounce">
+    <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="currentColor" stroke="currentColor" stroke-width="0" viewBox="0 0 16 16">
+      <path d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z"></path>
+    </svg>
+  </div>
+</div>
+  
+  }
+
+  {notification.show && (
+        <div className="fixed top-5 right-0 m-4 p-2 bg-gray-100 border border-gray-300 font-semibold text-sm text-gray-600 rounded shadow-md">
+          {notification.message}
+        </div>)}
+    </div>
+  )
+}
+
+export default Product
+
+
+
               {/*}
             <div className="flex items-center gap-2 mt-2 sm:mt-0">
               <div className="flex items-center gap-1">
@@ -266,72 +377,3 @@ imagesLoaded()
                 345 Reviews
               </a>
             </div>*/}
-          </div> 
-
-          <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-           
-            <span
-              onClick={handleAddToCart}
-              title=""
-              className="flex items-center justify-center py-2.5 px-5 my-2 md:my-0 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-primary hover:bg-primary hover:text-white focus:z-10 focus:ring-4 focus:ring-blue"
-              role="button"
-            > 
-              Add to Cart
-            </span>
-
-            <a
-              href={`https://wa.me/2348145887534?text=I'm%20interested%20in%20${product.name}%20.Is%20it%20available?%20`}
-              title=""
-              className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-secondary hover:bg-secondary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-              role="button"
-            >
-              Buy now
-            </a>
-
-          </div>
-
-          <hr className="my-6 md:my-8 border-gray-200 " />
-          {product.description? parse(`${product.description}`): ` `}
-{/*}
-          <p className="mb-6 px-3 md:px-0 text-gray-500 dark:text-gray-400">{product.description? 
-             product.description: 
-            `No description listed`}
-          </p>
-{/*}
-          <p className="text-gray-500 dark:text-gray-400">{product.details?
-          product.details: 
-           ` Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast
-            Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
-            Magic Keyboard or Magic Keyboard with Touch ID.`}
-          </p>{*/}
-        </div>
-      </div>
-    </div>
-  </section>
-  <hr className=' mt-10 col-span-5 h-px bg-gray-400 border-0 md:col-span-0 '/>
-<div className='pb-5'>
-<RelatedProduct id= {productId}/>
-</div>
-  
-  </>
-  
-  :
-  <div className="flex items-center justify-center h-svh w-full text-gray-700">
-  <div className=" z-10 -ml-2 h-8 w-8 animate-bounce">
-    <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" fill="currentColor" stroke="currentColor" stroke-width="0" viewBox="0 0 16 16">
-      <path d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 4c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zM12.773 12.773c-1.275 1.275-2.97 1.977-4.773 1.977s-3.498-0.702-4.773-1.977-1.977-2.97-1.977-4.773c0-1.803 0.702-3.498 1.977-4.773l1.061 1.061c0 0 0 0 0 0-2.047 2.047-2.047 5.378 0 7.425 0.992 0.992 2.31 1.538 3.712 1.538s2.721-0.546 3.712-1.538c2.047-2.047 2.047-5.378 0-7.425l1.061-1.061c1.275 1.275 1.977 2.97 1.977 4.773s-0.702 3.498-1.977 4.773z"></path>
-    </svg>
-  </div>
-</div>
-  
-  }
-
-  {notification.show && (
-        <div className="fixed top-5 right-0 m-4 p-2 bg-gray-100 border border-gray-300 font-semibold text-sm text-gray-600 rounded shadow-md">
-          {notification.message}
-        </div>)}
-    </div>
-  )
-}
-
-export default Product

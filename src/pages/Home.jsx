@@ -7,7 +7,16 @@ import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../App';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import newInImage from '../newInimage.jpg'
 
+import { 
+  Baby, 
+  HomeIcon, 
+  UtensilsCrossed, 
+  Gift, 
+  Palette, 
+  Dumbbell 
+} from 'lucide-react'
 
 import ReactGA from 'react-ga4';
 
@@ -21,7 +30,7 @@ const Home = () => {
     title:"Home",
   })
 const [popular, setPopular] = useState(null)
-const [deals, setDeals] = useState(null)
+const [deals, setDeals] = useState(sampleDeals)
 
 useEffect (()=>{ 
   loadProducts() 
@@ -35,7 +44,8 @@ const loadProducts = async()=>{
     if(fetchProducts){ 
       
       setPopular(fetchProducts.data.popularProducts) 
-      setDeals(fetchProducts.data.latestDeals)
+     // setDeals(fetchProducts.data.latestDeals)
+      
     }
     
   } catch(err){
@@ -43,17 +53,71 @@ const loadProducts = async()=>{
   }
 }
 
-  return (
-    <div className='bg-[#e5e5e5] '>
-        <Hero/>
+const Categories = () =>{
 
-        <div className='flex items-center md:py-5 flex-col justify-center' >
-            <h1 className='pt-10  text-2xl text-tertiary'> Latest Deals</h1>
-                <div  className=' carousel w-2/3 rounded-box ' > 
+ const categoryData = [
+    { name: "Babies & Kids", img: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&q=80&w=400", path: "/kids" },
+    { name: "Home Essentials", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=400", path: "/home" },
+    { name: "Kitchen Utensils", img: "https://images.unsplash.com/photo-1709837167686-a2e33aad1bf0?auto=format&fit=crop&q=80&w=400", path: "/kitchen" },
+    { name: "Gifts", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=400", path: "/gifts" },
+    { name: "Decors", img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=400", path: "/decor" },
+    { name: "Exercise & Fitness", img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=400", path: "/fitness" },
+  ];
+  return (
+    <><section className="py-16 bg-white">
+      <div className="container mx-auto px-6">
+       {/* <div className="flex justify-between items-end mb-10">
+          <div className="text-left">
+            <h2 className="text-3xl font-bold text-slate-900">Explore Collections</h2>
+            <p className="text-slate-500 mt-2">Curated essentials for every part of your life.</p>
+          </div>
+          <Link to="/products" className="text-indigo-600 font-semibold hover:underline hidden md:block">
+            View All Categories &rarr;
+          </Link>
+        </div>*/}
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {categoryData.map((cat, index) => (
+            <Link 
+              to={cat.path}
+              key={index} 
+              className="group relative flex flex-col overflow-hidden rounded-sm bg-slate-100 aspect-[4/5]"
+            >
+              {/* Image Background */}
+              <img 
+                src={cat.img} 
+                alt={cat.name}
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
+              
+              {/* Text Label */}
+              <div className="absolute inset-x-0 bottom-0 p-4 text-center">
+                <span className="text-sm font-bold text-white uppercase tracking-wider drop-shadow-md">
+                  {cat.name}
+                </span>
+              {/*<div className="h-0.5 w-0 bg-white mx-auto mt-2 transition-all duration-300 group-hover:w-1/2" />*/}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+    </>
+  )
+}
+
+const HotDeals = () =>{
+  return <>
+    <div className='flex py-5 mb-5 md:py-10 md:mb-10 flex-col  ' >
+            <h1 className='text-center text-2xl md:text-4xl md:font-medium md:mb-10 text-black'> Hot Deals</h1>
+                <div  className='md:w-full grid grid-cols-2 md:grid-cols-6 justify-items-center px-5 md:px-20' > 
 
                 {deals? (deals.map((item)=>(
-                  <div className='carousel-item my-3 mx-0.5 h-full'>
-                     <Card className="bg-blue-300"
+                  <div className=' my-3 mx-0.5 h-full'>
+                     <Card className=""
                       key={item._id}
                       data={item} />
                 
@@ -66,8 +130,77 @@ const loadProducts = async()=>{
                 </div>
                 
         </div>
-        
-        <div className='flex items-center flex-col justify-center'>
+  </>
+}
+
+const NewIn = ()=>{
+
+  return(
+    <>
+    <section className='relative min-h-96 md:min-h-[520px]'>
+      <div className='absolute flex flex-col justify-center inset-0 bg-no-repeat bg-cover ' style={{ backgroundImage: `url(${newInImage})` }}>
+
+      
+      <div className='ml-3 md:ml-20 md:pl-20 flex flex-col items-start ' >
+        <h1 className='text-3xl md:text-4xl text-semibold mb-5'>New arrivals</h1>
+        <span className='text-md inline-block mb-5'>Shop hundreds of new life-changing products <br className=''/> across cooking, cleaning & laundry.</span>
+       <Link to='/products' className=' px-3 py-2 mr-3 font-medium text-center text-white rounded-sm bg-secondary hover:bg-secondary hover:text-white  focus:ring-4 focus:ring-primary '>
+                     Shop All New
+  
+                  </Link>
+      </div>
+      </div>     
+    </section>
+    </>
+  )
+}
+
+const OtherCatContent = () =>{
+
+
+  return (
+    <>
+    <section className='bg-yellow-400 flex flex-col justify-center items-center md:pb-20 '>
+
+      <div className='hidden md:flex md:flex-col md:mt-20 md:mb-10 md:pb-10'>
+        <h1 className='text-3xl md:text-5xl text-semibold'>Every Shopper's Delight...</h1>
+      <span className='text-center pt-3 text-bold'>For a fraction of the price!</span>
+      </div>
+
+      <div className='flex flex-col md:flex-row md:space-x-3 md:w-3/5'>
+        {
+          otherCatContentData.map(topitem => (
+            <>
+          <div className='flex flex-col items-center pt-5 pb-5 border-b border-slate-200 w-full bg-white'>
+            <h3 className='self-start pl-5 text-xl pb-5 font-semibold'>{topitem.name}</h3>
+            <div className='grid grid-cols-2 w-4/5 p-4'>
+              {topitem.data.map( item =>(
+                <>
+                <Link to={item.link}>
+                <img className="w-50 h-50 p-0 m-0" src={item.img} />
+                </Link>
+                </>
+              )
+
+              )}
+            </div>
+            <Link className="self-end font-semibold pr-5 " to="/products"> <p> More</p></Link>
+
+          </div>
+            </>
+          ))
+        }
+          
+      </div>
+    </section>
+    </>
+  )
+}
+
+const Popular = () =>{
+  return (
+    <>
+    <div className='flex items-center flex-col justify-center'>
           <h1 className='pt-8 pb-1 text-2xl text-tertiary'> Popular </h1>
            
              {popular ? (
@@ -93,9 +226,14 @@ const loadProducts = async()=>{
         <div className='  flex justify-center p-10' >
           <button className='px-5 py-3  font-thin text-white rounded-lg bg-secondary hover:bg-tertiary hover:text-white  focus:ring-4 focus:ring-primary '><Link to ='/products'> Show More</Link></button>
         </div>
+    </>
+  )
+}
 
-        {/* Experimental, might remove later */}
-        <div className='bg-white'>
+const Brands = () =>{
+  return (
+    <>
+    <div className='bg-white'>
         <section className="p-6 my-6 dark:bg-gray-100 dark:text-gray-800">
 	<div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
 		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50 dark:text-gray-800">
@@ -156,8 +294,17 @@ const loadProducts = async()=>{
 		</div>
 	</div>
 </section>
-        </div>
-       
+        </div></>
+  )
+}
+
+  return (
+    <div className='bg-[#e5e5e5] '>
+        <Hero/>
+        <HotDeals />
+        <NewIn/>
+        <OtherCatContent />
+        <Brands />
         <Testimonials />
         
     </div>
@@ -165,3 +312,183 @@ const loadProducts = async()=>{
 }
 
 export default Home
+
+const sampleDeals = [
+  
+    {
+        "_id": "69b2ef508c518a21f459cadd",
+        "name": "Laundry Drawstring Bag",
+        "brand": "",
+        "price": "2500",
+        "sellingPrice": 2200,
+        "discount": "300",
+        "primaryCategory": "Kitchen Utensils & Home Essentials",
+        "imageUrl": "https://i.ibb.co/zTZ1WfjW/Untitled-design.png",
+        "imageUrl2": "https://i.ibb.co/F4jXhWfs/IMG-6327.jpg",
+        "imageUrl3": "https://i.ibb.co/k2FLFKQW/IMG-6328.jpg",
+        "imageUrl4": "https://i.ibb.co/BKTMGxHR/IMG-6326.jpg",
+        "date": "2026-03-12 17:52:30",
+        "description": "<div><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\" id=\"isPasted\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Cute Bear Laundry Storage Bag – Large Capacity Clothes Organizer</span></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 13.8px;\"><br></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Keep your space neat and clutter-free with this adorable Bear Laundry Storage Bag. Designed with a cute bear face and soft neutral colors, this stylish laundry hamper adds charm to any bedroom, kids’ room, or laundry area.</span></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 13.8px;\"><br></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Made from durable and lightweight fabric, it offers large storage capacity for dirty clothes, towels, blankets, or toys. The drawstring closure helps keep items secure while preventing dust from entering.</span></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 13.8px;\"><br></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">This laundry bag is foldable and easy to carry, making it perfect for everyday home organization.</span></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 13.8px;\"><br></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Features:</span></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 13.8px;\"><br></p><ul style=\"list-style-type: disc;\"><li style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Large capacity for clothes, towels, blankets, or toys</span></li><li style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Cute bear design that beautifies your room</span></li><li style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Strong, durable, and lightweight material</span></li><li style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Drawstring closure to keep items secure</span></li><li style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Foldable for easy storage</span></li><li style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Suitable for bedroom, bathroom, laundry room, or kids’ room</span></li></ul><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 13.8px;\"><br></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px 'Times New Roman'; -webkit-text-stroke: #000000; min-height: 13.8px;\"><br></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">Package Includes:</span></p><p style=\"margin: 0.0px 0.0px 12.0px 0.0px; font: 20.0px 'Times New Roman'; -webkit-text-stroke: #000000;\"><span style=\"font-family: 'Times New Roman'; font-weight: normal; font-style: normal; font-size: 20.00px; font-kerning: none;\">1 × Bear Laundry Storage Bag</span></p><p><br></p><p><br></p><p data-f-id=\"pbf\" style=\"text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;\">Powered by <a href=\"https://www.froala.com/wysiwyg-editor?pb=1\" title=\"Froala Editor\">Froala Editor</a></p></div>",
+        "deal": true,
+        "popular": false,
+        "productID": 1773334352519
+    },
+    {
+        "_id": "687afc372831ce11c28071db",
+        "name": "1pc padded mitten",
+        "brand": "",
+        "price": "3500",
+        "sellingPrice": 2000,
+        "discount": "1500",
+        "primaryCategory": "Kitchen Utensils & Home Essentials",
+        "imageUrl": "https://i.ibb.co/MkMBML9N/IMG-2845.jpg",
+        "imageUrl2": "https://i.ibb.co/kgbwPKg1/IMG-2848.jpg",
+        "imageUrl3": "https://i.ibb.co/6Jr4nvNf/IMG-2847.jpg",
+        "imageUrl4": "https://i.ibb.co/TsP9HJ5/IMG-2846.jpg",
+        "date": "2025-07-19 03:00:19",
+        "description": "",
+        "deal": true,
+        "popular": false,
+        "productID": 1752890423132
+    },
+    {
+        "_id": "687af542f898cfe51724d0b0",
+        "name": "37grids silicon ice maker mold",
+        "brand": "",
+        "price": "3500",
+        "sellingPrice": 2500,
+        "discount": "1000",
+        "primaryCategory": "Kitchen Utensils & Home Essentials",
+        "imageUrl": "https://i.ibb.co/G1CyrNm/IMG-2841.jpg",
+        "imageUrl2": "https://i.ibb.co/j9PCZZMM/IMG-2842.jpg",
+        "imageUrl3": "https://i.ibb.co/Kxd9Km0m/IMG-2843.jpg",
+        "imageUrl4": "https://i.ibb.co/nNspNrC0/IMG-2844.jpg",
+        "date": "2025-07-19 02:30:41",
+        "description": "",
+        "deal": true,
+        "popular": false,
+        "productID": 1752888642455
+    },
+    {
+        "_id": "687af0a712642d65866ead36",
+        "name": "50pcs food picker/ fork",
+        "brand": "",
+        "price": "2000",
+        "sellingPrice": 1500,
+        "discount": "500",
+        "primaryCategory": "Gifts & Souvenirs",
+        "imageUrl": "https://i.ibb.co/Kpmw429p/IMG-2835.jpg",
+        "imageUrl2": "https://i.ibb.co/wH10pqb/IMG-2837.jpg",
+        "imageUrl3": "https://i.ibb.co/ymsNc2Xx/IMG-2838.jpg",
+        "imageUrl4": "https://i.ibb.co/Swsv5QZX/IMG-2839.jpg",
+        "date": "2025-07-19 02:11:02",
+        "description": "",
+        "deal": true,
+        "popular": false,
+        "productID": 1752887463461
+    },
+    {
+        "_id": "687aef5f12642d65866ead35",
+        "name": "4in1 popsicle mold",
+        "brand": "",
+        "price": "5000",
+        "sellingPrice": 3500,
+        "discount": "1500",
+        "primaryCategory": "Kitchen Utensils & Home Essentials",
+        "imageUrl": "https://i.ibb.co/qMHwCQbN/IMG-2831.jpg",
+        "imageUrl2": "https://i.ibb.co/4wqGfpfZ/IMG-2833.jpg",
+        "imageUrl3": "https://i.ibb.co/kV9tVKFN/IMG-2834.jpg",
+        "imageUrl4": "https://i.ibb.co/FbqJRb18/IMG-2832.jpg",
+        "date": "2025-07-19 02:05:32",
+        "description": "",
+        "deal": true,
+        "popular": false,
+        "productID": 1752887135254
+    },
+    {
+        "_id": "687adf7ddd99748c17c0cb55",
+        "name": "Brush & toothpaste holder",
+        "brand": "",
+        "price": "2000",
+        "sellingPrice": 1500,
+        "discount": "500",
+        "primaryCategory": "Kitchen Utensils & Home Essentials",
+        "imageUrl": "https://i.ibb.co/yHBZnzn/IMG-2804.jpg",
+        "imageUrl2": "https://i.ibb.co/xKmPGZCg/IMG-2807.jpg",
+        "imageUrl3": "https://i.ibb.co/6RpP3rdJ/IMG-2806.jpg",
+        "imageUrl4": "https://i.ibb.co/d0dmpg8c/IMG-2805.jpg",
+        "date": "2025-07-19 00:57:47",
+        "description": "",
+        "deal": true,
+        "popular": false,
+        "productID": 1752883069082
+    }
+]
+
+const otherCatContentData = [
+  {
+    "name": "Top Gadgets",
+    "data": [
+      {
+        "name": "Vibrating Workout Machine",
+        "id": "687aae99b88c258a98b9bc18",
+        "link": "https://chicx-6rqm.onrender.com/products/687aae99b88c258a98b9bc18",
+        "img": "https://i.ibb.co/nMnQV6Hc/IMG-2768.jpg"
+      },
+       {
+        "name": "Kids LED Watch ",
+        "id": "6879a96e7f8ad1d98a0cf621",
+        "link": "https://chicx-6rqm.onrender.com/products/6879a96e7f8ad1d98a0cf621",
+        "img": "https://i.ibb.co/Qv7cwpP9/IMG-2752.jpg"
+      },
+
+       {
+        "name": "Multipurpose Table",
+        "id": "6691a190def128e0e14d0fdb",
+        "link": "https://chicx-6rqm.onrender.com/products/6691a190def128e0e14d0fdb",
+        "img": "https://i.ibb.co/mzx3cgG/tb5.jpg"
+      },
+
+       {
+        "name": "Electric Juice Extractor",
+        "id": "6683de4bbaff20ba57dce4cf",
+        "link": "https://chicx-6rqm.onrender.com/products/6683de4bbaff20ba57dce4cf",
+        "img": "https://i.ibb.co/phwf1F0/IMG-4955.jpg"
+      }
+    ]
+  },
+
+  {
+    "name": "Must-have Cookware",
+    "data": [
+      {
+        "name": "Single Grilling Pan",
+        "id": "692c0f77c2442f20d6840fac",
+        "link": "https://chicx-6rqm.onrender.com/products/692c0f77c2442f20d6840fac",
+        "img": "https://i.ibb.co/dJwKkM96/IMG-4649.jpg"
+      },
+       {
+        "name": "Quality Aluminum Cookware ",
+        "id": "66858c138f0fbe1cbbebda26",
+        "link": "https://chicx-6rqm.onrender.com/products/66858c138f0fbe1cbbebda26",
+        "img": "https://i.ibb.co/9tYRPr8/IMG-4990.jpg"
+      },
+
+       {
+        "name": "Padded Mitten",
+        "id": "687afc372831ce11c28071db",
+        "link": "https://chicx-6rqm.onrender.com/products/687afc372831ce11c28071db",
+        "img": "https://i.ibb.co/MkMBML9N/IMG-2845.jpg"
+      },
+
+       {
+        "name": "Silicon Spoon Set",
+        "id": "6672a7db0ead09b548c64fe3",
+        "link": "https://chicx-6rqm.onrender.com/products/6672a7db0ead09b548c64fe3",
+        "img": "https://i.ibb.co/ts2BchC/19pcs.jpg"
+      }
+    ]
+  },
+
+]
+

@@ -1,4 +1,6 @@
 
+@import './@/styles/_keyframe-animations.scss';
+@import './@/styles/_variables.scss';
 
 
 .loading-icon {
@@ -16,6 +18,8 @@
     transform: rotate(720deg);
   }
 }
+
+
 
 /* In your global CSS file or a specific CSS module */
 
@@ -42,3 +46,4 @@
 /* For `react-image-gallery`, direct utility classes on the component prop won't directly
    target the inner `img` tags. You'd still need a CSS file or modify the library's render methods.
    However, you can wrap the gallery and constrain its outer container. */
+

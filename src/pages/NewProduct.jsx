@@ -6,6 +6,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../ContextStore';
 import { API_URL } from '../App';
 
+import { SimpleEditor } from '../@/components/tiptap-templates/simple/simple-editor'
+
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import  FroalaEditor from 'react-froala-wysiwyg';
@@ -20,6 +22,29 @@ import 'froala-editor/js/plugins/emoticons.min.js';
 import 'froala-editor/js/plugins/lists.min.js';
 import 'froala-editor/js/plugins/colors.min.js'; 
 // Import other plugins as needed
+
+
+    const initialTags = {
+        "new": false, 
+        "kitchen": false, 
+        "bedroom": false,
+        "bathroom": false,
+        "kids": false,
+        "baby": false,
+        "men": false,
+        "women":false,
+        "gift":false,
+        "cookware": false,
+        "baking": false,
+        "decor": false,
+        "hot": false,
+        "laundry":false,
+        "storage":false,
+        "electricals":false,
+        "fitness":false,
+        "soldout":false,
+        "clearance":false
+    }
 
 
 const NewProduct = () => {
@@ -41,15 +66,73 @@ const NewProduct = () => {
     const [popular, setPopular] = useState(state?.popular|| false)
     const [error,setError] = useState('')
 
+    const [highlights, setHighlights] = useState(state?.highlights || "")
+    const [itemTags, setItemTags] = useState(initialTags)
+
+
     const api = process.env.REACT_APP_API_KEY
 
     const {currentUser} = useContext(AuthContext);
     const currentUserRef = useRef(currentUser)
     const navigate = useNavigate()
-/*useEffect(()=>{
+ 
+useEffect (()=>{
+configureTags()
 
-},[image,image2,image3,image4])*/
+},[])
 
+/*useEffect(() => {
+  console.log("The tags have updated:", itemTags);
+}, [itemTags]);*/
+
+const sampleTags = ["baby", "bedroom", "kitchen", "hot", "storage", "laundry"]
+
+const configureTags =()=>{
+    if (state?.tags== null || !state?.tags  ) return 
+const updatedTags = {...itemTags    } 
+for (const tagKey in updatedTags) { 
+
+    if(state.tags.includes(tagKey)){     // Copy all existing tags
+    updatedTags[tagKey]= true    // Overwrite the specific tag (e.g., "baby")
+  }
+    } 
+    setItemTags(updatedTags)
+}
+
+const toggleTag = (tagName) => {
+  setItemTags(prevTags => ({
+    ...prevTags,
+    [tagName]: !prevTags[tagName] // Toggle between true/false
+  }));
+};
+
+const toggleTags = (tagName)=>{
+    setItemTags({...itemTags, [tagName]: !itemTags[tagName]})
+}
+
+const TagSystem = ()=>{
+
+    return(
+        <>
+        <h1 className='p-2'>Tags here</h1>
+        <div className='flex flex-wrap p-2 border border-slate-200 rounded-md bg-slate-50 '>
+            {
+            Object.entries(itemTags).map(([tagName, isActive])=>(
+                
+                <span 
+                key={tagName} 
+                className={`px-2 py-1 m-2 ${isActive? 'bg-slate-400 text-gray-50 border-slate-50': 'bg-neutral-50'} text-sm md:text-md border border-black rounded-lg cursor-pointer hover:bg-slate-300 hover:text-gray-700 hover:border-gray-700`}
+                onClick={()=>{toggleTags(tagName)}}
+                >
+                    {tagName}
+                </span>
+            )
+            )
+            }
+        </div>
+        </>
+    )
+}
 
 
 const upload = async(image)=>{
@@ -76,6 +159,13 @@ const onSubmit =async e =>{
     e.preventDefault();
     if(!currentUser) return; 
     const sellingPrice = price-discount
+    const tags = []
+    Object.entries(itemTags).forEach(([tagName, value])=>{
+        if (value){
+            tags.push(tagName)
+        }
+    })
+
     const uploadImage = async(image)=>{
         if(image&&image.name){
             return await upload(image)
@@ -94,7 +184,7 @@ const onSubmit =async e =>{
             const imglnk4 = await uploadImage(image4);
 
             await axios.patch(`${API_URL}/auth/admin-update`, {
-            name, brand, price, sellingPrice, discount,description, category,id:state._id, imglnk, imglnk2, imglnk3, imglnk4, deal, popular}
+            name, brand, price, sellingPrice, tags, discount,description, category,id:state._id, imglnk, imglnk2, imglnk3, imglnk4, deal,highlights, popular}
         )
         alert("Product updated successfully ")
         navigate(`/products/${state._id.toString()}`)
@@ -110,7 +200,7 @@ const onSubmit =async e =>{
             const imglnk3 = await uploadImage(image3);
             const imglnk4 = await uploadImage(image4);
             await axios.post(`${API_URL}/auth/admin-add`, {
-                name, brand, price, sellingPrice, discount,description, category,imglnk, deal, popular, imglnk2, imglnk3, imglnk4,
+                name, brand, price, tags, sellingPrice, discount,description, category,imglnk, deal, popular, imglnk2, imglnk3, imglnk4, highlights,
                 date:  moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
             })
 
@@ -118,23 +208,9 @@ const onSubmit =async e =>{
               console.log(err)
           }
     alert("new product successfully added")
-    navigate("/products")
+    navigate("/products") 
 }    
     
-}
-
-let config = {
-    
-    heightMin:200,
-    heightMax:500,
-    toolbarButtons:[
-        'fontSize','textColor','backgroundColor','bold','italic','underline','strikeThrough','outdent','indent','alignLeft','alignCenter','alignRight','formatOL','formatUL','emoticons','undo','redo'
-    ],
-    editor: {
-        style:{
-            color:'black'
-        }
-    }
 }
  
   return (
@@ -202,15 +278,33 @@ let config = {
                   <input type="checkbox"  checked={popular} onChange={()=>setPopular(!popular)} name="popular" id="popular" className="checkbox checkbox-sm checkbox-tertiary m-1 mt-0 ml-10 "  required=""/>
                   
               </div> 
+              <div className='sm:col-span-2 mb-5 md:mb-10 '>
+                <TagSystem />
+              </div>
                <div className="sm:col-span-2">
-                    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
+                  <label htmlFor="highlights" className="block mb-2 text-sm font-medium text-gray-900 ">Product Highlights</label>
+                 <div className=' mb-5 h-64'>
+                    <SimpleEditor content={highlights} onChange={event=>{setHighlights(event)}} />
+                 </div>
+              </div> 
+
+              
+               <div className="sm:col-span-2">
+                   {/* <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
                     <FroalaEditor className='text-black'
                                     tag='textarea'
                                     model={description}
                                     onModelChange={event=>{setDescription(event)}}
                                     config={config}
                                     value={description}
-                                    />
+                                    />*/}
+            <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 "> Description</label>
+                   <div className='h-svh'>
+                      <SimpleEditor 
+                            content={description}
+                            onChange={event=>{setDescription(event)}}
+                     />
+                   </div>
 
                   {/*<label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                   <textarea id="description" rows="8" onChange={e=>{setDescription(e.target.value)}} value={description}className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your description here"></textarea>*/}
