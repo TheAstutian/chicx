@@ -63,7 +63,7 @@ const showNotification=(message)=>{
                           <div className='flex flex-col'> <span className='text-tertiary font-bold text-sm md:text-base '>₦{Intl.NumberFormat("en-US").format(item.sellingPrice)}     </span><span className='line-through text-xs text-red-500'>{} ₦{item.price}</span></div>
                           <div>
                             <button 
-                              onClick= {()=>handleAddtoCart(item)}
+                              onClick= {()=>handleAddtoCart({item})}
                               className='mx-1 px-5 py-2 font-medium text-gray-600 focus:outline-none cursor-pointer rounded-lg border border-gray-400 bg-amber-400 hover:bg-amber-200  focus:z-10 focus:ring-4 focus:ring-gray-100'>
                                 <MdAddShoppingCart />
                             </button>
