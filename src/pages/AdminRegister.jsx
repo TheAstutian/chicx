@@ -74,42 +74,42 @@ const handleSubmit = async e =>{
 
     return (
         <div>
-             <section className="bg-gray-50 dark:bg-gray-900">
+             <section className="bg-gray-50 darks:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-tertiary dark:text-white">
+                    <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-tertiary darks:text-white">
                         <img className="w-20 h-15" src={gdvsta}  alt="logo"/>
                         Goldyvhista Hubz
                     </a>
-                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="w-full bg-white rounded-lg shadow darks:border md:mt-0 sm:max-w-md xl:p-0 darks:bg-gray-800 darks:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl darks:text-white">
                                 Create an account
                             </h1> 
                             <form className="space-y-4 md:space-y-6" action="#">
                                 <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                    <input type="email" onChange={handleChange} name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required=""/>
+                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 darks:text-white">Email</label>
+                                    <input type="email" onChange={handleChange} name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500" placeholder="name@company.com" required=""/>
                                 </div>
                                 <div> 
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                    <input type="password" onChange={handleChange}  name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
+                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 darks:text-white">Password</label>
+                                    <input type="password" onChange={handleChange}  name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500" required=""/>
                                 </div>
                                 <div>
-                                    <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                                    <input type="password" onChange={handleChange} name="confirmPassword" id="confirmPassword" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
+                                    <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 darks:text-white">Confirm password</label>
+                                    <input type="password" onChange={handleChange} name="confirmPassword" id="confirmPassword" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500" required=""/>
                                 </div>
                                 <div className="flex items-start">
                                     <div className="flex items-center h-5">
-                                        <input id="terms" aria-describedby="terms" type="checkbox" checked={termsChecked} onChange={checkHandler}className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""/>
+                                        <input id="terms" aria-describedby="terms" type="checkbox" checked={termsChecked} onChange={checkHandler}className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 darks:bg-gray-700 darks:border-gray-600 darks:focus:ring-primary-600 darks:ring-offset-gray-800" required=""/>
                                     </div>
                                     <div className="ml-3 text-sm">
-                                        <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+                                        <label htmlFor="terms" className="font-light text-gray-500 darks:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline darks:text-primary-500" href="#">Terms and Conditions</a></label>
                                         <p className='mt-2 pl-2 text-red-500 text-xs text'>{errorMessage&& errorMessage}</p>
                                     </div>
                                 </div>
-                                <button type="submit" disabled={status==="solved"? false: true} onClick={handleSubmit} className={status!="solved"? "w-full bg-gray-500 text-sm px-5 py-2.5 text-center font-medium rounded-lg" : "w-full text-white bg-tertiary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"}>Create an account</button>
-                                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                    Already have an account? <Link to="/adminlogin" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
+                                <button type="submit" disabled={status==="solved"? false: true} onClick={handleSubmit} className={status!="solved"? "w-full bg-gray-500 text-sm px-5 py-2.5 text-center font-medium rounded-lg" : "w-full text-white bg-tertiary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center darks:bg-primary darks:hover:bg-primary darks:focus:ring-primary"}>Create an account</button>
+                                <p className="text-sm font-light text-gray-500 darks:text-gray-400">
+                                    Already have an account? <Link to="/adminlogin" className="font-medium text-primary-600 hover:underline darks:text-primary-500">Login here</Link>
                                 </p>
                                 <Turnstile 
                                                         siteKey={process.env.REACT_APP_TURNSTILE_SITE_KEY}

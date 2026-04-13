@@ -31,7 +31,7 @@ const Navbar = () => {
     const TopBar = () =>{
         return (
             <section className='border-b md:border-b-black w-full'>
-                <div className='scroll-smooth bg-white flex justify-between items-center h-18 px-4 text-[#e5e5e5] md:mx-auto md:max-w-[1440px]'>
+                <div className='scroll-smooth bg-white flex justify-between items-center h-18 px-4 text-black md:mx-auto md:max-w-[1440px]'>
                             {/*Logo*/}
                     <Link to='/'> <img className='w-24' src={gdvsta} alt="mockup"/>{/*<h1 className='w-full text-lg font-mono font-thin '>  GDVSTA </h1>*/} </Link>
 

@@ -117,7 +117,7 @@ const [notification, setNotification] = useState({show:false, message:""})
 
                     <div className='w-full px-2 md:px-3'>
                     <Link to={`/products/${item._id}`}> 
-                       <div className='h-12  md:py-2'><p className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2 md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
+                       <div className='h-12  md:py-2 md:mb-3'><p className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2 md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
                         </Link>   
                        <div className='flex flex-row justify-between md:px-2'>
                           <div className='flex flex-col'> <span className='text-tertiary font-bold text-sm md:text-base '>₦{Intl.NumberFormat("en-US").format(item.sellingPrice)}     </span><span className='line-through text-xs text-red-500'>{} ₦{item.price}</span></div>
@@ -160,7 +160,7 @@ const [notification, setNotification] = useState({show:false, message:""})
                       >Search
                     </label>
                     <button onClick={onSearch}
-                      className="relative z-[2] -ms-0.5 flex items-center rounded-e bg-tertiary px-3  text-xs font-medium uppercase leading-normal text-gray shadow-tertiary transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                      className="relative z-[2] -ms-0.5 flex items-center rounded-e bg-tertiary px-3  text-xs font-medium uppercase leading-normal text-gray shadow-tertiary transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 darks:shadow-black/30 darks:hover:shadow-dark-strong darks:focus:shadow-dark-strong darks:active:shadow-dark-strong"
                       type="button"> 
                       <span className="[&>svg]:h-5 [&>svg]:w-5 ">
                         <svg
@@ -189,7 +189,7 @@ const [notification, setNotification] = useState({show:false, message:""})
                     <li onClick={()=>changeCategory('Gifts & Souvenirs')}className='text-white'><span> Gifts & Souvenirs</span></li>
                     <li onClick={()=>changeCategory('Decors')}className='text-white'><span> Decors</span></li>
                     <li onClick={()=>changeCategory('Exercise & Fitness Supplies')} className='text-white'><span> Exercise & Fitness Supplies </span></li>
-                    <li onClick={()=>changeCategory('Resin Materials & Tools')}className='text-white'><span> Resin Materials & Tools</span></li>
+                   
                   </ul>
 
 
@@ -202,7 +202,7 @@ const [notification, setNotification] = useState({show:false, message:""})
                       <li onClick={()=>changeCategory('Gifts & Souvenirs')}className='text-gray-500'><span> Gifts & Souvenirs</span></li>
                       <li onClick={()=>changeCategory('Decors')}className='text-gray-500'><span> Decors</span></li>
                       <li onClick={()=>changeCategory('Exercise & Fitness Supplies')} className='text-gray-500'><span> Exercise & Fitness Supplies </span></li>
-                      <li onClick={()=>changeCategory('Resin Materials & Tools')}className='text-gray-500'><span> Resin Materials & Tools</span></li>
+                    
                     </ul>
                   </div>  
             
@@ -216,7 +216,7 @@ const [notification, setNotification] = useState({show:false, message:""})
       return (
         <>
             {currentStore? < >
-              
+               
                 {currentStore.map((item)=>(<>                
                   <ProductCard item={item}/>
                    </>
@@ -225,7 +225,7 @@ const [notification, setNotification] = useState({show:false, message:""})
                 </>
                 
                 :
-                <div className='grid place-items-center py-20 my-10'>
+                <div className='flex justify-center col-span-5 align-center items-center w-full h-full min-h-96'>
                <AiOutlineLoading3Quarters className="loading-icon"/>
               </div>
               } 
@@ -269,7 +269,7 @@ const [notification, setNotification] = useState({show:false, message:""})
 
 
   return (
-    <div className=' bg-[#e5e5e5] bg-zinc-200 scroll-smooth' >
+    <div className=' bg-[#e5e5e5] bg-zinc-100 scroll-smooth' >
       {/*ADMIN SECTION*/}
         { currentUser? ( currentUser.type==='admin'?(
         <div className='flex items-right justify-right bg-white py-2.5 pt-4 px-5 pl-8'> 

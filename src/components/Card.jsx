@@ -57,7 +57,7 @@ const showNotification=(message)=>{
         <div className="absolute inset-x-0 bottom-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0 bg-gradient-to-t from-black/60 to-transparent">
           <button onClick={handleAddtoCart} className="flex w-full items-center justify-center gap-2 rounded-xl bg-white py-2.5 text-sm font-bold text-slate-900 shadow-lg transition-transform active:scale-95">
             <ShoppingCart size={16} />
-            Quick Add
+             Add to Cart
           </button>
         </div>
       </div>

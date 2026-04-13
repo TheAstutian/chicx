@@ -199,8 +199,8 @@ null
                 items={galleryImages}
                 originalHeight={100}
                  />
-          {/*<img className="w-full px-5 md:px-0 dark:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
-          <img className="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />*/}
+          {/*<img className="w-full px-5 md:px-0 darks:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
+          <img className="w-full hidden darks:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />*/}
         <span className=" absolute top-2  m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${displayDiscount}% OFF`: null }</span>
         </div>
 
@@ -366,13 +366,13 @@ export default Product
                 </svg>
               </div>
               <p
-                className="text-sm font-medium leading-none text-gray-500 dark:text-gray-400"
+                className="text-sm font-medium leading-none text-gray-500 darks:text-gray-400"
               >
                 (5.0)
               </p>
               <a
                 href="#"
-                className="text-sm font-medium leading-none text-gray-900 underline hover:no-underline dark:text-white"
+                className="text-sm font-medium leading-none text-gray-900 underline hover:no-underline darks:text-white"
               >
                 345 Reviews
               </a>

@@ -9,14 +9,6 @@ import { API_URL } from '../App';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import newInImage from '../newInimage.jpg'
 
-import { 
-  Baby, 
-  HomeIcon, 
-  UtensilsCrossed, 
-  Gift, 
-  Palette, 
-  Dumbbell 
-} from 'lucide-react'
 
 import ReactGA from 'react-ga4';
 
@@ -35,7 +27,7 @@ const [deals, setDeals] = useState(sampleDeals)
 useEffect (()=>{ 
   loadProducts() 
   return
-}, [])
+}, [deals])
 
 const loadProducts = async()=>{
     
@@ -44,7 +36,7 @@ const loadProducts = async()=>{
     if(fetchProducts){ 
       
       setPopular(fetchProducts.data.popularProducts) 
-     // setDeals(fetchProducts.data.latestDeals)
+      setDeals(fetchProducts.data.latestDeals)
       
     }
     
@@ -53,61 +45,6 @@ const loadProducts = async()=>{
   }
 }
 
-const Categories = () =>{
-
- const categoryData = [
-    { name: "Babies & Kids", img: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&q=80&w=400", path: "/kids" },
-    { name: "Home Essentials", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=400", path: "/home" },
-    { name: "Kitchen Utensils", img: "https://images.unsplash.com/photo-1709837167686-a2e33aad1bf0?auto=format&fit=crop&q=80&w=400", path: "/kitchen" },
-    { name: "Gifts", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=400", path: "/gifts" },
-    { name: "Decors", img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=400", path: "/decor" },
-    { name: "Exercise & Fitness", img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=400", path: "/fitness" },
-  ];
-  return (
-    <><section className="py-16 bg-white">
-      <div className="container mx-auto px-6">
-       {/* <div className="flex justify-between items-end mb-10">
-          <div className="text-left">
-            <h2 className="text-3xl font-bold text-slate-900">Explore Collections</h2>
-            <p className="text-slate-500 mt-2">Curated essentials for every part of your life.</p>
-          </div>
-          <Link to="/products" className="text-indigo-600 font-semibold hover:underline hidden md:block">
-            View All Categories &rarr;
-          </Link>
-        </div>*/}
-        
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {categoryData.map((cat, index) => (
-            <Link 
-              to={cat.path}
-              key={index} 
-              className="group relative flex flex-col overflow-hidden rounded-sm bg-slate-100 aspect-[4/5]"
-            >
-              {/* Image Background */}
-              <img 
-                src={cat.img} 
-                alt={cat.name}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
-              
-              {/* Text Label */}
-              <div className="absolute inset-x-0 bottom-0 p-4 text-center">
-                <span className="text-sm font-bold text-white uppercase tracking-wider drop-shadow-md">
-                  {cat.name}
-                </span>
-              {/*<div className="h-0.5 w-0 bg-white mx-auto mt-2 transition-all duration-300 group-hover:w-1/2" />*/}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-    </>
-  )
-}
 
 const HotDeals = () =>{
   return <>
@@ -184,7 +121,7 @@ const OtherCatContent = () =>{
 
               )}
             </div>
-            <Link className="self-end font-semibold pr-5 " to="/products"> <p> More</p></Link>
+            <Link className="self-end pr-5 pt-3 hover:font-semibold" to="/products"> <p> More</p></Link>
 
           </div>
             </>
@@ -234,11 +171,11 @@ const Brands = () =>{
   return (
     <>
     <div className='bg-white'>
-        <section className="p-6 my-6 dark:bg-gray-100 dark:text-gray-800">
+        <section className="p-6 mb-1">
 	<div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
-		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50 dark:text-gray-800">
-			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-600">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className="h-9 w-9 dark:text-gray-100">
+		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 ">
+			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 ">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className="h-9 w-9 ">
 					<polygon points="160 96.039 160 128.039 464 128.039 464 191.384 428.5 304.039 149.932 304.039 109.932 16 16 16 16 48 82.068 48 122.068 336.039 451.968 336.039 496 196.306 496 96.039 160 96.039"></polygon>
 					<path d="M176.984,368.344a64.073,64.073,0,0,0-64,64h0a64,64,0,0,0,128,0h0A64.072,64.072,0,0,0,176.984,368.344Zm0,96a32,32,0,1,1,32-32A32.038,32.038,0,0,1,176.984,464.344Z"></path>
 					<path d="M400.984,368.344a64.073,64.073,0,0,0-64,64h0a64,64,0,0,0,128,0h0A64.072,64.072,0,0,0,400.984,368.344Zm0,96a32,32,0,1,1,32-32A32.038,32.038,0,0,1,400.984,464.344Z"></path>
@@ -249,9 +186,9 @@ const Brands = () =>{
 				<p className="capitalize">Orders</p>
 			</div>
 		</div>
-		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50 dark:text-gray-800">
-			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-600">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className="h-9 w-9 dark:text-gray-100">
+		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 ">
+			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 ">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className="h-9 w-9 darks:text-gray-100">
 					<path d="M256,16C123.452,16,16,123.452,16,256S123.452,496,256,496,496,388.548,496,256,388.548,16,256,16ZM403.078,403.078a207.253,207.253,0,1,1,44.589-66.125A207.332,207.332,0,0,1,403.078,403.078Z"></path>
 					<path d="M256,384A104,104,0,0,0,360,280H152A104,104,0,0,0,256,384Z"></path>
 					<polygon points="205.757 228.292 226.243 203.708 168 155.173 109.757 203.708 130.243 228.292 168 196.827 205.757 228.292"></polygon>
@@ -263,8 +200,8 @@ const Brands = () =>{
 				<p className="capitalize">Happy customers</p>
 			</div>
 		</div>
-		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50 dark:text-gray-800">
-			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-600">
+		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 ">
+			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 ">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className="w-6 h-6">
 					<path d="M462.541,316.3l-64.344-42.1,24.774-45.418A79.124,79.124,0,0,0,432.093,192V120A103.941,103.941,0,0,0,257.484,43.523L279.232,67a71.989,71.989,0,0,1,120.861,53v72a46.809,46.809,0,0,1-5.215,21.452L355.962,284.8l89.058,58.274a42.16,42.16,0,0,1,19.073,35.421V432h-72v32h104V378.494A74.061,74.061,0,0,0,462.541,316.3Z"></path>
 					<path d="M318.541,348.3l-64.343-42.1,24.773-45.418A79.124,79.124,0,0,0,288.093,224V152A104.212,104.212,0,0,0,184.04,47.866C126.723,47.866,80.093,94.581,80.093,152v72a78,78,0,0,0,9.015,36.775l24.908,45.664L50.047,348.3A74.022,74.022,0,0,0,16.5,410.4L16,496H352.093V410.494A74.061,74.061,0,0,0,318.541,348.3ZM320.093,464H48.186l.31-53.506a42.158,42.158,0,0,1,19.073-35.421l88.682-58.029L117.2,245.452A46.838,46.838,0,0,1,112.093,224V152a72,72,0,1,1,144,0v72a46.809,46.809,0,0,1-5.215,21.452L211.962,316.8l89.058,58.274a42.16,42.16,0,0,1,19.073,35.421Z"></path>
@@ -276,9 +213,9 @@ const Brands = () =>{
 				<p className="capitalize">Social Media Followers</p>
 			</div>
 		</div>
-		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50 dark:text-gray-800">
-			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-600">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className="h-9 w-9 dark:text-gray-100">
+		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 ">
+			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className="h-9 w-9 ">
 					<path d="M425.706,142.294A240,240,0,0,0,16,312v88H160V368H48V312c0-114.691,93.309-208,208-208s208,93.309,208,208v56H352v32H496V312A238.432,238.432,0,0,0,425.706,142.294Z"></path>
 					<rect width="32" height="32" x="80" y="264"></rect>
 					<rect width="32" height="32" x="240" y="128"></rect>

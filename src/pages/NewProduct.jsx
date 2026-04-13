@@ -118,14 +118,13 @@ const TagSystem = ()=>{
         <div className='flex flex-wrap p-2 border border-slate-200 rounded-md bg-slate-50 '>
             {
             Object.entries(itemTags).map(([tagName, isActive])=>(
-                
-                <span 
-                key={tagName} 
-                className={`px-2 py-1 m-2 ${isActive? 'bg-slate-400 text-gray-50 border-slate-50': 'bg-neutral-50'} text-sm md:text-md border border-black rounded-lg cursor-pointer hover:bg-slate-300 hover:text-gray-700 hover:border-gray-700`}
-                onClick={()=>{toggleTags(tagName)}}
-                >
-                    {tagName}
-                </span>
+                <div onClick={()=>{toggleTags(tagName)}}
+                    className={`px-2 py-1 m-2 ${isActive? 'bg-slate-400 text-gray-50 border-slate-50': 'bg-neutral-50'} text-sm md:text-md border border-black rounded-lg cursor-pointer hover:bg-slate-300 hover:text-gray-700 hover:border-gray-700`}
+                    > 
+                    <span key={tagName}>
+                        {tagName}
+                    </span>
+                </div>
             )
             )
             }
@@ -247,7 +246,7 @@ const onSubmit =async e =>{
                       <option value="Babies & Kids">Babies & Kids</option>
                       <option value="Decors">Decors</option>
                       <option value="Exercise & Fitness Supplies">Exercise & Fitness Supplies</option>
-                      <option value="Resin Materials & Tools">Resin Materials & Tools</option>
+                    {/*<option value="Resin Materials & Tools">Resin Materials & Tools</option>*/}
                       
                   </select>
               </div>    
@@ -306,8 +305,8 @@ const onSubmit =async e =>{
                      />
                    </div>
 
-                  {/*<label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                  <textarea id="description" rows="8" onChange={e=>{setDescription(e.target.value)}} value={description}className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your description here"></textarea>*/}
+                  {/*<label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 darks:text-white">Description</label>
+                  <textarea id="description" rows="8" onChange={e=>{setDescription(e.target.value)}} value={description}className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-primary-500 darks:focus:border-primary-500" placeholder="Your description here"></textarea>*/}
               </div>
           </div>
           <button type="submit" onClick={onSubmit} className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-tertiary rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-secondary">
