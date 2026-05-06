@@ -185,7 +185,8 @@ const [notification, setNotification] = useState({show:false, message:""})
                   <ul tabIndex={0} className='dropdown-content menu bg-tertiary rounded-box z-[1] w-52 p-2 ml-1 shadow'>
                     <li onClick={()=>{changeCategory('') }} className='text-zinc'><span>All Categories</span></li>
                     <li onClick={()=>changeCategory('Babies & Kids')} className='text-white'><span>Babies & Kids</span></li>
-                    <li onClick={()=>changeCategory('Kitchen Utensils & Home Essentials')} className='text-white'><span> Kitchen Utensils & Home Essentials</span></li>
+                    <li onClick={()=>changeCategory('Kitchen Utensils')} className='text-white'><span> Kitchen Utensils </span></li>
+                     <li onClick={()=>changeCategory('Home Essentials')} className='text-white'><span> Home Essentials</span></li>
                     <li onClick={()=>changeCategory('Gifts & Souvenirs')}className='text-white'><span> Gifts & Souvenirs</span></li>
                     <li onClick={()=>changeCategory('Decors')}className='text-white'><span> Decors</span></li>
                     <li onClick={()=>changeCategory('Exercise & Fitness Supplies')} className='text-white'><span> Exercise & Fitness Supplies </span></li>
@@ -198,7 +199,8 @@ const [notification, setNotification] = useState({show:false, message:""})
                 <ul tabIndex={0} className='dropdown-content menu  z-[1] p-2 ml-1 '>
                       <li onClick={()=>{changeCategory('') }} className='text-zinc'><span>All Categories</span></li>
                       <li onClick={()=>changeCategory('Babies & Kids')} className='text-gray-500'><span>Babies & Kids</span></li>
-                      <li onClick={()=>changeCategory('Kitchen Utensils & Home Essentials')} className='text-gray-500'><span> Kitchen Utensils & Home Essentials</span></li>
+                      <li onClick={()=>changeCategory('Kitchen Utensils')} className='text-gray-500'><span> Kitchen Utensils</span></li>
+                       <li onClick={()=>changeCategory('Home Essentials')} className='text-gray-500'><span> Home Essentials</span></li>
                       <li onClick={()=>changeCategory('Gifts & Souvenirs')}className='text-gray-500'><span> Gifts & Souvenirs</span></li>
                       <li onClick={()=>changeCategory('Decors')}className='text-gray-500'><span> Decors</span></li>
                       <li onClick={()=>changeCategory('Exercise & Fitness Supplies')} className='text-gray-500'><span> Exercise & Fitness Supplies </span></li>

@@ -157,7 +157,7 @@ return
                   type="submit"
                   className={status!="solved"? 'w-full bg-gray-500 text-sm px-5 py-2.5 text-center font-medium rounded-lg ':'w-full py-2 bg-tertiary text-white font-bold rounded-lg hover:bg-secondary transition'}
                   onClick={submitGuestData}
-                  disabled={status==="solved"? false : true}  
+                  /*{disabled={status==="solved"? false : true}  }*/
               >
                    Order
               </button>

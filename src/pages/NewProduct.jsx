@@ -241,12 +241,12 @@ const onSubmit =async e =>{
                   <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 "> Category</label>
                   <select id="category" value={category} onChange = {e=>setCategory(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
                       <option defaultValue="">Select category</option>
-                      <option value="Kitchen Utensils & Home Essentials">Kitchen Utensils & Home Essentials</option>
+                      <option value="Kitchen Utensils">Kitchen Utensils</option>
                       <option value="Gifts & Souvenirs">Gifts & Souvenirs</option>
                       <option value="Babies & Kids">Babies & Kids</option>
                       <option value="Decors">Decors</option>
                       <option value="Exercise & Fitness Supplies">Exercise & Fitness Supplies</option>
-                    {/*<option value="Resin Materials & Tools">Resin Materials & Tools</option>*/}
+                    <option value="Home Essentials">Home Essentials</option>
                       
                   </select>
               </div>    
