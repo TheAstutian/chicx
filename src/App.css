@@ -1,7 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import './@/styles/_keyframe-animations.scss';
 @import './@/styles/_variables.scss';
 
+
+@font-face {
+  font-family: 'Candal';
+  src: url('../public/Candal-Regular.ttf'); /* format('tff'); */
+}
+
+@font-face {
+  font-family: 'Elm-sans';
+  src: url('../public/ElmsSans-VariableFont_wght.ttf'); /* format('tff'); */
+}
+@font-face {
+  font-family: 'Playfair';
+  src: url('../public/Playfair-VariableFont_opsz\,wdth\,wght.ttf'); /*format('tff'); */
+}
+
+/*
+@theme {
+  -font-Candal: 'Candal-Regular', sans-serif;
+  -font-Playfair: 'Playfair', sans-serif;
+  -font-Elm-sans: 'Elm-sans', sans-serif;
+}
+*/
 
 .loading-icon {
   

@@ -7,6 +7,7 @@ import CheckoutModal from '../components/CheckoutModal';
 import { Turnstile } from '@marsidev/react-turnstile';
 import axios from 'axios';
 import { API_URL } from '../App';
+import { toggleBlockquote } from '@/components/tiptap-ui/blockquote-button';
 
 
 
@@ -17,7 +18,11 @@ const Guest = ({ setCheckoutStep, setShowModal, guestUser, setGuestUser }) => {
   const [emailError, setEmailError] = useState('')
   const [numberError, setNumberError] = useState('')
   const [addressError, setAddressError] = useState('')
+  const [verifyEmailError, setVerifyEmailError] = useState('Error dey?')
   const [status, setStatus] = useState('')
+  const [ToggleEmailVerification, setToggleEmailVerification] = useState(false)
+  const [emailCode, setEmailCode] = useState('')
+
 
   const handleOptionChange = (option) => {
       setDeliveryOption(option);
@@ -36,8 +41,13 @@ const Guest = ({ setCheckoutStep, setShowModal, guestUser, setGuestUser }) => {
    
 //        setError(prev => ({ ...prev, [`${name}Error`]: '' }));
 }
+  const handleEmailCodeChange = e =>{
+   
+    const code = e.target.value; 
+    setEmailCode(code)
+  }
 
-const verifyTraffic = async (token)=>{
+/* const verifyTraffic = async (token)=>{
   
   try{
 
@@ -45,13 +55,54 @@ const verifyTraffic = async (token)=>{
       const verifyToken = await axios.post(`${API_URL}/turnstile`, payload)
       if(verifyToken){
           setStatus('solved')
-      } 
+      } else setStatus('solved') 
+
       return  
   }catch(err){
       console.log(err)
   } 
-} 
+} */
 
+const sendEmailVerificationCode = async ()=>{
+
+  try{
+   const requestCode= await axios.post(`${API_URL}/tokenRequest`, {email: guestUser.email})
+    
+    }catch(error){
+    if (error.message){
+      setEmailError(error.message)
+    } else {
+            setEmailError(error)
+    }
+    
+  }
+  setToggleEmailVerification(true)
+  return 
+  //send email to backend to generate code. 
+}
+
+const submitEmailVerification  = async (e) =>{
+  e.preventDefault()
+  
+  const data = {
+    email: guestUser.email , 
+    code: emailCode
+  }
+
+  try{
+    const verifyCode = await axios.post(`${API_URL}/verifyToken`, data)
+    console.log(verifyCode)
+  if(verifyCode.data.status!="Success"){
+    setVerifyEmailError(verifyCode.data.message)
+  }else if (verifyCode.data.status==="Success"){
+    setShowModal(true)
+  }
+  }catch(error){
+    console.log(error)
+  }
+ //logic to verify code. 
+//setShowModal(true)
+}
 
 const submitGuestData = (e)=>{
   e.preventDefault()
@@ -90,23 +141,58 @@ if(guestUser.address && !addressRegex.test(guestUser.address )){
   }
 
 if (isValid) {
-  setShowModal(true)
+  sendEmailVerificationCode()
 }
 
 return 
   
-}
-
-  return (
+} 
+  return (<>
+     { ToggleEmailVerification? 
       <div className='p-4 border-t border-gray-200'>
+          <p className=' mb-2'>We have sent a one time passcode to you at your registered address: <b>{guestUser.email} </b><br /> <br /> Please check your email account for your one time passcode and enter it below.</p>
+              <input type="text" placeholder="Enter code" name='code' value={emailCode} onChange={handleEmailCodeChange} className='w-full p-2 border border-gray-300 rounded mb-2' required />
+              {verifyEmailError&&<p className=' w-full text-red-500 text-xs'>{verifyEmailError}</p>}
+
+              {/*
+                logic 
+                You can request a new code in...countdown for 2 minutes. 
+                After 2 minutes elapses, resend code button popus up and once clicked, 
+                goes dark and unclickable until after 2 mins again
+              */}
+            
+             <div className='flex justify-between py-5'>
+              <button 
+                  type="submit"
+                  className='w-full py-2 bg-red-600 text-white font-bold rounded-sm hover:bg-secondary transition mr-2'
+                  onClick={()=>setToggleEmailVerification(false)}
+                   
+              >
+                   Back
+              </button>
+              <button 
+                  type="submit"
+                  className='w-full py-2 bg-tertiary text-white font-bold rounded-sm hover:bg-secondary transition'
+                  onClick={submitEmailVerification}
+                  
+              >
+                   Verify Email
+              </button>
+             </div>
+        </div>
+          :
+        
+        <div className='p-4 border-t border-gray-200'>
           <h2 className='text-lg font-bold mb-3'>Billing Information </h2>
           <form className='space-y-2'>
-          
-              <input type="text" placeholder="Name" name="name" id="name" className='w-full p-2 border border-gray-300 text-sm italic rounded' value={guestUser.name} onChange={handleChange} required />
+            <h3 className='font-semibold mb-2'>Name:</h3>          
+              <input type="text" placeholder="Please enter your full name" name="name" id="name" className='w-full p-2 border border-gray-300 text-xs italic rounded' value={guestUser.name} onChange={handleChange} required />
               {nameError&&<p className=' w-full text-red-500 text-xs'>{nameError}</p>}
-              <input type="email" name="email" id="email" placeholder="Email (We'll  send order details here)" value={guestUser.email} onChange={handleChange} className='w-full p-2 border text-sm italic border-gray-300 rounded' required />
+              <h3 className='font-semibold mb-2'>Email: </h3>
+              <input type="email" name="email" id="email" placeholder="We'll send your order details here" value={guestUser.email} onChange={handleChange} className='w-full p-2 border text-xs italic border-gray-300 rounded' required />
               {emailError&&<p className=' w-full text-red-500 text-xs'>{emailError}</p>}
-              <input type="tel" name="phone" id="phone" placeholder="Phone Number (For updates about your order)" value={guestUser.phone} onChange={handleChange} className='w-full p-2 border border-gray-300 text-sm italic rounded' required />
+              <h3 className='font-semibold mb-2'>Phone number:</h3>              
+              <input type="tel" name="phone" id="phone" placeholder="For order updates pls enter a correct number." value={guestUser.phone} onChange={handleChange} className='w-full p-2 border border-gray-300 text-xs italic rounded' required />
               {numberError&&<p className=' w-full text-red-500 text-xs'>{numberError}</p>}
               {/* Pickup or Delivery Option */}
               <div className="flex items-center space-x-4 pt-2">
@@ -144,15 +230,12 @@ return
                   </div>
               )}
               
-              {/* Final step button 
-                  //Trigger Modal, new data captured passed as second argument
-              */}
-              <Turnstile 
-                                      siteKey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
-                                          onError={() => setStatus('error')}
-                                            onExpire={() => setStatus('expired')}
-                                      onSuccess={verifyTraffic}
-                                       />
+ {   /*          <Turnstile 
+                  siteKey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
+                      onError={/*() => setStatus('error')* verifyTraffic}
+                        onExpire={/*() => setStatus('expired')* verifyTraffic}
+                  onSuccess={verifyTraffic}
+                    /> */}
               <button 
                   type="submit"
                   className={status!="solved"? 'w-full bg-gray-500 text-sm px-5 py-2.5 text-center font-medium rounded-lg ':'w-full py-2 bg-tertiary text-white font-bold rounded-lg hover:bg-secondary transition'}
@@ -163,15 +246,15 @@ return
               </button>
           </form>
       </div>
-  );
+              
+    }
+ </> );
 }; 
 
 
 
 
-const Checkout = () => {
-
-  
+const Checkout = () => {  
   ReactGA.send({
     hitType:"pageview",
     page:"/Checkout",
@@ -209,12 +292,12 @@ const Checkout = () => {
 
     const {currentUser} = useContext(AuthContext)
     const handleProceedClick=()=>{
-      if(currentUser){
+/*      if(currentUser){
         //Trigger Modal with user information passed as second argument. 
        setUserDetails(currentUser)
        setShowModal(true)
         return 
-      }  
+      }  */
       setUserDetails(guestUser)
       setCheckoutStep('ACCOUNT_OPTION');
     }
@@ -230,14 +313,14 @@ const Checkout = () => {
             >
                 Continue as Guest
             </button>
-            <Link to='/adminlogin'>
+{  /*          <Link to='/adminlogin'>
             <button
                  className='px-4 py-2 border border-secondary text-secondary font-semibold rounded-lg hover:bg-blue-50 transition'
             >
                 Log In / Sign Up
             </button>
-            </Link>
-           
+            </Link>*/
+}           
         </div>
       </div>
     )

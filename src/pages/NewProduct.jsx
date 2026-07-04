@@ -43,7 +43,8 @@ import 'froala-editor/js/plugins/colors.min.js';
         "electricals":false,
         "fitness":false,
         "soldout":false,
-        "clearance":false
+        "clearance":false, 
+        "exclusive": false,
     }
 
 

@@ -26,6 +26,7 @@ const showNotification=(message)=>{
 }
 
   return (
+    <>
     <div className="group relative flex w-full max-w-[160px] md:max-w-[240px] flex-col overflow-hidden rounded-md border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
       
       {/* 1. IMAGE SECTION WITH OVERLAYS */}
@@ -66,24 +67,25 @@ const showNotification=(message)=>{
       <div className="flex flex-col p-2 md:p-4">
         
         <Link to={`/products/${id}`} className="mb-2">
-          <h3 className="line-clamp-1 text-sm md:text-base md:font-semibold text-slate-800 ">
+          <h3 className=" line-clamp-1 text-sm md:text-base md:font-semibold ">
             {name}
           </h3>
         </Link>
 
         {/* Pricing Hierarchy (UI: Size indicates importance) */}
-        <div className="flex items-baseline gap-2">
-          <span className="text-sm md:text-xl font-black text-slate-900">₦{Number(price - discount).toLocaleString()}</span>
+        <div className="flex items-baseline gap-2 ">
+          <span className="text-sm md:text-xl font-black text-extra2">₦{Number(price - discount).toLocaleString()}</span>
           {discount > 0 && (
             <span className="text-xs md:text-sm font-medium text-slate-400 line-through">₦{price.toLocaleString()}</span>
           )}
         </div>
       </div>
+    </div>
+
         {notification.show && (
         <div className="fixed top-5 right-0 m-4 p-2 bg-gray-100 border border-gray-300 font-semibold text-sm text-gray-600 rounded shadow-md">
           {notification.message}
-        </div>)}
-    </div>
+        </div>)} </>
   );
 };
 

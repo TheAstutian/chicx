@@ -10,7 +10,7 @@ const CheckoutModal = (props) =>{
     const {cartItems, total, userDetails, showModal, setShowModal } = props;  
     //recieve buyer information and goods information. 
     // And then send data to backend. 
-    console.log(userDetails)
+//    console.log(userDetails)
     const [order, setOrder] = useState({
         userDetails: userDetails,
         cart: cartItems,

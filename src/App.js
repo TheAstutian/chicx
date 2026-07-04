@@ -94,7 +94,7 @@ function App() {
   ReactGA.initialize('G-77ZCG9D534')
 
   return (
-    <div className="App"> 
+    <div className="App "> 
       <div className=" scroll-smooth">
         <RouterProvider router={router} />
       </div>

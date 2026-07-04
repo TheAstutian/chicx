@@ -57,7 +57,7 @@ const showNotification=(message)=>{
 
                     <div className='w-full px-2 md:px-3'>
                     <Link to={`/products/${item._id}`}> 
-                       <div className='h-12 md:h-14 md:py-2 md:mb-3'><p className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2 md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
+                       <div className='h-12 md:h-14 md:py-2 md:mb-3'><p className='font-Elm-sans text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2 md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
                         </Link>   
                        <div className='flex flex-row justify-between md:px-2'>
                           <div className='flex flex-col'> <span className='text-tertiary font-bold text-sm md:text-base '>₦{Intl.NumberFormat("en-US").format(item.sellingPrice)}     </span><span className='line-through text-xs text-red-500'>{} ₦{item.price}</span></div>
@@ -87,7 +87,7 @@ const showNotification=(message)=>{
          {relatedItems? 
          <>
          <div className='mb-5 p-3'>
-             <h2 className='pt-3 sm:pt-8 pb-5 sm:text-center text-2xl sm:text-3xl text-tertiary'> You might also like...</h2>
+             <h2 className='pt-3 sm:pt-8 pb-5 sm:text-center text-2xl sm:text-3xl text-extra2 font-Candal'> You might also like...</h2>
              <div className='grid grid-cols-2 gap-2 md:w-3/5 md:grid-cols-4 md:gap-3 md:justify-center md:mx-auto'>
                 
                 {relatedItems.map((item)=>(
@@ -116,7 +116,7 @@ const showNotification=(message)=>{
         
         <div className='mb-5 p-3'>
         <hr className=' col-span-5 h-px bg-gray-400 border-0 md:col-span-0 hidden md:flex'/>
-             <h2 className='pt-1 sm:pt-10 pb-5 sm:pb-10 sm:text-center text-2xl sm:text-3xl text-tertiary'> Continue shopping...</h2>
+             <h2 className='pt-1 sm:pt-10 pb-5 sm:pb-10 sm:text-center text-2xl sm:text-3xl text-extra2 font-Candal'> Continue shopping...</h2>
              <div className='grid grid-cols-2 gap-2 md:w-3/5 md:grid-cols-4 md:gap-3 md:justify-center md:mx-auto'>
                 
 

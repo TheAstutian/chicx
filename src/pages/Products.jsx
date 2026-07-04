@@ -35,7 +35,8 @@ const Products = () => {
   const currentUserRef = useRef(currentUser)
   const location = useLocation()
   const activeCategory = location.state?.activeCategory || "";
-  
+  const tagHeading = location.state?.tagHeading || ""; 
+  const categoryTags = location.state?.tags || ""; 
 
 
   const [error, setError]= useState(null)
@@ -70,7 +71,7 @@ const [notification, setNotification] = useState({show:false, message:""})
         
       try{
 
-        const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}&searchquery=${searchQuery}&category=${displayCategory}`)
+        const fetchStore = await axios.get(`${API_URL}/store?page=${currentPage}&searchquery=${searchQuery}&category=${displayCategory}&tags=${categoryTags}`)
         if(fetchStore){ 
           
           const TotalPages = Math.ceil(fetchStore.data[0].totalCount[0].count/rowsPerPage)
@@ -105,7 +106,7 @@ const [notification, setNotification] = useState({show:false, message:""})
         
       return (
         <>
-        <div   key={`${item._id}`} className='flex flex-col my-3 pb-3 md:pb-5 bg-white border border-gray-300 w-full max-w-180px md:max-w-[250px] h-68 '> 
+        <div   key={`${item._id}`} className='flex font-Elm-sans flex-col my-3 pb-3 md:pb-5 bg-white border border-gray-300 w-full max-w-180px md:max-w-[250px] h-68 '> 
                  
                    <div className=' w-full relative aspect-[4/5] overflow-hidden bg-slate-100 '> 
                          <Link to={`/products/${item._id}`} ><img className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 hover:opacity-70' src={item.imageUrl} />
@@ -117,7 +118,7 @@ const [notification, setNotification] = useState({show:false, message:""})
 
                     <div className='w-full px-2 md:px-3'>
                     <Link to={`/products/${item._id}`}> 
-                       <div className='h-12  md:py-2 md:mb-3'><p className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2 md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
+                       <div className='h-12 font-Elm-sans md:py-2 md:mb-3'><p className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2  md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
                         </Link>   
                        <div className='flex flex-row justify-between md:px-2'>
                           <div className='flex flex-col'> <span className='text-tertiary font-bold text-sm md:text-base '>₦{Intl.NumberFormat("en-US").format(item.sellingPrice)}     </span><span className='line-through text-xs text-red-500'>{} ₦{item.price}</span></div>
@@ -287,7 +288,7 @@ const [notification, setNotification] = useState({show:false, message:""})
       </Link>
           </div>):('')):('')}
 
-      <h1 className='pt-8 pb-2 md:pb-10 md:ml-10 text-2xl md:text-4xl text-center text-tertiary'> {displayCategory? ` ${displayCategory}` :('Start Shopping!') }</h1>
+      <h1 className='pt-8 pb-2 md:pb-10 font-Elm-sans md:ml-10 text-2xl md:text-5xl text-center text-tertiary'> {displayCategory? ` ${displayCategory}` : (tagHeading ?  `${tagHeading}` : 'Goldyvhista ' ) }</h1>
 
           {/*HEADING AND CONTENT SECTION*/}
         <div className='w-full px-2 grid grid-cols-5 md:flex-row md:justify-center '>

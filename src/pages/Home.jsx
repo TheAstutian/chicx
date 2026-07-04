@@ -36,10 +36,8 @@ const loadProducts = async()=>{
     if(fetchProducts){ 
       
       setPopular(fetchProducts.data.popularProducts) 
-      setDeals(fetchProducts.data.latestDeals)
-      
+      setDeals(fetchProducts.data.latestDeals)   
     }
-    
   } catch(err){
     console.log(err)
   }
@@ -49,7 +47,7 @@ const loadProducts = async()=>{
 const HotDeals = () =>{
   return <>
     <div className='flex py-5 mb-5 md:py-10 md:mb-10 flex-col  ' >
-            <h1 className='text-center text-2xl md:text-4xl md:font-medium md:mb-10 text-black'> Hot Deals</h1>
+            <h1 className=' font-Candal  text-center text-2xl md:text-5xl md:font-medium md:mb-10 text-black'> Hot Deals</h1>
                 <div  className='md:w-full grid grid-cols-2 md:grid-cols-6 justify-items-center px-5 md:px-20' > 
 
                 {deals? (deals.map((item)=>(
@@ -79,12 +77,11 @@ const NewIn = ()=>{
 
       
       <div className='ml-3 md:ml-20 md:pl-20 flex flex-col items-start ' >
-        <h1 className='text-3xl md:text-4xl text-semibold mb-5'>New arrivals</h1>
-        <span className='text-md inline-block mb-5'>Shop hundreds of new life-changing products <br className=''/> across cooking, cleaning & laundry.</span>
-       <Link to='/products' className=' px-3 py-2 mr-3 font-medium text-center text-white rounded-sm bg-secondary hover:bg-secondary hover:text-white  focus:ring-4 focus:ring-primary '>
+        <h1 className='text-3xl font-Candal md:text-5xl text-semibold mb-5'>New arrivals</h1>
+        <span className='text-md font-Elm-sans inline-block mb-5'>Shop hundreds of new life-changing products <br className='text-extra2'/> across cooking, cleaning & laundry.</span>
+       <Link to='/products' state={{tagHeading: 'New In', tags: ['new']}} className=' px-3 py-2 mr-3 font-medium text-center text-white rounded-sm bg-extra2 hover:bg-secondary hover:text-extra2 hover:bg-transparent hover:border-extra2 border  focus:ring-4 focus:ring-primary '>
                      Shop All New
-  
-                  </Link>
+         </Link>
       </div>
       </div>     
     </section>
@@ -94,14 +91,13 @@ const NewIn = ()=>{
 
 const OtherCatContent = () =>{
 
-
   return (
     <>
-    <section className='bg-yellow-400 flex flex-col justify-center items-center md:pb-20 '>
+    <section className=' bg-extra  flex flex-col justify-center items-center md:pb-20 '>
 
       <div className='hidden md:flex md:flex-col md:mt-20 md:mb-10 md:pb-10'>
-        <h1 className='text-3xl md:text-5xl text-semibold'>Every Shopper's Delight...</h1>
-      <span className='text-center pt-3 text-bold'>For a fraction of the price!</span>
+        <h1 className='text-3xl font-Candal text-extra2 md:text-5xl text-semibold'>Every Shopper's Delight...</h1>
+      <span className='text-center font-Elm-sans pt-3 text-bold'>For a fraction of the price!</span>
       </div>
 
       <div className='flex flex-col md:flex-row md:space-x-3 md:w-3/5'>
@@ -109,7 +105,7 @@ const OtherCatContent = () =>{
           otherCatContentData.map(topitem => (
             <>
           <div className='flex flex-col items-center pt-5 pb-5 border-b border-slate-200 w-full bg-white'>
-            <h3 className='self-start pl-5 text-xl pb-5 font-semibold'>{topitem.name}</h3>
+            <h3 className='self-start font-Elm-sans pl-5 text-xl pb-5 font-semibold'>{topitem.name}</h3>
             <div className='grid grid-cols-2 w-4/5 p-4'>
               {topitem.data.map( item =>(
                 <>
@@ -121,7 +117,7 @@ const OtherCatContent = () =>{
 
               )}
             </div>
-            <Link className="self-end pr-5 pt-3 hover:font-semibold" to="/products"> <p> More</p></Link>
+            <Link className="self-end pr-5 pt-3 font-Elm-sans hover:font-semibold" to="/products" state={ {tagHeading: topitem.name, tags: topitem.tags }} > <p> More</p></Link>
 
           </div>
             </>
@@ -236,7 +232,7 @@ const Brands = () =>{
 }
 
   return (
-    <div className='bg-[#e5e5e5] '>
+    <div className='bg-[#e5e5e5] bg-white '>
         <Hero/>
         <HotDeals />
         <NewIn/>
@@ -369,30 +365,31 @@ const otherCatContentData = [
       {
         "name": "Vibrating Workout Machine",
         "id": "687aae99b88c258a98b9bc18",
-        "link": "https://chicx-6rqm.onrender.com/products/687aae99b88c258a98b9bc18",
+        "link": "https://www.goldyvhistahubz.com/products/687aae99b88c258a98b9bc18",
         "img": "https://i.ibb.co/nMnQV6Hc/IMG-2768.jpg"
       },
        {
         "name": "Kids LED Watch ",
         "id": "6879a96e7f8ad1d98a0cf621",
-        "link": "https://chicx-6rqm.onrender.com/products/6879a96e7f8ad1d98a0cf621",
+        "link": "https://www.goldyvhistahubz.com/products/6879a96e7f8ad1d98a0cf621",
         "img": "https://i.ibb.co/Qv7cwpP9/IMG-2752.jpg"
       },
 
        {
         "name": "Multipurpose Table",
         "id": "6691a190def128e0e14d0fdb",
-        "link": "https://chicx-6rqm.onrender.com/products/6691a190def128e0e14d0fdb",
+        "link": "https://www.goldyvhistahubz.com/products/6691a190def128e0e14d0fdb",
         "img": "https://i.ibb.co/mzx3cgG/tb5.jpg"
       },
 
        {
         "name": "Electric Juice Extractor",
         "id": "6683de4bbaff20ba57dce4cf",
-        "link": "https://chicx-6rqm.onrender.com/products/6683de4bbaff20ba57dce4cf",
+        "link": "https://www.goldyvhistahubz.com/products/6683de4bbaff20ba57dce4cf",
         "img": "https://i.ibb.co/phwf1F0/IMG-4955.jpg"
       }
-    ]
+    ],
+    "tags": ["electricals"]
   },
 
   {
@@ -401,30 +398,31 @@ const otherCatContentData = [
       {
         "name": "Single Grilling Pan",
         "id": "692c0f77c2442f20d6840fac",
-        "link": "https://chicx-6rqm.onrender.com/products/692c0f77c2442f20d6840fac",
+        "link": "https://www.goldyvhistahubz.com/products/692c0f77c2442f20d6840fac",
         "img": "https://i.ibb.co/dJwKkM96/IMG-4649.jpg"
       },
        {
         "name": "Quality Aluminum Cookware ",
         "id": "66858c138f0fbe1cbbebda26",
-        "link": "https://chicx-6rqm.onrender.com/products/66858c138f0fbe1cbbebda26",
+        "link": "https://www.goldyvhistahubz.com/products/66858c138f0fbe1cbbebda26",
         "img": "https://i.ibb.co/9tYRPr8/IMG-4990.jpg"
       },
 
        {
         "name": "Padded Mitten",
         "id": "687afc372831ce11c28071db",
-        "link": "https://chicx-6rqm.onrender.com/products/687afc372831ce11c28071db",
+        "link": "https://www.goldyvhistahubz.com/products/687afc372831ce11c28071db",
         "img": "https://i.ibb.co/MkMBML9N/IMG-2845.jpg"
       },
 
        {
         "name": "Silicon Spoon Set",
         "id": "6672a7db0ead09b548c64fe3",
-        "link": "https://chicx-6rqm.onrender.com/products/6672a7db0ead09b548c64fe3",
+        "link": "https://www.goldyvhistahubz.com/products/6672a7db0ead09b548c64fe3",
         "img": "https://i.ibb.co/ts2BchC/19pcs.jpg"
       }
-    ]
+    ],
+    "tags": ["cookware", "baking"]
   },
 
 ]

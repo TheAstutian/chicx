@@ -105,7 +105,7 @@ const ProductDescription = () =>{
         <div className='flex flex-col w-full'>
 
         <div className='flex flex-row pb-2 md:justify-between md:pb-5 '> 
-          <h1 className='text-md pl-2 md:text-2xl '>Product Description </h1>
+          <h1 className='text-md pl-2 md:text-2xl font-Elm-sans'>Product Description </h1>
           <span className=" p-1 md:p-2 cursor-pointer "> {toggleDescription? <IoMdClose onClick={changeToggleDescription}/> : <FaAngleRight onClick={changeToggleDescription}/> } </span>
         </div>
     {
@@ -136,7 +136,7 @@ null
     <div className=''>{product? <>
     <div className='flex flex-col md:flex-row md:justify-between bg-white md:py-2.5 md:pt-4 md:px-5 md:pl-8'>
     <div className='flex flex-row'>
-      <p className='py-3 pl-3 md:pl-10 text-sm md:text-lg text-gray-500 cursor-pointer md:font-normal'>
+      <p className='py-3 pl-3 font-Elm-sans md:pl-10 text-sm md:text-lg text-gray-500 cursor-pointer md:font-normal'>
       {product.primaryCategory} / {product.name}
       </p>
     </div>
@@ -207,7 +207,7 @@ null
 
         <div className="px-4 mt-6 md:flex md:flex-col md:mt-8 ">
           <h1
-            className="text-2xl md:font-semibold px-5 md:px-1 text-gray-900 md:text-3xl "
+            className="text-2xl md:font-semibold px-5 md:px-1 text-gray-900 md:text-3xl font-Elm-sans "
           >{product? capitalizeTitle(product.name) : 
            `Product Name Not Available`}
           </h1>
@@ -224,7 +224,7 @@ null
             <a
               href={`https://wa.me/2348145887534?text=I'm%20interested%20in%20${product.name}%20.Is%20it%20available?%20`}
               title=""
-              className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-secondary hover:bg-secondary hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+              className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-black focus:outline-none bg-extra rounded-lg border border-gray-200  hover:border-extra focus:z-10 focus:ring-4 focus:ring-gray-100"
               role="button"
             >
               Buy now
@@ -233,7 +233,7 @@ null
             <span
               onClick={handleAddToCart}
               title=""
-              className="flex items-center justify-center py-2.5 px-5 my-2 md:my-0 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-primary hover:bg-primary hover:text-white focus:z-10 focus:ring-4 focus:ring-blue"
+              className="flex items-center justify-center py-2.5 px-5 my-2 md:my-0 text-sm font-medium text-white focus:outline-none bg-extra2 rounded-lg border border-gray-200 hover:border-extra2 focus:z-10 focus:ring-4 focus:ring-blue"
               role="button"
             > 
               Add to Cart
@@ -243,7 +243,7 @@ null
 
           <hr className="my-6 md:my-8 border-gray-200 " />
             <div>
-              <h1 className='text-md pl-2 font-semibold md:text-lg '>Top Highlights</h1>
+              <h1 className='text-md pl-2 font-semibold md:text-lg font-Elm-sans'>Top Highlights</h1>
   <div className=' prose prose-sm pt-2 px-1 prose-li:leading-6 prose-ul:leading-6 md:mx-auto '>
                   {product.highlights? parse(`${product.highlights}`): ` `}
                 </div>

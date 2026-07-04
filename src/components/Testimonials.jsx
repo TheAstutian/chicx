@@ -3,7 +3,7 @@ import React from 'react'
 const Testimonials = () => {
   return (
     <section className="bg-white ">
-<div className='w-9/10 md:w-8/10 pt-3 md:pt-10 flex items-center flex-col justify-center'>
+<div className='w-9/10 font-Elm-sans md:w-8/10 pt-3 md:pt-10 flex items-center flex-col justify-center'>
  <h1 className='p-1  md:p-3 mx-auto text-2xl md:text-5xl text-tertiary'> What Our Customers Are Saying</h1>
   <iframe src='https://widgets.sociablekit.com/google-reviews/iframe/25578136' frameborder='0' width='90%' height='500'></iframe>
   

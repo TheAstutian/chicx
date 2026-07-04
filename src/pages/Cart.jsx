@@ -15,7 +15,7 @@ const Cart = ({showModal, toggle}) => {
       navigate('/Checkout')
     }
   return (
-    <div className='relative scroll-smooth '>
+    <div className='relative scroll-smooth z-20'>
     <div  className={`flex flex-col fixed h-full overflow-y-auto right-0 top-0 z-10 bg-gray-100 md:border-l-2 md:border-b-2 md:border-tertiary  px-2 py-5 w-full md:w-1/4 text-black text-sm transform transition-transform ease-in-out duration-500 ${showModal ? 'translate-x-0' : 'translate-x-full '}`}>
     <div className=' pt-5 flex justify-between  ease-in-out duration-500'>
     <h1 className=" pl-5 ml-5 font-semibold text-lg text-tertiary ">Shopping Cart</h1>
