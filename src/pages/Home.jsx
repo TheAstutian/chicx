@@ -19,7 +19,7 @@ const Home = () => {
   ReactGA.send({
     hitType: "pageview",
     page:"/",
-    title:"Home",
+    title:"Home", 
   })
 const [popular, setPopular] = useState(null)
 const [deals, setDeals] = useState(sampleDeals)
