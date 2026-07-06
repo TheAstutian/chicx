@@ -95,8 +95,8 @@ const OtherCatContent = () =>{
     <>
     <section className=' bg-extra  flex flex-col justify-center items-center md:pb-20 '>
 
-      <div className='hidden md:flex md:flex-col md:mt-20 md:mb-10 md:pb-10'>
-        <h1 className='text-3xl font-Candal text-extra2 md:text-5xl text-semibold'>Every Shopper's Delight...</h1>
+      <div className=' hidden sm:flex sm:flex-col mt-10 mb-5 pb-5 sm:mt-20 sm:mb-10 sm:pb-10'>
+        <h1 className='text-2xl font-Candal text-extra2 md:text-5xl text-semibold'>Every Shopper's Delight...</h1>
       <span className='text-center font-Elm-sans pt-3 text-bold'>For a fraction of the price!</span>
       </div>
 

@@ -18,7 +18,7 @@ const Guest = ({ setCheckoutStep, setShowModal, guestUser, setGuestUser }) => {
   const [emailError, setEmailError] = useState('')
   const [numberError, setNumberError] = useState('')
   const [addressError, setAddressError] = useState('')
-  const [verifyEmailError, setVerifyEmailError] = useState('Error dey?')
+  const [verifyEmailError, setVerifyEmailError] = useState('')
   const [status, setStatus] = useState('')
   const [ToggleEmailVerification, setToggleEmailVerification] = useState(false)
   const [emailCode, setEmailCode] = useState('')
