@@ -187,8 +187,9 @@ null
     <div className="flex flex-col">
       <div className=" md:flex md:justify-center  md:gap-10 ">
 
-
-        <div className="px-4 relative my-5 md:flex md:w-1/3">
+ 
+        <div className={product.tags&&product.tags.includes('soldout')? 'opacity-25 px-4 relative my-5 md:flex md:w-1/3':'px-4 relative my-5 md:flex md:w-1/3'}>
+       
           <ImageGallery 
                 className=" image-gallery-slide w-full image-gallery-image px-2 md:px-0 h-150"
                 showBullets={false}
@@ -201,16 +202,20 @@ null
                  />
           {/*<img className="w-full px-5 md:px-0 darks:hidden" src={product.imageUrl? product.imageUrl:"https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"} alt="" />
           <img className="w-full hidden darks:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />*/}
-        <span className=" absolute top-2  m-2 rounded-full bg-secondary px-2 text-center text-xs font-normal text-white">{product.discount? `${displayDiscount}% OFF`: null }</span>
+        <span className=" absolute top-2  m-2 rounded-full bg-extra2 px-2 text-center text-xs font-normal text-white">{product.discount? `${displayDiscount}% OFF`: null }</span>
+        
         </div>
 
 
         <div className="px-4 mt-6 md:flex md:flex-col md:mt-8 ">
+          <span>
           <h1
             className="text-2xl md:font-semibold px-5 md:px-1 text-gray-900 md:text-3xl font-Elm-sans "
           >{product? capitalizeTitle(product.name) : 
            `Product Name Not Available`}
           </h1>
+          {product.tags&&product.tags.includes('soldout')&&<span className=" m-2 bg-red-600 px-2 text-center text-xs font-normal text-white"> Sold Out!</span>} 
+          </span>
           <p className=' pl-5 md:pl-0 text-sm my-3 text-gray-500'>{product.primaryCategory}</p>
           
           <div className="mt-4 sm:items-center px-5 md:px-0 sm:gap-4 md:flex">
@@ -221,7 +226,7 @@ null
           <div className="mt-6  sm:mt-8 gap-2 sm:gap-4 flex items-center">
            
 
-            <a
+            {product.tags&&product.tags.includes('soldout')? <p>This item is currently unavailable. Check back for updates on availability</p>: <><a
               href={`https://wa.me/2348145887534?text=I'm%20interested%20in%20${product.name}%20.Is%20it%20available?%20`}
               title=""
               className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-black focus:outline-none bg-extra rounded-lg border border-gray-200  hover:border-extra focus:z-10 focus:ring-4 focus:ring-gray-100"
@@ -237,7 +242,8 @@ null
               role="button"
             > 
               Add to Cart
-            </span>
+            </span></>
+            }
 
           </div>
 

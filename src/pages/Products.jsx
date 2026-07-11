@@ -109,8 +109,10 @@ const [notification, setNotification] = useState({show:false, message:""})
         <div   key={`${item._id}`} className='flex font-Elm-sans flex-col my-3 pb-3 md:pb-5 bg-white border border-gray-300 w-full max-w-180px md:max-w-[250px] h-68 '> 
                  
                    <div className=' w-full relative aspect-[4/5] overflow-hidden bg-slate-100 '> 
-                         <Link to={`/products/${item._id}`} ><img className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 hover:opacity-70' src={item.imageUrl} />
+                    {item.tags&&item.tags.includes('soldout')&&<span className="absolute top-0 right-0 m-2 bg-red-600 px-2 text-center text-xs font-normal text-white"> Sold Out!</span>} 
+                         <Link to={`/products/${item._id}`} className={item.tags&&item.tags.includes('soldout')? 'opacity-25':''} ><img className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 hover:opacity-70' src={item.imageUrl} />
                          <span className="absolute top-0 left-0 m-2 bg-red-600 px-2 text-center text-xs font-normal text-white"> {item.popular? "Popular": ""} </span>
+                         
                          {/*<span className="absolute top-5 left-0 m-2 rounded-full bg-red-600 px-2 text-center text-xs font-normal text-white"> {item.deal? "Good deal": ""} </span>*/}
                          </Link>
                     </div>
@@ -118,7 +120,12 @@ const [notification, setNotification] = useState({show:false, message:""})
 
                     <div className='w-full px-2 md:px-3'>
                     <Link to={`/products/${item._id}`}> 
-                       <div className='h-12 font-Elm-sans md:py-2 md:mb-3'><p className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2  md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}</p></div>
+                       <div className='h-12 font-Elm-sans md:py-2 md:mb-3'><span className='text-gray-800 mt-2 md:mt-0 text-sm md:text-base line-clamp-2  md:line-clamp-2 md:py-1 mx-auto'>{capitalizeTitle(item.name)}
+
+                        {item.tags&&item.tags.includes('soldout')&&<span className="  relative left-0 bg-red-600 px-2 text-center text-xs font-normal text-white"> Sold Out!</span>} 
+                       </span>
+                        
+                       </div>
                         </Link>   
                        <div className='flex flex-row justify-between md:px-2'>
                           <div className='flex flex-col'> <span className='text-tertiary font-bold text-sm md:text-base '>₦{Intl.NumberFormat("en-US").format(item.sellingPrice)}     </span><span className='line-through text-xs text-red-500'>{} ₦{item.price}</span></div>

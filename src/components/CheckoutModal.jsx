@@ -1,13 +1,13 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API_URL } from "../App";
 import { useNavigate } from "react-router-dom";
 
 
 const CheckoutModal = (props) =>{
 
-    window.scrollTo(0,0)
-    const {cartItems, total, userDetails, showModal, setShowModal } = props;  
+    useEffect(() => { window.scrollTo(0,0); }, [])
+    const {cartItems, total, userDetails, showModal, setOrderConfirmed, setShowModal } = props;  
     //recieve buyer information and goods information. 
     // And then send data to backend. 
 //    console.log(userDetails)
@@ -16,19 +16,27 @@ const CheckoutModal = (props) =>{
         cart: cartItems,
         total: total, 
     })
-     const navigate = useNavigate();
+    
+    const navigate = useNavigate();
 
     const placeOrder = async ()=>{
 
         // send order data to backend 
         //return with yes or no alert, then redirect to user page or homepage
         try{
+            const order={
+                 userDetails: userDetails,
+                cart: cartItems,
+                total: total, 
+            }
             const orderPlaced = await axios.post(`${API_URL}/order`, {order})
-           
+           console.log(orderPlaced)
             if (orderPlaced) {
-                alert('Order Placed')
-                navigate('/products')
-            } else alert('there was an error')
+                window.alert('Order Placed')
+                setOrderConfirmed(true)
+            } else {
+                window.alert('there was an error')
+            }
 
         }catch (err){
             console.log(err)
