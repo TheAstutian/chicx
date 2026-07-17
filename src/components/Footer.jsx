@@ -10,7 +10,7 @@ const Footer = () => {
                    <img className='w-20' src={gdvsta} alt="mockup"/> 
                     GoldyVhista Hubz
                 </p>
-                <p className="my-6 text-[#171717] ">Diamond Estate, Command Ipaja, Lagos, Nigeria</p>
+                <p className="my-6 text-[#171717] ">18, Fashola Street. Diamond Estate, Command Ipaja, Lagos, Nigeria</p>
                 <ul className="flex flex-wrap justify-center items-center mb-6  text-gray-900 ">
                     <li>
                         <Link to='/About' className="mr-4 hover:underline md:mr-6 ">About Us</Link>

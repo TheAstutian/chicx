@@ -13,11 +13,11 @@ import { AuthContext, CartContext } from '../ContextStore';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import ReactGA from 'react-ga4'
-import { useLocation } from '../../node_modules/react-router-dom/dist/index';
+import { useLocation } from 'react-router-dom';
  
 export const capitalizeTitle = (string) =>{
   return string.split(' ').map(word=>{
-    if(word.charAt(0) === word.charAt(0).toUpperCase && word.charAt(1) === word.charAt(1).toUpperCase ){
+    if(word.charAt(0) === word.charAt(0).toUpperCase && word.charAt(1) === word.charAt(1).toUpperCase()){
       return word
     } else return word.charAt(0).toUpperCase()+ word.slice(1)
   }).join(' ')
@@ -89,16 +89,9 @@ const [notification, setNotification] = useState({show:false, message:""})
     setCurrentPage(1)
     }
 
-    const handleKeyPress = (event)=>{
-      
-      if(event.key==='Enter'){
-        onSearch(event)
-      }
-    }
      const onSearch = async (e)=>{
         e.preventDefault()
-        setActivateSearch(!activateSearch)
-        
+        setActivateSearch(!activateSearch)     
      }
     
      const ProductCard = ({item}) =>{
@@ -152,15 +145,18 @@ const [notification, setNotification] = useState({show:false, message:""})
 
       return (
         <>
-        <div className='flex flex-col w-full' >
+        <div className='' >
 
-              <div className='mx-2 mt-1 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
-                <input
+              {/*<div className='mx-2 mt-1 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
+                
+               
+                {/*<input
                       type="search" 
-                      className="peer block min-h-[auto] w-full rounded border-0 bg-transparent  outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
+                      className="peer block min-h-[auto] w-full rounded border-0 bg-transparent  outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary "
                       placeholder="Search"
-                      onChange={(e)=>{setSearchQuery(e.target.value)}}
-                      onKeyDown={(e)=>{handleKeyPress(e)}}
+                      onChange={e=>setSearchQuery(e.target.value)}
+                      //onKeyDown={(e)=>{handleKeyPress(e)}}
+                      value={searchQuery}
                       />     
                   <label
                       htmlFor="exampleFormControlInput"
@@ -183,9 +179,9 @@ const [notification, setNotification] = useState({show:false, message:""})
                             d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                       </span>
-                    </button>
+                    </button>*/}
 
-                </div>
+                
 
                 <div className='mx-5 dropdown md:hidden md:px-3 py-2 flex flex-row md:pl-10 md:ml-10'>
                     
@@ -200,8 +196,6 @@ const [notification, setNotification] = useState({show:false, message:""})
                     <li onClick={()=>changeCategory('Exercise & Fitness Supplies')} className='text-white'><span> Exercise & Fitness Supplies </span></li>
                    
                   </ul>
-
-
                 </div>
                 <div className='hidden md:flex md:w-64 mt-1 p-2'>
                 <ul tabIndex={0} className='dropdown-content menu  z-[1] p-2 ml-1 '>
@@ -300,7 +294,8 @@ const [notification, setNotification] = useState({show:false, message:""})
           {/*HEADING AND CONTENT SECTION*/}
         <div className='w-full px-2 grid grid-cols-5 md:flex-row md:justify-center '>
 
-              <div className=' col-span-5 md:col-span-1 md:pt-3'>
+              <div className=' flex flex-col w-full col-span-5 md:col-span-1 md:pt-3'>
+                 <SearchFunctionality setSearchQuery={setSearchQuery} onSearch={onSearch} searchQuery={searchQuery} />
                 <Menu />
               </div>
               <hr key="2" className=' col-span-5 h-px mt-2 bg-gray-400 border-0 md:hidden'/>
@@ -340,6 +335,54 @@ const [notification, setNotification] = useState({show:false, message:""})
              
     </div>
     
+  )
+}
+
+
+export const SearchFunctionality = (props)=>{
+
+  const {setSearchQuery, onSearch, searchQuery } = props; 
+      const handleKeyPress = (event)=>{
+      
+      if(event.key==='Enter'){
+        onSearch(event)
+      }
+    }
+
+
+  return (
+    <div className='mx-2 mt-1 py-2 flex flex-row h-12 md:mr-10 md:pr-10 relative'>
+     <input
+                      type="search" 
+                      className="peer block min-h-[auto] w-full rounded border-0 bg-transparent  outline outline-1 outline-tertiary transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary "
+                      //placeholder="Search"
+                      onChange={e=>setSearchQuery(e.target.value)}
+                      onKeyDown={(e)=>{handleKeyPress(e)}}
+                      value={searchQuery}
+                      />     
+                  <label
+                      //htmlFor="exampleFormControlInput"
+                      className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.47rem] pl-1 leading-[1.8] text-neutral-500 italic transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none"
+                      >Search
+                    </label>
+                    <button onClick={onSearch}
+                      className="relative z-[2] -ms-0.5 flex items-center rounded-e bg-tertiary px-3  text-xs font-medium uppercase leading-normal text-gray shadow-tertiary transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 darks:shadow-black/30 darks:hover:shadow-dark-strong darks:focus:shadow-dark-strong darks:active:shadow-dark-strong"
+                      type="button"> 
+                      <span className="[&>svg]:h-5 [&>svg]:w-5 ">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                      </span>
+                    </button>
+    </div>
   )
 }
 
