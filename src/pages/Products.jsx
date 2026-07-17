@@ -91,7 +91,8 @@ const [notification, setNotification] = useState({show:false, message:""})
 
      const onSearch = async (e)=>{
         e.preventDefault()
-        setActivateSearch(!activateSearch)     
+        setActivateSearch(true)  
+           
      }
     
      const ProductCard = ({item}) =>{
@@ -187,7 +188,11 @@ const [notification, setNotification] = useState({show:false, message:""})
                     
                   <div tabIndex={0} role="button" className='btn btn-sm btn-outline bg-gray hover:bg-tertiary text-tertiary hover:text-white m-1'>Shop by category <IoIosArrowDown /> </div>
                   <ul tabIndex={0} className='dropdown-content menu bg-tertiary rounded-box z-[1] w-52 p-2 ml-1 shadow'>
-                    <li onClick={()=>{changeCategory('') }} className='text-zinc'><span>All Categories</span></li>
+                    <li onClick={()=>{
+                      changeCategory('') 
+                      setActivateSearch(false)
+                      setSearchQuery('')
+                      }} className='text-zinc'><span>All Categories</span></li>
                     <li onClick={()=>changeCategory('Babies & Kids')} className='text-white'><span>Babies & Kids</span></li>
                     <li onClick={()=>changeCategory('Kitchen Utensils')} className='text-white'><span> Kitchen Utensils </span></li>
                      <li onClick={()=>changeCategory('Home Essentials')} className='text-white'><span> Home Essentials</span></li>
@@ -289,7 +294,7 @@ const [notification, setNotification] = useState({show:false, message:""})
       </Link>
           </div>):('')):('')}
 
-      <h1 className='pt-8 pb-2 md:pb-10 font-Elm-sans md:ml-10 text-2xl md:text-5xl text-center text-tertiary'> {displayCategory? ` ${displayCategory}` : (tagHeading ?  `${tagHeading}` : 'Goldyvhista ' ) }</h1>
+      <h1 className='pt-8 pb-2 md:pb-10 font-Elm-sans md:ml-10 text-2xl md:text-5xl text-center text-tertiary'> {displayCategory? ` ${displayCategory}` : (tagHeading ?  `${tagHeading}` : activateSearch? "Search Results" : ('Goldyvhista ') ) }</h1>
 
           {/*HEADING AND CONTENT SECTION*/}
         <div className='w-full px-2 grid grid-cols-5 md:flex-row md:justify-center '>
